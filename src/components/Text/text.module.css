@@ -1,0 +1,189 @@
+/*font-size*/
+.s12 {
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.s24 {
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.s64 {
+  font-size: 64px;
+  line-height: 64px;
+}
+
+.s72 {
+  font-size: 72px;
+  line-height: 72px;
+}
+
+.s150 {
+  font-size: 150px;
+  line-height: 150px;
+}
+
+/*line-height*/
+.h17 {
+  line-height: 17px;
+}
+
+.h24 {
+  line-height: 24px;
+}
+
+.h33 {
+  line-height: 33px;
+}
+
+
+/*color*/
+.black {
+  color: var(--black);
+}
+
+.white {
+  color: var(--white);
+}
+
+.red {
+  color: var(--cinnabar);
+}
+
+.green {
+  color: var(--celery);
+}
+
+.greyC4 {
+  color: var(--greyC4);
+}
+
+.grey99 {
+  color: var(--grey99);
+}
+
+.grey33 {
+  color: var(--grey33);
+}
+
+/*font-weight*/
+.thin {
+  font-weight: 100;
+}
+
+.light {
+  font-weight: 300;
+}
+
+.regular {
+  font-weight: 400;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.upperCase {
+  text-transform: uppercase;
+}
+
+@media all and (min-width: 320px) and (max-width: 1023px) {
+  .m28 {
+    font-size: 28px;
+    line-height: 33px;
+  }
+  
+  .m20 {
+    font-size: 20px;
+    line-height: 23px;
+  }
+  
+  .m16 {
+    font-size: 16px;
+    line-height: 19px;
+  }
+  
+  .m14 {
+    font-size: 14px;
+    line-height: 16px;
+  }
+  
+  .m12 {
+    font-size: 12px;
+    line-height: 14px;
+  }
+  
+  .m10 {
+    font-size: 10px;
+    line-height: 12px;
+  }
+}
+
+@media all and (min-width: 1024px) and (max-width: 1539px) {
+  .t28 {
+    font-size: 28px;
+    line-height: 33px;
+  }
+  
+  .t20 {
+    font-size: 20px;
+    line-height: 23px;
+  }
+  
+  .t16 {
+    font-size: 16px;
+    line-height: 19px;
+  }
+  
+  .t14 {
+    font-size: 14px;
+    line-height: 16px;
+  }
+  
+  .t12 {
+    font-size: 12px;
+    line-height: 14px;
+  }
+  
+  .t10 {
+    font-size: 10px;
+    line-height: 12px;
+  }
+}
+
+@media all and (min-width: 1540px) {
+  .d28 {
+    font-size: 28px;
+    line-height: 33px;
+  }
+  
+  .d20 {
+    font-size: 20px;
+    line-height: 23px;
+  }
+  
+  .d16 {
+    font-size: 16px;
+    line-height: 19px;
+  }
+  
+  .d14 {
+    font-size: 14px;
+    line-height: 16px;
+  }
+  
+  .d12 {
+    font-size: 12px;
+    line-height: 14px;
+  }
+  
+  .d10 {
+    font-size: 10px;
+    line-height: 12px;
+  }
+}

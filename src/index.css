@@ -1,0 +1,160 @@
+@import-normalize;
+
+@font-face {
+  font-family: 'SF UI Display';
+  src: local('SF UI Display Regular'), local('SFUIDisplay-Regular'),
+  url('fonts/SFUIDisplay-Regular.woff2') format('woff2'),
+  url('fonts/SFUIDisplay-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SF UI Display';
+  src: local('SF UI Display Ultralight'), local('SFUIDisplay-Ultralight'),
+  url('fonts/SFUIDisplay-Light.woff2') format('woff2'),
+  url('fonts/SFUIDisplay-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SF UI Display';
+  src: local('SF UI Display Ultralight'), local('SFUIDisplay-Ultralight'),
+  url('fonts/SFUIDisplay-Ultralight.woff2') format('woff2'),
+  url('fonts/SFUIDisplay-Ultralight.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SF UI Display';
+  src: local('SF UI Display Bold'), local('SFUIDisplay-Bold'),
+  url('fonts/SFUIDisplay-Bold.woff2') format('woff2'),
+  url('fonts/SFUIDisplay-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SF UI Display';
+  src: local('SF UI Display Thin'), local('SFUIDisplay-Thin'),
+  url('fonts/SFUIDisplay-Thin.woff2') format('woff2'),
+  url('fonts/SFUIDisplay-Thin.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SF UI Display';
+  src: local('SF UI Display Medium'), local('SFUIDisplay-Medium'),
+  url('fonts/SFUIDisplay-Medium.woff2') format('woff2'),
+  url('fonts/SFUIDisplay-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+:root {
+  --black:     #000;
+  --cinnabar:  #dc3e22;
+  --celery:    #a8b64f;
+  --wasabi:    #899441;
+  --hdo:       #b7280f;
+  --d-salmon:  #ea8a79;
+  --supernova: #ffae35;
+  --nyp:       #ea8979;
+  --whiteLightness: 100%;
+  --white: hsl(0, 0%, var(--whiteLightness));
+  --greyF4: hsl(0, 0%, calc(var(--whiteLightness) - 4%));
+  --greyE5: hsl(0, 0%, calc(var(--whiteLightness) - 10%));
+  --greyE4: hsl(0, 0%, calc(var(--whiteLightness) - 11%));
+  --greyC4: hsl(0, 0%, calc(var(--whiteLightness) - 23%));
+  --grey99: hsl(0, 0%, calc(var(--whiteLightness) - 40%));
+  --grey33: hsl(0, 0%, calc(var(--whiteLightness) - 80%));
+}
+
+html {
+  box-sizing: content-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: 'SF UI Display', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--grey33);
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* global */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  border: 0;
+  background-color: inherit;
+  outline: 0;
+}
+
+button {
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/*TODO посмотреть нужно ли это*/
+.blocked {
+  display: none;
+}
+
+.btn {
+  border: 2px solid var(--celery);
+  background-color: var(--celery);
+  font-weight: 500;
+  line-height: 17px;
+  color: var(--white);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input[type="number"]:hover,
+input[type="number"]:focus {
+  -moz-appearance: number-input;
+}
+
