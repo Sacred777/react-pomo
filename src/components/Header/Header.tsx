@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom'
 import styles from './header.module.css';
 
@@ -7,6 +7,10 @@ import {Break} from "../Break";
 import {EColors, EWeight, Text } from '../Text';
 
 export function Header() {
+  // TODO
+
+  const [isModalOpened, setIsModalOpened] = useState(false)
+
   return (
     <header >
       {/*<div className="container">*/}
@@ -20,11 +24,13 @@ export function Header() {
               </Link>
             </li>
             <li>
-              <Link className={styles.link} to="/settings">
+              {/*<Link className={styles.link} to="/settings">*/}
+              <button className={styles.link} onClick={() => {setIsModalOpened(true)}}>
                 <Icon name={EIcons.settings} size={20}/>
                 <Break size={5}/>
                 <Text size={16} color={EColors.red} lineHeight={17}>Настройки</Text>
-              </Link>
+              </button>
+              {/*</Link>*/}
             </li>
             <li>
               <Link className={styles.link} to="/stat">

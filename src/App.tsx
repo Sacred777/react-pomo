@@ -15,7 +15,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<AppPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
+          {/*<Route path="/settings" element={<SettingsPage />} />*/}
           <Route path="/stat" element={<StatisticsPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
