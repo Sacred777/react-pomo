@@ -1,14 +1,23 @@
 import React from 'react';
 // import classNames from "classnames";
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm, useFormState } from 'react-hook-form';
 
+import { EColors, EWeight, Text } from '../Text';
 import styles from './settingsmodal.module.css';
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { Break } from '../Break';
+import { changeSettings } from '../../store/settingsSlice';
 
 
 export function SettingsModal() {
+  // const settingsState = useAppSelector(state => state.settings);
   const settings = useAppSelector(state => state.settings);
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+
+
+  const gaps = 5;
+  const labelSize = 24;
+  const errorTextSize = 12;
 
   type TInputs = {
     taskTime: number;
@@ -19,20 +28,51 @@ export function SettingsModal() {
     massage: boolean;
   }
 
+  // const settings:TInputs = {
+  //   taskTime: 0,
+  //   shortBreakTime: 0,
+  //   longBreakTime: 0,
+  //   longBreakCycle: 0,
+  //   theme: false,
+  //   massage: false,
+  // };
+
+
   const {
     register,
     formState: {
       isDirty,
       errors,
+      isValid,
+      isSubmitSuccessful,
     },
+    reset,
     handleSubmit,
   } = useForm<TInputs>({
     mode: 'onBlur'
   })
 
   const onSubmit: SubmitHandler<TInputs> = (data) => {
-    alert(JSON.stringify(data));
+    const settings = {
+      taskTime: data.taskTime * 60,
+      shortBreakTime: data.shortBreakTime * 60,
+      longBreakTime: data.longBreakTime * 60,
+      longBreakCycle: +data.longBreakCycle,
+      theme: data.theme,
+      massage: data.massage,
+    }
+    // alert(JSON.stringify(data));
+    console.log(data);
+    console.log(settings);
+    dispatch(changeSettings(settings));
   }
+
+  // React.useEffect(() => {
+  //     settings.taskTime: settingsState.taskTime,
+
+  //   }
+  //  }, [settingsState])
+
 
   // TODO Если проверка на изменение данных. Вопрос как быть с оверлеем и кнопкой закрытия окна
   const handleClick = () => {
@@ -41,14 +81,17 @@ export function SettingsModal() {
 
   return (
     <div>
-      <h2>Настройки программы</h2>
+      <Text As={'h2'} size={24} lineHeight={24} weight={EWeight.medium}>Настройки программы</Text>
+      <Break size={12} top />
+
       <form
         className={styles.form}
         onSubmit={handleSubmit(onSubmit)}>
 
         {/* taskTime */}
         <label className={styles.label}>
-          <span>Помидор, мин</span>
+          <Text size={labelSize} lineHeight={labelSize} color={EColors.grey33}>Помидор, мин</Text>
+          <Break size={gaps} top />
           <input
             className={styles.inputs}
             type='text'
@@ -74,15 +117,16 @@ export function SettingsModal() {
         </label>
         <div className={styles.errorBox}>
           {errors.taskTime &&
-            <p className={styles.error}>
+            <Text As={'p'} size={errorTextSize} lineHeight={1} color={EColors.red}>
               {errors.taskTime.message || 'Недопустимое значение'}
-            </p>
+            </Text>
           }
         </div>
 
         {/* shortBreakTime */}
         <label className={styles.label}>
-          <span>Короткий перерыв, мин</span>
+          <Text size={labelSize} lineHeight={labelSize} color={EColors.grey33}>Короткий перерыв, мин</Text>
+          <Break size={gaps} top />
           <input
             className={styles.inputs}
             type='text'
@@ -108,15 +152,16 @@ export function SettingsModal() {
         </label>
         <div className={styles.errorBox}>
           {errors.shortBreakTime &&
-            <p className={styles.error}>
+            <Text As={'p'} size={errorTextSize} lineHeight={1} color={EColors.red}>
               {errors.shortBreakTime.message || 'Недопустимое значение'}
-            </p>
+            </Text>
           }
         </div>
 
         {/* longBreakTime */}
         <label className={styles.label}>
-          <span>Длинный перерыв, мин</span>
+          <Text size={labelSize} lineHeight={labelSize} color={EColors.grey33}>Длинный перерыв, мин</Text>
+          <Break size={gaps} top />
           <input
             className={styles.inputs}
             type='text'
@@ -142,19 +187,20 @@ export function SettingsModal() {
         </label>
         <div className={styles.errorBox}>
           {errors.longBreakTime &&
-            <p className={styles.error}>
+            <Text As={'p'} size={errorTextSize} lineHeight={1} color={EColors.red}>
               {errors.longBreakTime.message || 'Недопустимое значение'}
-            </p>
+            </Text>
           }
         </div>
 
         {/* longBreakCycle */}
         <label className={styles.label}>
-          <span>Помидоров до длинного перерыва</span>
+          <Text size={labelSize} lineHeight={labelSize} color={EColors.grey33}>Помидоров до длинного перерыва</Text>
+          <Break size={gaps} top />
           <input
             className={styles.inputs}
             type='text'
-            defaultValue={settings.longBreakCycle / 60}
+            defaultValue={settings.longBreakCycle}
             {...register('longBreakCycle',
               {
                 required: 'Поле не может быть пустым',
@@ -176,35 +222,48 @@ export function SettingsModal() {
         </label>
         <div className={styles.errorBox}>
           {errors.longBreakCycle &&
-            <p className={styles.error}>
+            <Text As={'p'} size={errorTextSize} lineHeight={1} color={EColors.red}>
               {errors.longBreakCycle.message || 'Недопустимое значение'}
-            </p>
+            </Text>
           }
         </div>
 
-
         <label className={styles.label}>
-          <span>Включить тёмную тему</span>
+          <Text size={labelSize} lineHeight={labelSize} color={EColors.grey33}>Включить тёмную тему</Text>
+          <Break size={gaps} top />
           <input
             className={styles.inputs}
             type='checkbox'
             defaultChecked={settings.theme}
-            {...register('massage')}
+            {...register('theme')}
           />
+          <Break size={12} top />
         </label>
+
         <label className={styles.label}>
-          <span>Отключить уведомления</span>
+          <Text size={labelSize} lineHeight={labelSize} color={EColors.grey33}>Отключить уведомления</Text>
+          <Break size={gaps} top />
           <input
             className={styles.inputs}
             type='checkbox'
             defaultChecked={settings.massage}
+            {...register('massage')}
           />
+          <Break size={12} top />
         </label>
+
         <div className={styles.buttonsWrapper}>
-          <button type="submit" className={styles.applyButton}>Сохранить</button>
+          <button type="submit" className={styles.applyButton} disabled={!isValid || !isDirty}>
+            <Text size={16} lineHeight={17} color={EColors.white}>Сохранить</Text>
+          </button>
         </div>
       </form>
-      <button onClick={handleClick}>Выйти</button>
+
+      <Break size={gaps} top />
+
+      <button className={styles.cancelButton} onClick={handleClick}>
+        <Text size={16} lineHeight={17} color={EColors.red}>Выйти</Text>
+      </button>
     </div>
   );
 }

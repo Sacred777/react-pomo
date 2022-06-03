@@ -3,8 +3,8 @@
 @font-face {
   font-family: 'SF UI Display';
   src: local('SF UI Display Regular'), local('SFUIDisplay-Regular'),
-  url('fonts/SFUIDisplay-Regular.woff2') format('woff2'),
-  url('fonts/SFUIDisplay-Regular.woff') format('woff');
+    url('fonts/SFUIDisplay-Regular.woff2') format('woff2'),
+    url('fonts/SFUIDisplay-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
@@ -12,8 +12,8 @@
 @font-face {
   font-family: 'SF UI Display';
   src: local('SF UI Display Ultralight'), local('SFUIDisplay-Ultralight'),
-  url('fonts/SFUIDisplay-Light.woff2') format('woff2'),
-  url('fonts/SFUIDisplay-Light.woff') format('woff');
+    url('fonts/SFUIDisplay-Light.woff2') format('woff2'),
+    url('fonts/SFUIDisplay-Light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
 }
@@ -21,8 +21,8 @@
 @font-face {
   font-family: 'SF UI Display';
   src: local('SF UI Display Ultralight'), local('SFUIDisplay-Ultralight'),
-  url('fonts/SFUIDisplay-Ultralight.woff2') format('woff2'),
-  url('fonts/SFUIDisplay-Ultralight.woff') format('woff');
+    url('fonts/SFUIDisplay-Ultralight.woff2') format('woff2'),
+    url('fonts/SFUIDisplay-Ultralight.woff') format('woff');
   font-weight: 100;
   font-style: normal;
 }
@@ -30,8 +30,8 @@
 @font-face {
   font-family: 'SF UI Display';
   src: local('SF UI Display Bold'), local('SFUIDisplay-Bold'),
-  url('fonts/SFUIDisplay-Bold.woff2') format('woff2'),
-  url('fonts/SFUIDisplay-Bold.woff') format('woff');
+    url('fonts/SFUIDisplay-Bold.woff2') format('woff2'),
+    url('fonts/SFUIDisplay-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
 }
@@ -39,8 +39,8 @@
 @font-face {
   font-family: 'SF UI Display';
   src: local('SF UI Display Thin'), local('SFUIDisplay-Thin'),
-  url('fonts/SFUIDisplay-Thin.woff2') format('woff2'),
-  url('fonts/SFUIDisplay-Thin.woff') format('woff');
+    url('fonts/SFUIDisplay-Thin.woff2') format('woff2'),
+    url('fonts/SFUIDisplay-Thin.woff') format('woff');
   font-weight: 200;
   font-style: normal;
 }
@@ -48,21 +48,21 @@
 @font-face {
   font-family: 'SF UI Display';
   src: local('SF UI Display Medium'), local('SFUIDisplay-Medium'),
-  url('fonts/SFUIDisplay-Medium.woff2') format('woff2'),
-  url('fonts/SFUIDisplay-Medium.woff') format('woff');
+    url('fonts/SFUIDisplay-Medium.woff2') format('woff2'),
+    url('fonts/SFUIDisplay-Medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
 }
 
 :root {
-  --black:     #000;
-  --cinnabar:  #dc3e22;
-  --celery:    #a8b64f;
-  --wasabi:    #899441;
-  --hdo:       #b7280f;
-  --d-salmon:  #ea8a79;
+  --black: #000;
+  --cinnabar: #dc3e22;
+  --celery: #a8b64f;
+  --wasabi: #899441;
+  --hdo: #b7280f;
+  --d-salmon: #ea8a79;
   --supernova: #ffae35;
-  --nyp:       #ea8979;
+  --nyp: #ea8979;
   --whiteLightness: 100%;
   --white: hsl(0, 0%, var(--whiteLightness));
   --greyF4: hsl(0, 0%, calc(var(--whiteLightness) - 4%));
@@ -131,6 +131,10 @@ button {
   cursor: pointer;
 }
 
+p {
+  margin: 0;
+}
+
 /*TODO посмотреть нужно ли это*/
 .blocked {
   display: none;
@@ -158,4 +162,3 @@ input[type="number"]:hover,
 input[type="number"]:focus {
   -moz-appearance: number-input;
 }
-

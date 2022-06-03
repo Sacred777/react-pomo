@@ -13,7 +13,7 @@ export enum EColors {
 }
 
 export type TSizes = 150 | 72 | 64 | 24 | 16 | 12;
-export type TLineHeight = 33 | 24 | 17;
+export type TLineHeight = 33 | 24 | 17 | 1;
 
 export enum EWeight {
   thin =    'thin',

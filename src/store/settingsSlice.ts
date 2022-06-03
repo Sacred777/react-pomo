@@ -13,7 +13,7 @@ const initialState: TSettings = {
   taskTime: 1500,
   shortBreakTime: 300,
   longBreakTime: 1800,
-  longBreakCycle: 240,
+  longBreakCycle: 4,
   theme: false,
   massage: true,
 }
@@ -25,7 +25,18 @@ const settingsSlice = createSlice({
     changeSettings(state, action: PayloadAction<object>) {
       // TODO поправить typescript
       // @ts-ignore
-      state = action.payload;
+      state.taskTime = action.payload.taskTime;
+      // @ts-ignore
+      state.shortBreakTime = action.payload.shortBreakTime;
+      // @ts-ignore
+      state.longBreakTime = action.payload.longBreakTime;
+      // @ts-ignore
+      state.longBreakCycle = action.payload.longBreakCycle;
+      // @ts-ignore
+      state.theme = action.payload.theme;
+      // @ts-ignore
+      state.massage = action.payload.massage;
+
       // console.log(state);
       // console.log(action);
     },
