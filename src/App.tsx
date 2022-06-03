@@ -6,7 +6,6 @@ import { Header } from './components/Header';
 import { AppPage } from './components/AppPage';
 import { NotFoundPage } from './components/NotFoundPage';
 import { StatisticsPage } from './components/StatisticsPage';
-import { SettingsPage } from  './components/SettingsPage';
 
 function App() {
   return (
@@ -15,7 +14,6 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<AppPage />} />
-          {/*<Route path="/settings" element={<SettingsPage />} />*/}
           <Route path="/stat" element={<StatisticsPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

@@ -1,0 +1,44 @@
+.form {
+  --formGap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: var(--formGap);
+}
+
+.inputs {
+  text-align: center;
+}
+
+.buttonsWrapper {
+  margin-bottom: var(--formGap);
+  text-align: center;
+}
+
+.applyButton {
+  padding: 10px 0;
+  width: 145px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 17px;
+  background-color: #a8b64f;
+  color: #fff;
+}
+
+.errorBox {
+  min-height: 10px;
+}
+
+.error {
+  margin: 0;
+  font-size: 10px;
+  color: red;
+}
