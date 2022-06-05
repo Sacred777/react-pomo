@@ -1,6 +1,6 @@
 .task {
   padding: 19px 15px;
-  width: 370px;
+  width: 340px;
   font-weight: 300;
   font-size: 16px;
   line-height: 17px;
@@ -20,3 +20,4 @@
   border-color: var(--wasabi);
   background-color: var(--wasabi);
 }
+

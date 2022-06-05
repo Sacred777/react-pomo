@@ -1,0 +1,45 @@
+.list {
+  width: 370px;
+  list-style-type: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-top: 1px solid var(--greyE4);
+  border-bottom: 1px solid var(--greyE4);
+}
+
+.count {
+  display: inline-block;
+  --radius-count: 25px;
+  width: var(--radius-count);
+  height: var(--radius-count);
+  text-align: center;
+  border: 1px solid var(--greyC4);
+  border-radius: 50%;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--grey33);
+}
+
+.dropdownBtn {
+  text-align: center;
+}
+
+
+
+.dropdownIcon {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--greyC4);
+  border-radius: 50%;
+}
+
+.dropdownIcon:not(:last-child) {
+  margin-right: 5px;
+}
