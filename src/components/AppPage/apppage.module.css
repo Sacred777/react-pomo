@@ -1,0 +1,13 @@
+.mainBox {
+  display: flex;
+  padding: 100px 0;
+}
+
+.leftBox {
+  padding-right: 16px;
+  width: 40%;
+}
+
+.rightBox {
+  width: 60%;
+}

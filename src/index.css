@@ -55,6 +55,8 @@
 }
 
 :root {
+  --duration: 0.3s;
+  
   --black: #000;
   --cinnabar: #dc3e22;
   --celery: #a8b64f;
@@ -138,6 +140,12 @@ p {
 /*TODO посмотреть нужно ли это*/
 .blocked {
   display: none;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 15px;
+  max-width: 1250px;
 }
 
 .btn {

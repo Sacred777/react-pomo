@@ -41,6 +41,9 @@
   line-height: 33px;
 }
 
+.h179 {
+  line-height: 179px;
+}
 
 /*color*/
 .black {
@@ -74,6 +77,10 @@
 /*font-weight*/
 .thin {
   font-weight: 100;
+}
+
+.extraLight {
+  font-weight: 200;
 }
 
 .light {

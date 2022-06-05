@@ -24,7 +24,6 @@ export function SettingsModal() {
     shortBreakTime: number;
     longBreakTime: number;
     longBreakCycle: number;
-    theme: boolean;
     massage: boolean;
   }
 
@@ -33,7 +32,6 @@ export function SettingsModal() {
   //   shortBreakTime: 0,
   //   longBreakTime: 0,
   //   longBreakCycle: 0,
-  //   theme: false,
   //   massage: false,
   // };
 
@@ -58,7 +56,6 @@ export function SettingsModal() {
       shortBreakTime: data.shortBreakTime * 60,
       longBreakTime: data.longBreakTime * 60,
       longBreakCycle: +data.longBreakCycle,
-      theme: data.theme,
       massage: data.massage,
     }
     // alert(JSON.stringify(data));
@@ -227,18 +224,6 @@ export function SettingsModal() {
             </Text>
           }
         </div>
-
-        <label className={styles.label}>
-          <Text size={labelSize} lineHeight={labelSize} color={EColors.grey33}>Включить тёмную тему</Text>
-          <Break size={gaps} top />
-          <input
-            className={styles.inputs}
-            type='checkbox'
-            defaultChecked={settings.theme}
-            {...register('theme')}
-          />
-          <Break size={12} top />
-        </label>
 
         <label className={styles.label}>
           <Text size={labelSize} lineHeight={labelSize} color={EColors.grey33}>Отключить уведомления</Text>

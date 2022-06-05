@@ -13,10 +13,11 @@ export enum EColors {
 }
 
 export type TSizes = 150 | 72 | 64 | 24 | 16 | 12;
-export type TLineHeight = 33 | 24 | 17 | 1;
+export type TLineHeight = 179 | 33 | 24 | 17 | 1;
 
 export enum EWeight {
   thin =    'thin',
+  extraLight = 'extraLight',
   light =   'light',
   regular = 'regular',
   medium =  'medium',

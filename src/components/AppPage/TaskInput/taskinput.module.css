@@ -1,0 +1,22 @@
+.task {
+  padding: 19px 15px;
+  width: 370px;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 17px;
+  background-color: var(--greyF4);
+}
+
+.addBtn {
+  padding: 19px 50px;
+  border: 2px solid var(--celery);
+  background-color: var(--celery);
+  transition-property: border-color, background-color;
+  transition-duration: var(--duration);
+  transition-timing-function: ease-in-out;
+}
+
+.addBtn:hover {
+  border-color: var(--wasabi);
+  background-color: var(--wasabi);
+}

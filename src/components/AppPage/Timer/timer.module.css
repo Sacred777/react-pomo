@@ -1,0 +1,64 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 19px 40px;
+  background-color: var(--greyC4);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 70px 20px 100px;
+  background-color: var(--greyF4);
+}
+
+.timerBox {
+  position: relative;
+}
+
+.addBtnBox {
+  position: absolute;
+  content: '';
+  top: 50%;
+  right: -70px;
+  transform: translateY(-25px);
+}
+
+.addBtnBox circle {
+  transition: fill var(--duration) ease-in-out;
+}
+
+.addBtnBox:hover circle {
+  fill: var(--wasabi);
+}
+
+.startBtn {
+  padding: 19px 50px;
+  border: 2px solid var(--celery);
+  background-color: var(--celery);
+  transition-property: border-color, background-color;
+  transition-duration: var(--duration);
+  transition-timing-function: ease-in-out;
+}
+
+.startBtn:hover {
+  border-color: var(--wasabi);
+  background-color: var(--wasabi);
+}
+
+.stopBtn {
+  padding: 19px 50px;
+  border: 2px solid var(--greyC4);
+  transition-property: color, background-color;
+  transition-duration: var(--duration);
+  transition-timing-function: ease-in-out;
+}
+
+.stopBtn:hover {
+  background-color: var(--greyC4);
+}
+
+.stopBtn:hover span {
+  color: var(--white);
+}

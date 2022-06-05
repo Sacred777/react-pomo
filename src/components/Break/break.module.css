@@ -18,8 +18,16 @@
   padding: 0 20px 0 0;
 }
 
+.s25 {
+  padding: 0 25px 0 0;
+}
+
 .s35 {
   padding: 0 35px 0 0;
+}
+
+.s70 {
+  padding: 0 70px 0 0;
 }
 
 .inline {
@@ -46,55 +54,63 @@
   padding: 20px 0 0;
 }
 
+.top.s25 {
+  padding: 25px 0 0;
+}
+
 .top.s35 {
   padding: 35px 0 0;
+}
+
+.top.s70 {
+  padding: 70px 0 0;
 }
 
 @media all and (max-width: 1023px) {
   .mobile_s5 {
     padding: 0 5px 0 0;
   }
-  
+
   .mobile_s8 {
     padding: 0 8px 0 0;
   }
-  
+
   .mobile_s12 {
     padding: 0 12px 0 0;
   }
-  
+
   .mobile_s16 {
     padding: 0 16px 0 0;
   }
-  
+
   .mobile_s20 {
     padding: 0 20px 0 0;
   }
-  
+
   .mobile_s35 {
     padding: 0 35px 0 0;
   }
-  
+
   .top.mobile_s5 {
     padding: 5px 0 0;
   }
-  
+
   .top.mobile_s8 {
     padding: 8px 0 0;
   }
-  
+
   .top.mobile_s12 {
     padding: 12px 0 0;
   }
-  
+
   .top.mobile_s16 {
     padding: 16px 0 0;
   }
-  
+
   .top.mobile_s20 {
     padding: 20px 0 0;
   }
-  
+
   .top.mobile_s35 {
     padding: 35px 0 0;
   }
@@ -104,47 +120,47 @@
   .tablet_s5 {
     padding: 0 5px 0 0;
   }
-  
+
   .tablet_s8 {
     padding: 0 8px 0 0;
   }
-  
+
   .tablet_s12 {
     padding: 0 12px 0 0;
   }
-  
+
   .tablet_s16 {
     padding: 0 16px 0 0;
   }
-  
+
   .tablet_s20 {
     padding: 0 20px 0 0;
   }
-  
+
   .tablet_s35 {
     padding: 0 35px 0 0;
   }
-  
+
   .top.tablet_s5 {
     padding: 5px 0 0;
   }
-  
+
   .top.tablet_s8 {
     padding: 8px 0 0;
   }
-  
+
   .top.tablet_s12 {
     padding: 12px 0 0;
   }
-  
+
   .top.tablet_s16 {
     padding: 16px 0 0;
   }
-  
+
   .top.tablet_s20 {
     padding: 20px 0 0;
   }
-  
+
   .top.tablet_s35 {
     padding: 35px 0 0;
   }
@@ -154,47 +170,47 @@
   .desktop_s5 {
     padding: 0 5px 0 0;
   }
-  
+
   .desktop_s8 {
     padding: 0 8px 0 0;
   }
-  
+
   .desktop_s12 {
     padding: 0 12px 0 0;
   }
-  
+
   .desktop_s16 {
     padding: 0 16px 0 0;
   }
-  
+
   .desktop_s20 {
     padding: 0 20px 0 0;
   }
-  
+
   .desktop_s35 {
     padding: 0 35px 0 0;
   }
-  
+
   .top.desktop_s5 {
     padding: 5px 0 0;
   }
-  
+
   .top.desktop_s8 {
     padding: 8px 0 0;
   }
-  
+
   .top.desktop_s12 {
     padding: 12px 0 0;
   }
-  
+
   .top.desktop_s16 {
     padding: 16px 0 0;
   }
-  
+
   .top.desktop_s20 {
     padding: 20px 0 0;
   }
-  
+
   .top.desktop_s35 {
     padding: 35px 0 0;
   }

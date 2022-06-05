@@ -5,7 +5,6 @@ export type TSettings = {
   shortBreakTime: number;
   longBreakTime: number;
   longBreakCycle: number;
-  theme: boolean;
   massage: boolean;
 }
 
@@ -14,7 +13,6 @@ const initialState: TSettings = {
   shortBreakTime: 300,
   longBreakTime: 1800,
   longBreakCycle: 4,
-  theme: false,
   massage: true,
 }
 
@@ -32,8 +30,6 @@ const settingsSlice = createSlice({
       state.longBreakTime = action.payload.longBreakTime;
       // @ts-ignore
       state.longBreakCycle = action.payload.longBreakCycle;
-      // @ts-ignore
-      state.theme = action.payload.theme;
       // @ts-ignore
       state.massage = action.payload.massage;
 

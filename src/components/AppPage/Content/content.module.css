@@ -1,0 +1,12 @@
+.list {
+  padding-left: 18px;
+}
+
+.list li {
+  padding-left: 5px;
+}
+
+.list li::marker {
+  font-size: 16px;
+  color: var(--hdo);
+}
