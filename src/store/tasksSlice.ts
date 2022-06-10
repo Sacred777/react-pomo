@@ -27,7 +27,8 @@ const tasksSlice = createSlice({
     increaseCount(state, action: PayloadAction<number>) {
       // TODO Написать функцию
       // state.tasks.push(action.payload);
-      // state.tasks.find
+      const foundTask = state.tasks.find(task => task.id === action.payload)
+      if(foundTask) foundTask.time += 60;
     },
 
     decreaseCount(state, action: PayloadAction<TTask>) {
