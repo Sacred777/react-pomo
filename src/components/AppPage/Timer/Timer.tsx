@@ -4,6 +4,7 @@ import { EColors, EWeight, Text } from '../../Text';
 import { Break } from '../../Break';
 import { AddIcon } from '../../Icons';
 import { EIcons, Icon } from '../../Icon';
+import { Button, EButtonColors } from '../../Button';
 
 export function Timer() {
   return (
@@ -29,15 +30,24 @@ export function Timer() {
         <Break size={35} top />
 
         <div className={styles.btnsBox}>
-          <button className={styles.startBtn}>
+          {/* <button className={styles.startBtn}>
             <Text size={16} lineHeight={17} weight={EWeight.medium} color={EColors.white}>Старт</Text>
-          </button>
+          </button> */}
 
-          <Break size={25} inline/>
+          <Button type={'button'}>
+            Старт
+          </Button>
 
-          <button className={styles.stopBtn}>
+          <Break size={25} inline />
+
+          {/* <button className={styles.stopBtn}>
             <Text size={16} lineHeight={17} weight={EWeight.medium} color={EColors.greyC4}>Стоп</Text>
-          </button>
+          </button> */}
+
+          <Button type={'button'} color={EButtonColors.grey} notBackground={true}>Стоп
+          </Button>
+
+
         </div>
       </div>
     </>

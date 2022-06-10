@@ -33,8 +33,6 @@
   /*Высота*/
   --height: 22px;
   /*Ширина*/
-  /* --duration: 0.3s; */
-  /*Длительность transitons*/
   position: relative;
   display: inline-block;
   width: var(--width);

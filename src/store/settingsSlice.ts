@@ -20,17 +20,12 @@ const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    changeSettings(state, action: PayloadAction<object>) {
+    changeSettings(state, action: PayloadAction<TSettings>) {
       // TODO поправить typescript
-      // @ts-ignore
       state.taskTime = action.payload.taskTime;
-      // @ts-ignore
       state.shortBreakTime = action.payload.shortBreakTime;
-      // @ts-ignore
       state.longBreakTime = action.payload.longBreakTime;
-      // @ts-ignore
       state.longBreakCycle = action.payload.longBreakCycle;
-      // @ts-ignore
       state.massage = action.payload.massage;
 
       // console.log(state);

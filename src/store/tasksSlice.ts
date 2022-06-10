@@ -1,47 +1,51 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { useAppSelector } from "../hooks/reduxHooks";
 
-// export type TTask = {
-//   id: number;
-//   name: string;
-//   count: number;
-//   time: number;
-// }
+export type TTask = {
+  id: number;
+  name: string;
+  count: number;
+  time: number;
+}
 
-// const initialState = {
-//   id: 0,
-//   name: '',
-//   count: 0,
-//   time: 0,
-// };
+type TTasksState = {
+  tasks: TTask[];
+}
 
-// @ts-ignore
-const initialState = [];
+const initialState: TTasksState = {
+  tasks: [],
+};
 
 const tasksSlice = createSlice({
   name: 'tasks',
-  // @ts-ignore
   initialState,
   reducers: {
-    changeTasks(state, action: PayloadAction<object>) {
-      state.push(action.payload);
-      // TODO поправить typescript
-      // @ts-ignore
-      // state.taskTime = action.payload.taskTime;
-      // @ts-ignore
-      // state.shortBreakTime = action.payload.shortBreakTime;
-      // @ts-ignore
-      // state.longBreakTime = action.payload.longBreakTime;
-      // @ts-ignore
-      // state.longBreakCycle = action.payload.longBreakCycle;
-      // @ts-ignore
-      // state.massage = action.payload.massage;
+    addTask(state, action: PayloadAction<TTask>) {
+      state.tasks.push(action.payload)
+    },
 
-      // console.log(state);
-      // console.log(action);
+    increaseCount(state, action: PayloadAction<TTask>) {
+      // TODO Написать функцию
+      state.tasks.push(action.payload);
+    },
+
+    decreaseCount(state, action: PayloadAction<TTask>) {
+      // TODO Написать функцию
+      state.tasks.push(action.payload);
+    },
+
+    changeTask(state, action: PayloadAction<TTask>) {
+      // TODO Написать функцию
+      state.tasks.push(action.payload);
+    },
+
+    removeTask(state, action: PayloadAction<TTask>) {
+      // TODO Написать функцию
+      state.tasks.push(action.payload);
     },
   }
 })
 
-export const { changeTasks } = tasksSlice.actions;
+export const { addTask, increaseCount, decreaseCount, changeTask, removeTask } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
