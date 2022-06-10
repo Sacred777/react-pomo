@@ -10,12 +10,16 @@
   transition-timing-function: ease-in-out;
 }
 
+.button:disabled {
+  opacity: 0.6;
+}
+
 .green {
   background-color: var(--celery);
   border-color: var(--celery);
 }
 
-.green:hover {
+.green:not(:disabled):hover {
   background-color: var(--wasabi);
 }
 
@@ -25,7 +29,7 @@
   border-color: var(--greyC4);
 }
 
-.grey:hover {
+.grey:not(:disabled):hover {
   color: var(--white);
   background-color: var(--greyC4);
 }
@@ -39,7 +43,7 @@
   background-color: transparent;
 }
 
-.red.notBackground:hover {
+.red:not(:disabled).notBackground:hover {
   background-color: var(--cinnabar);
 }
 

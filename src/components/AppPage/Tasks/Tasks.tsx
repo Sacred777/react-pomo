@@ -1,7 +1,7 @@
 import React, { createElement } from 'react';
 import { isConstructorDeclaration } from 'typescript';
 import { useAppSelector } from '../../../hooks/reduxHooks';
-import { secondsToString } from '../../../utilities/secondsToString';
+import { secondsToString } from '../../../utilities/timeutiltties';
 import { Break } from '../../Break';
 import { EIcons, Icon } from '../../Icon';
 import { EColors, EWeight, Text } from '../../Text';

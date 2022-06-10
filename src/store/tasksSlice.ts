@@ -24,9 +24,10 @@ const tasksSlice = createSlice({
       state.tasks.push(action.payload)
     },
 
-    increaseCount(state, action: PayloadAction<TTask>) {
+    increaseCount(state, action: PayloadAction<number>) {
       // TODO Написать функцию
-      state.tasks.push(action.payload);
+      // state.tasks.push(action.payload);
+      // state.tasks.find
     },
 
     decreaseCount(state, action: PayloadAction<TTask>) {

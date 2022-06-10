@@ -29,8 +29,13 @@
   transition: fill var(--duration) ease-in-out;
 }
 
-.addBtnBox:hover circle {
+.addBtnBox:not(:disabled):hover circle {
   fill: var(--wasabi);
+}
+
+.addBtnBox:disabled {
+  opacity: 0.6;
+  cursor: initial;
 }
 
 .startBtn {

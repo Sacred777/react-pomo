@@ -17,6 +17,7 @@ interface IButtonProps {
   notBackground?: boolean;
   // TODO Нужен ли этот onClick?
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 export function Button(props: IButtonProps) {
@@ -26,6 +27,7 @@ export function Button(props: IButtonProps) {
     type = 'button',
     notBackground = false,
     onClick,
+    disabled = false,
   } = props;
 
   const classes = classNames(
@@ -35,7 +37,7 @@ export function Button(props: IButtonProps) {
   );
 
   return (
-    <button className={classes} type={type}>
+    <button className={classes} type={type} disabled={disabled}>
       {children}
     </button>
   );
