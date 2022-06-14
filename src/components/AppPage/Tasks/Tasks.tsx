@@ -1,11 +1,11 @@
-import React, { createElement } from 'react';
-import { isConstructorDeclaration } from 'typescript';
+import React from 'react';
 import { useAppSelector } from '../../../hooks/reduxHooks';
-import { secondsToString } from '../../../utilities/timeutiltties';
+import { secondsToString } from '../../../utils/timeutiltties';
 import { Break } from '../../Break';
-import { EIcons, Icon } from '../../Icon';
+import { Dropdown } from '../../Dropdown';
 import { EColors, EWeight, Text } from '../../Text';
 import styles from './tasks.module.css';
+import { TasksItem } from './TasksItem';
 
 export function Tasks() {
   const tasks = useAppSelector(state => state.tasks.tasks);
@@ -40,13 +40,21 @@ export function Tasks() {
               </Text>
             </div>
 
-            <Break size={8} inline />
+            {/* <Break size={8} inline /> */}
 
-            <button className={styles.dropdownBtn}>
-              <span className={styles.dropdownIcon}></span>
-              <span className={styles.dropdownIcon}></span>
-              <span className={styles.dropdownIcon}></span>
-            </button>
+            <Dropdown
+              button={
+                <button className={styles.dropdownBtn}>
+                  <span className={styles.dropdownIcon}></span>
+                  <span className={styles.dropdownIcon}></span>
+                  <span className={styles.dropdownIcon}></span>
+                </button>
+              }>
+              <ul className={styles.dropdown}>
+                <TasksItem taskId={task.id} />
+              </ul>
+
+            </Dropdown>
           </li>
         ))}
       </ul>

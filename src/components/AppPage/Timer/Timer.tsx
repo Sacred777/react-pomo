@@ -6,7 +6,7 @@ import { AddIcon } from '../../Icons';
 import { EIcons, Icon } from '../../Icon';
 import { Button, EButtonColors } from '../../Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
-import { showTime } from '../../../utilities/timeutiltties';
+import { showTime } from '../../../utils/timeutiltties';
 import { increaseCount } from '../../../store/tasksSlice';
 
 export function Timer() {
