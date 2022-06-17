@@ -7,7 +7,7 @@ import { EIcons, Icon } from '../../Icon';
 import { Button, EButtonColors } from '../../Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { showTime } from '../../../utils/timeutiltties';
-import { increaseCount } from '../../../store/tasksSlice';
+import {increaseTime} from '../../../store/tasksSlice';
 
 export function Timer() {
   const dispatch = useAppDispatch();
@@ -28,7 +28,7 @@ export function Timer() {
   console.log(taskCount);
 
   function handleAddCount() {
-    dispatch(increaseCount(sortTasks[0].id))
+    dispatch(increaseTime(sortTasks[0].id))
   }
 
   return (

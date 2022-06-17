@@ -24,16 +24,22 @@ const tasksSlice = createSlice({
       state.tasks.push(action.payload)
     },
 
-    increaseCount(state, action: PayloadAction<number>) {
-      // TODO Написать функцию
-      // state.tasks.push(action.payload);
+    increaseTime(state, action: PayloadAction<number>) {
       const foundTask = state.tasks.find(task => task.id === action.payload)
       if(foundTask) foundTask.time += 60;
     },
 
-    decreaseCount(state, action: PayloadAction<TTask>) {
-      // TODO Написать функцию
-      state.tasks.push(action.payload);
+    increaseCount(state, action: PayloadAction<number>) {
+      const foundTask = state.tasks.find(task => task.id === action.payload)
+      if(foundTask) foundTask.count += 1;
+    },
+
+    decreaseCount(state, action: PayloadAction<number>) {
+      const foundTask = state.tasks.find(task => task.id === action.payload)
+      if(foundTask) {
+        console.log()
+       if (foundTask.count > 1) foundTask.count -= 1;
+      }
     },
 
     changeTask(state, action: PayloadAction<TTask>) {
@@ -41,13 +47,20 @@ const tasksSlice = createSlice({
       state.tasks.push(action.payload);
     },
 
-    removeTask(state, action: PayloadAction<TTask>) {
+    removeTask(state, action: PayloadAction<number>) {
       // TODO Написать функцию
-      state.tasks.push(action.payload);
+      state.tasks = state.tasks.filter((task) => task.id !== action.payload);
     },
   }
 })
 
-export const { addTask, increaseCount, decreaseCount, changeTask, removeTask } = tasksSlice.actions;
+export const {
+  addTask,
+  increaseTime,
+  increaseCount,
+  decreaseCount,
+  changeTask,
+  removeTask
+} = tasksSlice.actions;
 
 export default tasksSlice.reducer;

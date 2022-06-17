@@ -15,6 +15,11 @@
   border-bottom: 1px solid var(--greyE4);
 }
 
+.taskWrapper {
+  display: flex;
+  align-items: center;
+}
+
 .count {
   display: inline-block;
   --radius-count: 25px;
@@ -27,6 +32,20 @@
   font-size: 16px;
   line-height: 26px;
   color: var(--grey33);
+}
+
+.taskInput {
+  padding: 6px 4px;
+  font-size: 16px;
+  line-height: 17px;
+  font-weight: 300;
+  color: var(--grey99);
+  background-color: var(--greyF4);
+  transition: background-color var(--duration) ease-in-out;
+}
+
+.taskInput:disabled {
+  background-color: transparent;
 }
 
 .dropdownBtn {
