@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom'
 import styles from './header.module.css';
 
@@ -13,9 +13,18 @@ import { setIsActive } from '../../store/modalSlice'
 
 export function Header() {
   const dispatch = useAppDispatch();
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    document.body.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const openModal = () => {
     dispatch(setIsActive(true));
+  }
+
+  function handleChange() {
+   setTheme(theme === 'light' ? 'night' : 'light');
   }
 
   return (
@@ -31,7 +40,12 @@ export function Header() {
             </Link>
 
             <label className={styles.themeLabel}>
-              <input className={styles.themeInput} type="checkbox" name='theme' />
+              <input
+                className={styles.themeInput}
+                type="checkbox"
+                name='theme'
+                onChange={handleChange}
+              />
               <span className={styles.themeSpan}></span>
             </label>
           </div>

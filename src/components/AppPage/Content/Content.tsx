@@ -13,7 +13,7 @@ export function Content() {
         <Text As={'li'} size={16} lineHeight={33} color={EColors.grey33}>Запустите таймер («помидор»)</Text>
         <Text As={'li'} size={16} lineHeight={33} color={EColors.grey33}>Работайте пока «помидор» не прозвонит</Text>
         <Text As={'li'} size={16} lineHeight={33} color={EColors.grey33}>Сделайте короткий перерыв (3-5 минут)</Text>
-        <Text As={'li'} size={16} lineHeight={33} color={EColors.grey33}>Продолжайте работать «помидор» за «помидором», пока задача не будут выполнена. Каждые 4 «помидора» делайте длинный перерыв (15-30 минут).</Text>
+        <Text As={'li'} size={16} lineHeight={33} color={EColors.grey33}>Продолжайте работать «помидор» за «помидором», пока задача не будет выполнена. Каждые 4 «помидора» делайте длинный перерыв (15-30 минут).</Text>
       </ul>
       <Break size={25} top />
     </>

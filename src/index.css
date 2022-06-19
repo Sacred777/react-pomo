@@ -57,7 +57,6 @@
 :root {
   --duration: 0.3s;
   
-  --black: #000;
   --cinnabar: #dc3e22;
   --celery: #a8b64f;
   --wasabi: #899441;
@@ -65,14 +64,15 @@
   --d-salmon: #ea8a79;
   --supernova: #ffae35;
   --nyp: #ea8979;
-  --whiteLightness: 100%;
-  --white: hsl(0, 0%, var(--whiteLightness));
-  --greyF4: hsl(0, 0%, calc(var(--whiteLightness) - 4%));
-  --greyE5: hsl(0, 0%, calc(var(--whiteLightness) - 10%));
-  --greyE4: hsl(0, 0%, calc(var(--whiteLightness) - 11%));
-  --greyC4: hsl(0, 0%, calc(var(--whiteLightness) - 23%));
-  --grey99: hsl(0, 0%, calc(var(--whiteLightness) - 40%));
-  --grey33: hsl(0, 0%, calc(var(--whiteLightness) - 80%));
+  /*--black: #000;*/
+  /*--whiteLightness: 100%;*/
+  /*--white: hsl(0, 0%, var(--whiteLightness));*/
+  /*--greyF4: hsl(0, 0%, calc(var(--whiteLightness) - 4%));*/
+  /*--greyE5: hsl(0, 0%, calc(var(--whiteLightness) - 10%));*/
+  /*--greyE4: hsl(0, 0%, calc(var(--whiteLightness) - 11%));*/
+  /*--greyC4: hsl(0, 0%, calc(var(--whiteLightness) - 23%));*/
+  /*--grey99: hsl(0, 0%, calc(var(--whiteLightness) - 40%));*/
+  /*--grey33: hsl(0, 0%, calc(var(--whiteLightness) - 80%));*/
 }
 
 html {
@@ -88,13 +88,40 @@ html {
 body {
   margin: 0;
   font-family: 'SF UI Display', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
+  /*font-style: normal;*/
+  /*font-weight: 400;*/
+  /*font-size: 16px;*/
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--grey33);
+  background-color: var(--white);
 }
+
+body[data-theme="light"] {
+  --black: #000;
+  --whiteLightness: 100%;
+  --white: hsl(0, 0%, var(--whiteLightness));
+  --greyF4: hsl(0, 0%, calc(var(--whiteLightness) - 4%));
+  --greyE5: hsl(0, 0%, calc(var(--whiteLightness) - 10%));
+  --greyE4: hsl(0, 0%, calc(var(--whiteLightness) - 11%));
+  --greyC4: hsl(0, 0%, calc(var(--whiteLightness) - 23%));
+  --grey99: hsl(0, 0%, calc(var(--whiteLightness) - 40%));
+  --grey33: hsl(0, 0%, calc(var(--whiteLightness) - 80%));
+}
+
+body[data-theme="night"] {
+  --black: #fff;
+  --whiteLightness: 0%;
+  --white: hsl(0, 0%, var(--whiteLightness));
+  --greyF4: hsl(0, 0%, calc(var(--whiteLightness) + 4%));
+  --greyE5: hsl(0, 0%, calc(var(--whiteLightness) + 10%));
+  --greyE4: hsl(0, 0%, calc(var(--whiteLightness) + 11%));
+  --greyC4: hsl(0, 0%, calc(var(--whiteLightness) + 23%));
+  --grey99: hsl(0, 0%, calc(var(--whiteLightness) + 40%));
+  --grey33: hsl(0, 0%, calc(var(--whiteLightness) + 80%));
+}
+
+
 
 img {
   max-width: 100%;
