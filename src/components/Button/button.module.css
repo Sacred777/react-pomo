@@ -24,17 +24,6 @@
   background-color: var(--wasabi);
 }
 
-.grey {
-  color: var(--greyC4);
-  background-color: var(--greyC4);
-  border-color: var(--greyC4);
-}
-
-.grey:not(:disabled):hover {
-  color: var(--white);
-  background-color: var(--greyC4);
-}
-
 .red {
   background-color: var(--cinnabar);
   border-color: var(--cinnabar);
@@ -48,14 +37,9 @@
   background-color: var(--cinnabar);
 }
 
-
-
-/* .greyGreen {
-  background-color: var(--celery);
-  border-color: var(--celery);
-}
-
-.greyRed {
+.red:disabled {
+  border-color: var(--greyC4);
+  color: var(--greyC4);
   background-color: transparent;
-  border-color: var(--cinnabar);
-} */
+  cursor: initial;
+}

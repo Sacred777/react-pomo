@@ -1,13 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import styles from './timer.module.css';
-import {EColors, EWeight, Text} from '../../Text';
-import {Break} from '../../Break';
-import {EIcons, Icon} from '../../Icon';
-import {Button, EButtonColors} from '../../Button';
 import {useAppDispatch, useAppSelector} from '../../../hooks/reduxHooks';
 import {showTime} from '../../../utils/timeutiltties';
 import {increaseTime} from '../../../store/tasksSlice';
-import {pauseTimer, startTimer } from "../../../store/statesSlice";
+import {pauseTimer, startTimer} from "../../../store/statesSlice";
+import {EWindowTypes, Timer} from './Timer';
 
 export function TimerContainer() {
   const dispatch = useAppDispatch();
@@ -27,8 +23,8 @@ export function TimerContainer() {
   const taskName = isTasks ? sortTasks[0].name : 'Задач нет';
   // console.log(taskName);
 
-  const taskCount = isTasks ? `Помидор ${sortTasks[0].count}` : 'Помидор';
-  // console.log(taskCount);
+  const taskCount = isTasks ? sortTasks[0].count : 0;
+  console.log(taskCount);
 
   function handleAddTime() {
     dispatch(increaseTime(sortTasks[0].id))
@@ -74,11 +70,34 @@ export function TimerContainer() {
     setTimer(0); //Обнулили счетчик
   }
 
-
+  // Определение типа окна исходя из states
+  let typeOfWindow;
+  if(states.isStarted) {
+    typeOfWindow = EWindowTypes.starting
+  } else if (states.onPause) {
+    typeOfWindow = EWindowTypes.pausing
+  } else if (states.isBreak) {
+    typeOfWindow = EWindowTypes.breaking
+  } else if (states.onBreakPause) {
+    typeOfWindow = EWindowTypes.breakPausing;
+  } else {
+    typeOfWindow = EWindowTypes.initial;
+  }
 
   return (
     <>
-      <Timer />
+      <Timer
+        windowType={typeOfWindow}
+        taskName={taskName}
+        pomodoroCount={4}
+        timerDigits={timerString}
+        handleAddTime={handleAddTime}
+        taskNumber={taskCount}
+        handleLeftButtonClick={handleLeftButton}
+        handleRightButtonClick={handleRightButton}
+        isLeftButtonDisabled={!isTasks}
+        isRightButtonDisabled={isTasks ? !isTasks : true}
+      />
     </>
   );
 }

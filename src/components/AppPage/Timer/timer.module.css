@@ -5,6 +5,10 @@
   background-color: var(--greyC4);
 }
 
+.headerRed {
+  background-color: var(--cinnabar);
+}
+
 .body {
   display: flex;
   flex-direction: column;

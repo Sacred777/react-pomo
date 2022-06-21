@@ -4,7 +4,7 @@ import styles from './apppage.module.css';
 import { Content } from './Content';
 import { TaskInput } from './TaskInput';
 import { Tasks } from './Tasks';
-import { Timer } from './Timer';
+import {TimerContainer} from "./Timer/TimerContainer";
 
 export function AppPage() {
   return (
@@ -16,7 +16,7 @@ export function AppPage() {
         <Tasks/>
       </div>
       <div className={styles.rightBox}>
-        <Timer />
+        <TimerContainer />
       </div>
     </div>
   );
