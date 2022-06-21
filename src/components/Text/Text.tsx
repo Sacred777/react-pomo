@@ -1,4 +1,4 @@
-  import React from 'react';
+import React from 'react';
 import styles from './text.module.css';
 import classNames from 'classnames';
 

@@ -37,7 +37,7 @@ export function Button(props: IButtonProps) {
   );
 
   return (
-    <button className={classes} type={type} disabled={disabled}>
+    <button className={classes} type={type} disabled={disabled} onClick={onClick}>
       {children}
     </button>
   );
