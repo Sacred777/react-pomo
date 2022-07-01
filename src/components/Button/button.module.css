@@ -11,7 +11,6 @@
 }
 
 .button:disabled {
-  opacity: 0.6;
   cursor: initial;
 }
 
@@ -20,13 +19,27 @@
   border-color: var(--celery);
 }
 
+.green:disabled {
+  opacity: 60%;
+}
+
 .green:not(:disabled):hover {
   background-color: var(--wasabi);
 }
 
+
 .red {
+  /*background-color: var(--cinnabar);*/
+  border-color: var(--cinnabar);
+}
+
+.red:hover {
   background-color: var(--cinnabar);
   border-color: var(--cinnabar);
+}
+
+.red:hover span {
+  color: white;
 }
 
 .notBackground {
@@ -39,7 +52,11 @@
 
 .red:disabled {
   border-color: var(--greyC4);
-  color: var(--greyC4);
+  /*color: var(--greyC4);*/
   background-color: transparent;
   cursor: initial;
+}
+
+.red:disabled span {
+  color: var(--greyC4);
 }

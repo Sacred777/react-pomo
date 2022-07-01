@@ -12,6 +12,18 @@ export type TStat = {
   pauseTime: number;
   stopCount: number;
   pomodoroCount: number;
+  taskCount: number;
+  lastBreakPomodoroCount: number;
+}
+
+export type TShortStat = {
+  date: string;
+  timerTime: number;
+  pomodoroTime: number;
+  pauseTime: number;
+  stopCount: number;
+  pomodoroCount: number;
+  taskCount: number;
   lastBreakPomodoroCount: number;
 }
 
@@ -27,8 +39,24 @@ const statSlice = createSlice({
   name: 'stat',
   initialState,
   reducers: {
-    addTask(state, action: PayloadAction<TStat>) {
-      state.stat.push(action.payload)
+    createStat(state, action: PayloadAction<TStat>) {
+      state.stat.push(action.payload);
+    },
+
+    changeStat(state, action: PayloadAction<TShortStat>) {
+      const [currentStat] = state.stat.filter((stat) => stat.date === action.payload.date);
+      currentStat.timerTime = currentStat.timerTime + action.payload.timerTime;
+      currentStat.pomodoroTime = currentStat.pomodoroTime + action.payload.pomodoroTime;
+      currentStat.pauseTime = currentStat.pauseTime + action.payload.pauseTime;
+      currentStat.stopCount = currentStat.stopCount + action.payload.stopCount;
+      currentStat.pomodoroCount = currentStat.pomodoroCount + action.payload.pomodoroCount;
+      currentStat.taskCount = currentStat.taskCount + action.payload.taskCount;
+      currentStat.lastBreakPomodoroCount = currentStat.lastBreakPomodoroCount + action.payload.lastBreakPomodoroCount;
+    },
+
+    addStop(state, action: PayloadAction<string>) {
+      const [currentStat] = state.stat.filter((stat) => stat.date === action.payload);
+      currentStat.stopCount = currentStat.stopCount + 1;
     },
 
     // increaseTime(state, action: PayloadAction<number>) {
@@ -62,7 +90,9 @@ const statSlice = createSlice({
 })
 
 export const {
-  addTask,
+  createStat,
+  changeStat,
+  addStop,
   // increaseTime,
   // increaseCount,
   // decreaseCount,

@@ -9,6 +9,10 @@
   background-color: var(--cinnabar);
 }
 
+.headerGreen {
+  background-color: var(--celery);
+}
+
 .body {
   display: flex;
   flex-direction: column;

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styles from './timer.module.css';
 import {EColors, EWeight, Text} from '../../Text';
 import {Break} from '../../Break';
@@ -59,16 +59,19 @@ export function Timer({ isLeftButtonDisabled = false, isRightButtonDisabled = fa
     case EWindowTypes.breaking:
       leftButtonName = 'Пауза';
       rightButtonName = 'Пропустить';
+      headerStyles = styles.header + ' ' + styles.headerGreen;
+      timerStyles = EColors.green;
       break
     case EWindowTypes.breakPausing:
       leftButtonName = 'Продолжить';
       rightButtonName = 'Пропустить';
+      headerStyles = styles.header + ' ' + styles.headerGreen;
+      timerStyles = EColors.black;
       break
     default:
       leftButtonName = 'Старт';
       rightButtonName = 'Стор';
       break
-
   }
 
   return (
@@ -122,7 +125,7 @@ export function Timer({ isLeftButtonDisabled = false, isRightButtonDisabled = fa
             disabled={isRightButtonDisabled}
             onClick={props.handleRightButtonClick}
           >
-            <Text size={16} lineHeight={17} color={EColors.greyC4} weight={EWeight.medium}>{rightButtonName}</Text>
+            <Text size={16} lineHeight={17} color={EColors.red} weight={EWeight.medium}>{rightButtonName}</Text>
           </Button>
 
         </div>

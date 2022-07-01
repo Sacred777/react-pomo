@@ -37,7 +37,7 @@ const tasksSlice = createSlice({
     decreaseCount(state, action: PayloadAction<number>) {
       const foundTask = state.tasks.find(task => task.id === action.payload)
       if(foundTask) {
-        console.log()
+        console.log('удалили помидор')
        if (foundTask.count > 1) foundTask.count -= 1;
       }
     },
