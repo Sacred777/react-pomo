@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../hooks/reduxHooks';
 import {getDateStringYYYYMMDD, getNumberOfWeek, showTime} from '../../../utils/timeutiltties';
 import {decreaseCount, increaseTime, removeTask} from '../../../store/tasksSlice';
@@ -24,6 +24,9 @@ export function TimerContainer() {
   const [secondsLeft, setSecondsLeft] = useState(0);
   const [pauseSeconds, setPauseSeconds] = useState(0);
   const [breakSeconds, setBreakSeconds] = useState(0);
+  const [isChangedMode, setIsChangedMode] = useState(false);
+
+
 
   const currentDate = new Date();
   const currentDateStringYYYYMMDD = getDateStringYYYYMMDD(currentDate);
@@ -206,24 +209,36 @@ export function TimerContainer() {
       case EWindowTypes.initial: // Стоп неактивная
         break
       case EWindowTypes.starting: // Стоп активная
+        // Записать состояние
+          // Время работы таймера. Разница между временем задачи и оставшегося времени по счетчику
+          // Время паузы
+          // Увеиличить StopCount
+        const newStat = {
+          ...statDataTemplate,
+          timerTime: sortTasks[0].time - secondsLeft + pauseSeconds,
+          pauseTime: pauseSeconds,
+          stopCount: 1,
+        }
+        // Записываем статистику
+        dispatch(changeStat(newStat));
+        // Установить время secondsLeft = время задачи
+        setSecondsLeft(sortTasks[0].time);
+        // Обнулить pauseSeconds
+        setPauseSeconds(0);
+        // Установить таймер в false
         dispatch(startTimer(false));
-        // setTime(0); //Обнулили счетчик
-        // setPauseTime(0); //Обнулили счетчик
-        // dispatch(changeStat({
-        //   ...statDataTemplate,
-          // timerTime: time + pauseTime,
-          // pomodoroTime: time,
-          // pauseTime: pauseTime,
-          // stopCount: 1,
-        // }))
         break
       case EWindowTypes.pausing: // Сделано
-        // dispatch(pauseTimer(false));
-        // setPomodoroIsDone(); // Здесь обнуление счётчиков, помидора (и задачи если нужно)
+        dispatch(startTimer(true));
+        setIsChangedMode(true);
         break
-      case EWindowTypes.breaking:
+      case EWindowTypes.breaking: // Пропустить
+        dispatch(breakTimer(true));
+        setIsChangedMode(true);
         break
-      case EWindowTypes.breakPausing:
+      case EWindowTypes.breakPausing: // Пропустить
+        dispatch(breakTimer(true));
+        setIsChangedMode(true);
         break
     }
   }
@@ -241,92 +256,13 @@ export function TimerContainer() {
     dispatch(createStat(stat));
   }
 
-  // Помидор выполнен (Нажата кнопка "Сделано", Timer закончился)
-  // Если помидор был последним - удаляем задачу
-  // function setPomodoroIsDone() {
-  //   const isNotPomodoro = sortTasks[0].count - 1 === 0 ? true : false;
-  //   // Готовим объект
-  //   const stat: TShortStat = {
-  //     ...statDataTemplate,
-  //     // date: currentDateStringYYYYMMDD,
-  //     // timerTime: time + pauseTime,
-  //     // pomodoroTime: time,
-  //     // pauseTime: pauseTime,
-  //     // stopCount: 0,
-  //     pomodoroCount: 1,
-  //     taskCount: isNotPomodoro ? 1 : 0,
-  //     // lastBreakPomodoroCount: 0,
-  //   };
-  //     console.log(stat);
-  //     dispatch(changeStat(stat)); // Обновляем данные
-
-
-    // Обнуляем счётчики timer pauseTime
-    // setTime(0);
-    // setPauseTime(0);
-    // Задиспатчить удаление помидара, а если помидоров у задачи нет - задачу
-    // dispatch(decreaseCount(sortTasks[0].id))
-    // console.log('уменьшаем помодоро')
-
-    // if(isNotPomodoro) {
-    //   dispatch(removeTask(sortTasks[0].id));
-    // }
-  // }
-
-  // console.log('isTasks', isTasks);
-  // console.log('sortTasks[0].time', sortTasks[0].time)
-  // console.log(timerTime);
-  // console.log(time);
-  // console.log(sortTasks[0].time === time);
-  // if(time && timerTime === time) {
-    // console.log('сравняли');
-    // dispatch(startTimer(false));
-    // setPomodoroIsDone();
-    // setTime(0);
-  // };
-  // Порядок и логика выполнения
-  // Если таймер закончился - записываем выполнение помидора
-  // console.log(states.isStarted);
-  // if(isTasks) {
-  // if(states.isStarted) {
-  //   if(time && (sortTasks[0].time === time)) {
-  //     dispatch(startTimer(false))
-  //     setPomodoroIsDone();
-  //     console.log('isTasks', isTasks);
-  //     console.log('elseTasks', tasks.length !== 0)
-  //     // console.log('tasksCount', tasksCount);
-  //     console.log('tasks', tasks);
-  //     if(tasks.length !== 0) {
-  //     // Проверяем какой должен быть перевыв
-  //     // Делим state.pomodoroCount и settings.longBreakCycle если получается число без остатка - большой перерыв, иначе - маленький
-  //     const breakTimeSettings = pomodoroCount % longBreakCycle === 0
-  //     ? longBreakTime : shortBreakTime;
-  //     console.log('Перерыв', breakTimeSettings);
-  //     // Отключаем таймер
-  //     dispatch(startTimer(false));
-  //     // Включаем перерыв (запуск таймера)
-  //     dispatch(breakTimer(true));
-  //     // timerString = showTime(breakTimeSettings - breakTime);
-  //     console.log(breakTimeSettings - breakTime);
-  //     console.log('timerString', timerString)
-  //     // Когда закончится перерыв, если есть ещё задачи
-  //
-  //     // выполняем помидор, если нет - initial windows
-  //     }
-  //   }
-
-
-
-  // dispatch(breakTimer(true));
-  // dispatch(pauseBreakTimer(true));
-  // }
-
   useEffect(() => {
     if(!states.isStarted && !states.isBreak) {
       return
     }
 
     function switchMode() {
+      setIsChangedMode(false);
       if(states.isStarted) {
         //Если ещё несколько задач или помидоров
         if(sortTasks.length > 1 || sortTasks[0].count > 1) {
@@ -334,8 +270,8 @@ export function TimerContainer() {
           console.log("Запись статистики. Есть ещё помидоры");
           const newStat = {
             ...statDataTemplate,
-            timerTime: sortTasks[0].time + pauseSeconds,
-            pomodoroTime: sortTasks[0].time,
+            timerTime: sortTasks[0].time - secondsLeft + pauseSeconds,
+            pomodoroTime: sortTasks[0].time - secondsLeft,
             pauseTime: pauseSeconds,
             pomodoroCount: 1,
             taskCount: sortTasks[0].count === 1 ? 1 : 0 ,
@@ -357,8 +293,8 @@ export function TimerContainer() {
           console.log("Запись статистики. Нет помидоров")
           const newStat = {
             ...statDataTemplate,
-            timerTime: sortTasks[0].time + pauseSeconds,
-            pomodoroTime: sortTasks[0].time,
+            timerTime: sortTasks[0].time - secondsLeft + pauseSeconds,
+            pomodoroTime: sortTasks[0].time - secondsLeft,
             pauseTime: pauseSeconds,
             pomodoroCount: 1,
             taskCount: sortTasks[0].count === 1 ? 1 : 0 ,
@@ -391,14 +327,16 @@ export function TimerContainer() {
     }
 
     const intervalID = setInterval(() => {
-      if(secondsLeft === 0) {
+      console.log('isPomodoroDone', isChangedMode);
+      if(secondsLeft === 0 || isChangedMode) {
+        console.log('Смена моды')
         return switchMode();
       }
       setSecondsLeft((prevState) => prevState - 1);
     }, 100)
 
     return () => clearInterval(intervalID);
-  }, [states, secondsLeft, breakSeconds])
+  }, [states, secondsLeft, breakSeconds, isChangedMode])
 
 
   // Счётчик Паузы
