@@ -9,10 +9,10 @@ export type TSettings = {
 }
 
 const initialState: TSettings = {
-  taskTime: 3,
-  shortBreakTime: 300,
-  longBreakTime: 1800,
-  longBreakCycle: 4,
+  taskTime: 60,
+  shortBreakTime: 100,
+  longBreakTime: 120,
+  longBreakCycle: 2,
   massage: true,
 }
 

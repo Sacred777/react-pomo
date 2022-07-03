@@ -25,11 +25,12 @@ interface ITimer {
   // rightButtonName: string;
   handleLeftButtonClick: () => void;
   handleRightButtonClick: () => void;
+  isAddButtonDisabled?: boolean;
   isLeftButtonDisabled?: boolean;
   isRightButtonDisabled?: boolean;
 }
 
-export function Timer({ isLeftButtonDisabled = false, isRightButtonDisabled = false, ...props}: ITimer) {
+export function Timer({ isLeftButtonDisabled = false, isRightButtonDisabled = false, isAddButtonDisabled = false, ...props}: ITimer) {
 
   let leftButtonName = '';
   let rightButtonName = '';
@@ -89,6 +90,7 @@ export function Timer({ isLeftButtonDisabled = false, isRightButtonDisabled = fa
             {props.timerDigits}</Text>
           <button
             className={styles.addBtnBox}
+            disabled={isAddButtonDisabled}
             onClick={props.handleAddTime}
             // disabled={!isTasks}
           >

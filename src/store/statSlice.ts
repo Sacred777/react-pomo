@@ -13,7 +13,7 @@ export type TStat = {
   stopCount: number;
   pomodoroCount: number;
   taskCount: number;
-  lastBreakPomodoroCount: number;
+  lastLongBreakPomodoroCount: number;
 }
 
 export type TShortStat = {
@@ -24,7 +24,7 @@ export type TShortStat = {
   stopCount: number;
   pomodoroCount: number;
   taskCount: number;
-  lastBreakPomodoroCount: number;
+  lastLongBreakPomodoroCount: number;
 }
 
 type TStatState = {
@@ -51,13 +51,24 @@ const statSlice = createSlice({
       currentStat.stopCount = currentStat.stopCount + action.payload.stopCount;
       currentStat.pomodoroCount = currentStat.pomodoroCount + action.payload.pomodoroCount;
       currentStat.taskCount = currentStat.taskCount + action.payload.taskCount;
-      currentStat.lastBreakPomodoroCount = currentStat.lastBreakPomodoroCount + action.payload.lastBreakPomodoroCount;
+      currentStat.lastLongBreakPomodoroCount = currentStat.lastLongBreakPomodoroCount + action.payload.lastLongBreakPomodoroCount;
     },
 
     addStop(state, action: PayloadAction<string>) {
       const [currentStat] = state.stat.filter((stat) => stat.date === action.payload);
       currentStat.stopCount = currentStat.stopCount + 1;
     },
+
+    increaseLastLongBreakPomodoroCount(state, action: PayloadAction<string>) {
+      const [currentStat] = state.stat.filter((stat) => stat.date === action.payload);
+      currentStat.lastLongBreakPomodoroCount = currentStat.lastLongBreakPomodoroCount + 1;
+    },
+
+    cleanLastLongBreakPomodoroCount(state, action: PayloadAction<string>) {
+      const [currentStat] = state.stat.filter((stat) => stat.date === action.payload);
+      currentStat.lastLongBreakPomodoroCount = 0;
+    },
+
 
     // increaseTime(state, action: PayloadAction<number>) {
     //   const foundTask = state.tasks.find(task => task.id === action.payload)
@@ -93,6 +104,8 @@ export const {
   createStat,
   changeStat,
   addStop,
+  increaseLastLongBreakPomodoroCount,
+  cleanLastLongBreakPomodoroCount,
   // increaseTime,
   // increaseCount,
   // decreaseCount,
