@@ -70,19 +70,13 @@
   --d-salmon: #ea8a79;
   --supernova: #ffae35;
   --nyp: #ea8979;
-  /*--black: #000;*/
-  /*--whiteLightness: 100%;*/
-  /*--white: hsl(0, 0%, var(--whiteLightness));*/
-  /*--greyF4: hsl(0, 0%, calc(var(--whiteLightness) - 4%));*/
-  /*--greyE5: hsl(0, 0%, calc(var(--whiteLightness) - 10%));*/
-  /*--greyE4: hsl(0, 0%, calc(var(--whiteLightness) - 11%));*/
-  /*--greyC4: hsl(0, 0%, calc(var(--whiteLightness) - 23%));*/
-  /*--grey99: hsl(0, 0%, calc(var(--whiteLightness) - 40%));*/
-  /*--grey33: hsl(0, 0%, calc(var(--whiteLightness) - 80%));*/
+  --honey: #ffdda9;
+  --malva: #dfdcfe;
+  --frost: #c5f1ff;
 }
 
 html {
-  box-sizing: content-box;
+  box-sizing: border-box;
 }
 
 *,
@@ -178,7 +172,7 @@ p {
 .container {
   margin: 0 auto;
   padding: 0 15px;
-  max-width: 1250px;
+  max-width: 1310px;
 }
 
 input[type="number"]::-webkit-outer-spin-button,

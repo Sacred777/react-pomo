@@ -1,0 +1,104 @@
+.wrapper {
+  padding-top: 88px;
+}
+
+.topWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 19px 15px;
+  width: 370px;
+  background-color: var(--greyF4);
+  cursor: pointer;
+  transition: translate var(--duration) ease-in-out;
+}
+
+.chartWrapper {
+  display: flex;
+  margin-bottom: 32px;
+  padding-top: 40px;
+}
+
+.leftChartWrapper {
+  max-width: 23%;
+  margin-right: 32px;
+}
+
+.rightChartWrapper {
+  max-width: 74%;
+}
+
+.workingOnTasks {
+  margin-bottom: 32px;
+  padding: 25px;
+  min-height: 260px;
+  background-color: var(--greyF4);
+}
+
+.pomodoroCount {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /*padding: 23px;*/
+  min-height: 179px;
+  /*background-color: var(--greyF4);*/
+}
+
+.pomodoroCountIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /*align-content: stretch;*/
+  /*min-height: ;*/
+  flex-grow: 1;
+  background-color: var(--greyF4);
+}
+
+.pomodoroCountInfo {
+  display: flex;
+  justify-content: center;
+  padding: 9px;
+  background-color: var(--cinnabar);
+}
+
+.bottomWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /*row-gap: 32px;*/
+  /*min-height: 179px;*/
+}
+
+.items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px;
+  /*height: 179px;*/
+  width: 405px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: stretch;
+}
+
+.focus {
+  background-color: var(--honey);
+}
+
+.pause {
+  background-color: var(--malva);
+}
+
+.stop {
+  background-color: var(--frost);
+}

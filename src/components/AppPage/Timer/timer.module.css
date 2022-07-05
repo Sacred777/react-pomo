@@ -14,6 +14,7 @@
 }
 
 .body {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,14 +23,14 @@
 }
 
 .timerBox {
-  position: relative;
+  /*position: relative;*/
 }
 
 .addBtnBox {
   position: absolute;
   content: '';
-  top: 50%;
-  right: -70px;
+  top: 160px;
+  right: 100px;
   transform: translateY(-25px);
 }
 

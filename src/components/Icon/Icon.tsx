@@ -50,7 +50,7 @@ export enum EIcons {
   rectangleDown = 'rectangleDown',
 }
 
-export type TSizes = 50 | 40 | 24 | 20 | 18 | 16;
+export type TSizes = 129 | 81 | 50 | 40 | 24 | 20 | 18 | 16;
 
 interface IIconProps {
   name: EIcons;
