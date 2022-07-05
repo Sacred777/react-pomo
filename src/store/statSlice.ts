@@ -54,63 +54,20 @@ const statSlice = createSlice({
       currentStat.lastLongBreakPomodoroCount = currentStat.lastLongBreakPomodoroCount + action.payload.lastLongBreakPomodoroCount;
     },
 
-    addStop(state, action: PayloadAction<string>) {
-      const [currentStat] = state.stat.filter((stat) => stat.date === action.payload);
-      currentStat.stopCount = currentStat.stopCount + 1;
-    },
-
-    increaseLastLongBreakPomodoroCount(state, action: PayloadAction<string>) {
-      const [currentStat] = state.stat.filter((stat) => stat.date === action.payload);
-      currentStat.lastLongBreakPomodoroCount = currentStat.lastLongBreakPomodoroCount + 1;
-    },
-
     cleanLastLongBreakPomodoroCount(state, action: PayloadAction<string>) {
       const [currentStat] = state.stat.filter((stat) => stat.date === action.payload);
       currentStat.lastLongBreakPomodoroCount = 0;
     },
 
 
-    // increaseTime(state, action: PayloadAction<number>) {
-    //   const foundTask = state.tasks.find(task => task.id === action.payload)
-    //   if(foundTask) foundTask.time += 60;
-    // },
-    //
-    // increaseCount(state, action: PayloadAction<number>) {
-    //   const foundTask = state.tasks.find(task => task.id === action.payload)
-    //   if(foundTask) foundTask.count += 1;
-    // },
-    //
-    // decreaseCount(state, action: PayloadAction<number>) {
-    //   const foundTask = state.tasks.find(task => task.id === action.payload)
-    //   if(foundTask) {
-    //     console.log()
-    //     if (foundTask.count > 1) foundTask.count -= 1;
-    //   }
-    // },
-    //
-    // changeTask(state, action: PayloadAction<TTask>) {
-    //   // TODO Написать функцию
-    //   state.tasks.push(action.payload);
-    // },
-    //
-    // removeTask(state, action: PayloadAction<number>) {
-    //   // TODO Написать функцию
-    //   state.tasks = state.tasks.filter((task) => task.id !== action.payload);
-    // },
+
   }
 })
 
 export const {
   createStat,
   changeStat,
-  addStop,
-  increaseLastLongBreakPomodoroCount,
   cleanLastLongBreakPomodoroCount,
-  // increaseTime,
-  // increaseCount,
-  // decreaseCount,
-  // changeTask,
-  // removeTask
 } = statSlice.actions;
 
 export default statSlice.reducer;

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../hooks/reduxHooks';
 import {getDateStringYYYYMMDD, getNumberOfWeek, showTime} from '../../../utils/timeutiltties';
 import {decreaseCount, increaseTime, removeTask} from '../../../store/tasksSlice';
@@ -7,12 +7,11 @@ import {EWindowTypes, Timer} from './Timer';
 import {
   changeStat,
   cleanLastLongBreakPomodoroCount,
-  createStat, increaseLastLongBreakPomodoroCount,
+  createStat,
   TShortStat,
   TStat
 } from "../../../store/statSlice";
 import getShortStatDataTemplate from "../../../utils/getStatObjects";
-
 
 export function TimerContainer() {
   const dispatch = useAppDispatch();
@@ -158,7 +157,6 @@ export function TimerContainer() {
         //Если ещё несколько задач или помидоров
         if(sortTasks.length > 1 || currentTask.count > 1) {
           // Записать статистику
-          console.log("Запись статистики. Есть ещё помидоры");
           const newStat = {
             ...statDataTemplate,
             timerTime: currentTask.time - secondsLeft + pauseSeconds,
@@ -168,7 +166,6 @@ export function TimerContainer() {
             taskCount: currentTask.count === 1 ? 1 : 0 ,
             lastLongBreakPomodoroCount: 1,
           }
-          console.log(newStat);
           dispatch(changeStat(newStat));
           // Удалить помидор или задачу
           setFinishedPomodoro();
@@ -181,7 +178,6 @@ export function TimerContainer() {
           // Поменять состояние на Break
           dispatch(breakTimer(true));
         } else {
-          console.log("Запись статистики. Нет помидоров")
           const newStat = {
             ...statDataTemplate,
             timerTime: currentTask.time - secondsLeft + pauseSeconds,
@@ -189,7 +185,6 @@ export function TimerContainer() {
             pauseTime: pauseSeconds,
             pomodoroCount: 1,
             taskCount: currentTask.count === 1 ? 1 : 0 ,
-            // lastLongBreakPomodoroCount: 1,
           }
           // Записываем статистику
           dispatch(changeStat(newStat));
@@ -203,12 +198,9 @@ export function TimerContainer() {
         }
       } else if(states.isBreak) {
         //Обновляем статистику
-        console.log("Запись статистики. Пауза")
         const newStat = {
           ...statDataTemplate,
-          //TODO Подумать как фиксировать время
           timerTime: breakSeconds,
-          // lastLongBreakPomodoroCount: 1,
         }
         dispatch(changeStat(newStat));
         setSecondsLeft(currentTask.time);
@@ -218,9 +210,7 @@ export function TimerContainer() {
     }
 
     const intervalID = setInterval(() => {
-      console.log('isPomodoroDone', isChangedMode);
       if(secondsLeft === 0 || isChangedMode) {
-        console.log('Смена моды')
         return switchMode();
       }
       setSecondsLeft((prevState) => prevState - 1);
@@ -242,16 +232,11 @@ export function TimerContainer() {
     return () => clearInterval(intervalID);
   }, [states])
 
-  // console.log(typeOfWindow);
 
   function getNextBreakSeconds() {
     if(isCurrentDateStat) {
-      // console.log('Расчет перерыва')
       const isLongBreak = settingsInfo.longBreakCycle === currentDateStat.lastLongBreakPomodoroCount + 1;
-      // console.log('isLongBreak', isLongBreak);
-      // console.log()
       const breakDuration = isLongBreak ? settingsInfo.longBreakTime : settingsInfo.shortBreakTime;
-      // console.log('breakDuration', breakDuration);
       if(isLongBreak) {
         dispatch(cleanLastLongBreakPomodoroCount(currentDateStringYYYYMMDD))
       }
@@ -262,7 +247,6 @@ export function TimerContainer() {
   }
 
   function setFinishedPomodoro() {
-    // console.log('function');
     if (currentTask.count > 1) {
       dispatch(decreaseCount(currentTask.id));
     } else {
