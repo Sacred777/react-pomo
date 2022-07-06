@@ -14,7 +14,7 @@ import {
   PauseIcon,
   StopIcon,
   AddIcon,
-  RectangleDownIcon,
+  RectangleDownIcon, PomoIcon,
 } from "../Icons";
 
 
@@ -32,6 +32,7 @@ const icons = {
   stop:          StopIcon,
   add:           AddIcon,
   rectangleDown: RectangleDownIcon,
+  pomo:          PomoIcon,
 }
 
 export enum EIcons {
@@ -48,9 +49,10 @@ export enum EIcons {
   stop =          'stop',
   add =           'add',
   rectangleDown = 'rectangleDown',
+  pomo =          'pomo',
 }
 
-export type TSizes = 129 | 81 | 50 | 40 | 24 | 20 | 18 | 16;
+export type TSizes = 129 | 115 | 81 | 50 | 40 | 24 | 20 | 18 | 16;
 
 interface IIconProps {
   name: EIcons;

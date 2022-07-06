@@ -11,3 +11,4 @@ export * from './PauseIcon';
 export * from './StopIcon';
 export * from './AddIcon';
 export * from './RectangleDownIcon';
+export * from './PomoIcon';
