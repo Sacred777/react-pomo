@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import { Layout } from './components/Layout';
@@ -10,8 +10,6 @@ import {CreateStatState} from "./help/CreateStatsState";
 import StatisticsPageContainer from "./components/StatisticsPage/StatisticsPageContainer";
 
 function App() {
-  // TODO Удалить. Служит для создания статистики
-  CreateStatState();
 
   return (
     <div className="App">

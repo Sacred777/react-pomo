@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../hooks/reduxHooks';
-import {getDateStringYYYYMMDD, getNumberOfWeek, showTime} from '../../../utils/timeutiltties';
+import {
+  getDateStringYYYYMMDD,
+  getNumberOfWeek,
+  getNumberOfWeekSince01011970,
+  getRusDayOfWeek,
+  showTime
+} from '../../../utils/timeutiltties';
 import {decreaseCount, increaseTime, removeTask} from '../../../store/tasksSlice';
 import {breakTimer, pauseBreakTimer, pauseTimer, setInitialState, startTimer} from "../../../store/statesSlice";
 import {EWindowTypes, Timer} from './Timer';
@@ -140,8 +146,8 @@ export function TimerContainer() {
       day: currentDate.getDate(),
       month: currentDate.getMonth() + 1,
       year: currentDate.getFullYear(),
-      dayOfTheWeek: currentDate.getDay(),
-      week: getNumberOfWeek(currentDate),
+      dayOfTheWeek: getRusDayOfWeek(currentDate),
+      week: getNumberOfWeekSince01011970(currentDate),
     }
     dispatch(createStat(stat));
   }

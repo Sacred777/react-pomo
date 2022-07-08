@@ -1,4 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {CreateStatState} from "../help/CreateStatsState";
+
+// TODO Удалить. Служит для создания статистики
+const testStat = CreateStatState();
+// console.log(testStat);
 
 export type TStat = {
   day: number;
@@ -31,8 +36,9 @@ type TStatState = {
   stat: TStat[];
 }
 
+//Todo на финише установить stat: [],
 const initialState: TStatState = {
-  stat: [],
+  stat: testStat,
 };
 
 const statSlice = createSlice({

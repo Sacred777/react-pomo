@@ -3,7 +3,7 @@ import React from "react";
 export function PomoIcon(props: {}) {
   return (
     <svg width="115" height="115" viewBox="0 0 115 115" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <g clip-path="url(#clip0_16_527)">
+      <g clipPath="url(#clip0_16_527)">
         <path
           d="M111.881 66.9398C111.881 96.9041 87.5898 115 57.6255 115C27.6603 115 3.36914 90.7089 3.36914 60.7437C3.36914 30.7794 28.4192 12.3571 58.3836 12.3571C88.3488 12.3571 111.881 36.9746 111.881 66.9398Z"
           fill="#DC3E22"/>
