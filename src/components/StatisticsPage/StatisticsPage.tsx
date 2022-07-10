@@ -9,24 +9,18 @@ export interface IStatForButton {
   name: string;
   level: string;
   onClick: ReactEventHandler<HTMLButtonElement>;
+  data: string;
 }
 
 export interface IStatisticsPageProps {
-  // onClick: () => void;
   statForButtons: IStatForButton[];
+  // isDataOfDay: boolean;
   dayOfWeek: string;
   workingOnTaskTime: string;
   pomodoroCount: number;
   focusPercents: string;
   pauseTime: string;
   stopCount: string;
-  moButtonHeight: string;
-  tuButtonHeight: string;
-  weButtonHeight: string;
-  thButtonHeight: string;
-  frButtonHeight: string;
-  saButtonHeight: string;
-  suButtonHeight: string;
   oneLineLevelValue: string;
   twoLineLevelValue: string;
   threeLineLevelValue: string;
@@ -34,6 +28,14 @@ export interface IStatisticsPageProps {
 }
 
 export function StatisticsPage({...props}: IStatisticsPageProps) {
+
+  let pomoName = 'помидоров';
+  if (props.pomodoroCount === 1) {
+    pomoName = 'помидор';
+  } else if (props.pomodoroCount > 1 && props.pomodoroCount < 5 ) {
+    pomoName = 'помидора';
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.topWrapper}>
@@ -53,7 +55,7 @@ export function StatisticsPage({...props}: IStatisticsPageProps) {
             <Text
               size={16}
               lineHeight={33}>
-              {`Вы работали над задачами в течении`}
+              {props.workingOnTaskTime ? 'Вы работали над задачами в течении' : 'Нет данных'}
               <Break size={5} inline={true}/>
               <Text
                 size={16}
@@ -68,13 +70,21 @@ export function StatisticsPage({...props}: IStatisticsPageProps) {
 
           <div className={styles.pomodoroCount}>
             <div className={styles.pomodoroCountIcon}>
-              <Icon name={EIcons.pomo} size={115}/>
+              {props.pomodoroCount === 0
+                ? <Icon name={EIcons.pomo} size={115}/>
+                : <Icon name={EIcons.logo} size={81}/>
+              }
+
               <Break size={16}/>
-              {/*<Text size={24} lineHeight={33} weight={EWeight.bold} color={EColors.grey99}>x 2</Text>*/}
+
+              {props.pomodoroCount !== 0 && <Text size={24} lineHeight={33} weight={EWeight.bold}
+                                                  color={EColors.grey99}>{`x ${props.pomodoroCount}`}</Text>}
             </div>
-            {/*<div className={styles.pomodoroCountInfo}>*/}
-            {/*<Text As={'p'} size={24} lineHeight={33} weight={EWeight.bold} color={EColors.white}>2 помидора</Text>*/}
-            {/*</div>*/}
+
+            {props.pomodoroCount !== 0 && <div className={styles.pomodoroCountInfo}>
+              <Text As={'p'} size={24} lineHeight={33} weight={EWeight.bold}
+                    color={EColors.white}>{`${props.pomodoroCount} ${pomoName}`}</Text>
+            </div>}
           </div>
         </div>
 
@@ -95,63 +105,6 @@ export function StatisticsPage({...props}: IStatisticsPageProps) {
             <div className={styles.chartLine}></div>
 
             <div className={styles.chartColums}>
-              {/*<div className={styles.buttonWrapper}>*/}
-              {/*  <button*/}
-              {/*    className={styles.button}*/}
-              {/*    id='1'*/}
-              {/*    style={{height: props.moButtonHeight}}>*/}
-              {/*  </button>*/}
-              {/*  <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Пн</Text>*/}
-              {/*</div>*/}
-              {/*<div className={styles.buttonWrapper}>*/}
-              {/*  <button*/}
-              {/*    className={styles.button}*/}
-              {/*    id='2'*/}
-              {/*    style={{height: props.tuButtonHeight}}>*/}
-              {/*  </button>*/}
-              {/*  <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Вт</Text>*/}
-              {/*</div>*/}
-              {/*<div className={styles.buttonWrapper}>*/}
-              {/*  <button*/}
-              {/*    className={styles.button}*/}
-              {/*    id='3'*/}
-              {/*    style={{height: props.weButtonHeight}}>*/}
-              {/*  </button>*/}
-              {/*  <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Ср</Text>*/}
-              {/*</div>*/}
-              {/*<div className={styles.buttonWrapper}>*/}
-              {/*  <button*/}
-              {/*    className={styles.button}*/}
-              {/*    id='4'*/}
-              {/*    style={{height: props.thButtonHeight}}>*/}
-              {/*  </button>*/}
-              {/*  <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Чт</Text>*/}
-              {/*</div>*/}
-              {/*<div className={styles.buttonWrapper}>*/}
-              {/*  <button*/}
-              {/*    className={styles.button}*/}
-              {/*    id='5'*/}
-              {/*    style={{height: props.frButtonHeight}}>*/}
-              {/*  </button>*/}
-              {/*  <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Пт</Text>*/}
-              {/*</div>*/}
-              {/*<div className={styles.buttonWrapper}>*/}
-              {/*  <button*/}
-              {/*    className={styles.button}*/}
-              {/*    id='6'*/}
-              {/*    style={{height: props.saButtonHeight}}>*/}
-              {/*  </button>*/}
-              {/*  <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Сб</Text>*/}
-              {/*</div>*/}
-              {/*<div className={styles.buttonWrapper}>*/}
-              {/*  <button*/}
-              {/*    className={styles.button}*/}
-              {/*    id='7'*/}
-              {/*    style={{height: props.suButtonHeight}}>*/}
-              {/*    /!*onClick={onClick(+id)}*!/*/}
-              {/*  </button>*/}
-              {/*  <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Вс</Text>*/}
-              {/*</div>*/}
               {
                 props.statForButtons.map((button) => (
                   <div
@@ -162,7 +115,8 @@ export function StatisticsPage({...props}: IStatisticsPageProps) {
                       className={styles.button}
                       id={button.key.toString()}
                       style={{height: button.level}}
-                      onClick={button.onClick}>
+                      onClick={button.onClick}
+                      data-level={button.data}>
                     </button>
                     <Text
                       As={'p'}
@@ -181,15 +135,22 @@ export function StatisticsPage({...props}: IStatisticsPageProps) {
       </div>
       <div className={styles.bottomWrapper}>
 
-        <div className={styles.items + ' ' + styles.focus}>
-          <div className={styles.info}>
+        <div
+          className={styles.items + ' ' + styles.focus}
+          data-value={props.focusPercents !== '0%' ? 'value' : 'notvalue'}>
+          <div
+            className={styles.info}
+          >
             <Text As={'p'} size={24} lineHeight={33} weight={EWeight.bold}>Фокус</Text>
             <Text size={64} lineHeight={76}>{props.focusPercents}</Text>
           </div>
           <Icon name={EIcons.focus} size={129}/>
         </div>
 
-        <div className={styles.items + ' ' + styles.pause}>
+        <div
+          className={styles.items + ' ' + styles.pause}
+          data-value={props.pauseTime !== '0c' ? 'value' : 'notvalue'}
+        >
           <div className={styles.info}>
             <Text As={'p'} size={24} lineHeight={33} weight={EWeight.bold}>Время на паузе</Text>
             <Text size={64} lineHeight={76}>{props.pauseTime}</Text>
@@ -197,7 +158,10 @@ export function StatisticsPage({...props}: IStatisticsPageProps) {
           <Icon name={EIcons.pause} size={129}/>
         </div>
 
-        <div className={styles.items + ' ' + styles.stop}>
+        <div
+          className={styles.items + ' ' + styles.stop}
+          data-value={props.stopCount !== '0' ? 'value' : 'notvalue'}
+        >
           <div className={styles.info}>
             <Text As={'p'} size={24} lineHeight={33} weight={EWeight.bold}>Остановки</Text>
             <Text size={64} lineHeight={76}>{props.stopCount}</Text>

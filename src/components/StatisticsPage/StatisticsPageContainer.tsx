@@ -38,21 +38,11 @@ const StatisticsPageContainer = () => {
     pomodoroLevel[i] = result ? getPersentFromSeconds(result.pomodoroTime) + '%' : '';
   }
 
-  // useEffect(() => {
-  //   setStatForDay(getStatForDay(getRusDayOfWeek(today)));
-  // },[])
-
-  // let statForDay = getStatForDay(getRusDayOfWeek(today));
   let statForDay = getStatForDay(dayOfWeekForDisplay);
   console.log(statForDay);
 
-  const changeStatDay: ReactEventHandler<HTMLButtonElement> = (event) => {
-    //TODO нужно типизировать почемут пишет нет id
-    //@ts-ignore
-    console.log(event.target.id);
-    // @ts-ignore
-    // statForDay = getStatForDay(event.target.id);
-    setDayOfWeekForDisplay(+event.target.id);
+  const changeStatDay = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setDayOfWeekForDisplay(+event.currentTarget.id);
   }
 
   const statForButtons = [];
@@ -65,6 +55,7 @@ const StatisticsPageContainer = () => {
       level: findedData ? getPersentFromSeconds(findedData.pomodoroTime) + '%' : '',
       // onClick: changeStatDay(findedData ? findedData.dayOfTheWeek : i + 1),
       onClick: changeStatDay,
+      data: findedData ? 'notempty' : 'empty',
     }
     statForButtons.push(objOfData);
   }
@@ -82,19 +73,11 @@ const StatisticsPageContainer = () => {
     return currentWeekStat.find((item) => item.dayOfTheWeek === numberOfWeek);
   }
 
-  // TODO По кнопке меняем данные этого объекта
-  // let statForDay = getStatForDay(getRusDayOfWeek(today));
-  // console.log(statForDay);
-
-  // function changeStatDay: ReactEventHandler<HTMLButtonElement> (event) {
-  //   // statForDay = getStatForDay(dayOfWeek)
-  //   // const id
-  //   console.log('клик');
-  // }
+  console.log(statForDay);
 
   const props: IStatisticsPageProps = {
-    // onClick: {changeStatDay},
     statForButtons,
+    // isDataOfDay: statForDay ? true : false,
     dayOfWeek: (
       statForDay
         ? getFullNameOfDayOfWeek(statForDay.dayOfTheWeek - 1)
@@ -126,13 +109,6 @@ const StatisticsPageContainer = () => {
         ? statForDay.stopCount.toString()
         : '0'
     ),
-    moButtonHeight: pomodoroLevel[0],
-    tuButtonHeight: pomodoroLevel[1],
-    weButtonHeight: pomodoroLevel[2],
-    thButtonHeight: pomodoroLevel[3],
-    frButtonHeight: pomodoroLevel[4],
-    saButtonHeight: pomodoroLevel[5],
-    suButtonHeight: pomodoroLevel[6],
     oneLineLevelValue: secondsToString(stepOfLevels),
     twoLineLevelValue: secondsToString(stepOfLevels * 2),
     threeLineLevelValue: secondsToString(stepOfLevels * 3),

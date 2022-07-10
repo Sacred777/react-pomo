@@ -92,6 +92,16 @@
   width: 100%;
   height: 1%;
   background-color: var(--greyC4);
+  /*transition: background-color var(--duration) ease-in-out;*/
+}
+
+.button[data-level="notempty"] {
+  background-color: var(--d-salmon);
+  transition: background-color var(--duration) ease-in-out;
+}
+
+.button[data-level="notempty"]:hover {
+  background-color: var(--cinnabar);
 }
 
 .workingOnTasks {
@@ -155,18 +165,27 @@
   align-self: stretch;
 }
 
-.focus path {
-  /*background-color: var(--honey);*/
+.focus[data-value='value'] {
+  background-color: var(--honey);
+}
+
+.focus[data-value='notvalue']  path {
   stroke: var(--greyC4);
 }
 
-.pause path {
-  /*background-color: var(--malva);*/
+.pause[data-value='value'] {
+  background-color: var(--malva);
+}
+
+.pause[data-value='notvalue'] path {
   stroke: var(--greyC4);
 }
 
-.stop path {
+.stop[data-value='value'] {
+  background-color: var(--frost);
+}
+
+.stop[data-value='notvalue'] path {
   stroke: var(--greyC4);
-  /*background-color: var(--frost);*/
 }
 
