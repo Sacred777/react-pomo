@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {ReactEventHandler} from 'react';
 import styles from './statisticspage.module.css';
 import {EColors, EWeight, Text} from "../Text";
 import {EIcons, Icon} from "../Icon";
 import {Break} from "../Break";
 
+export interface IStatForButton {
+  key: number;
+  name: string;
+  level: string;
+  onClick: ReactEventHandler<HTMLButtonElement>;
+}
+
 export interface IStatisticsPageProps {
+  // onClick: () => void;
+  statForButtons: IStatForButton[];
   dayOfWeek: string;
   workingOnTaskTime: string;
   pomodoroCount: number;
@@ -64,7 +73,7 @@ export function StatisticsPage({...props}: IStatisticsPageProps) {
               {/*<Text size={24} lineHeight={33} weight={EWeight.bold} color={EColors.grey99}>x 2</Text>*/}
             </div>
             {/*<div className={styles.pomodoroCountInfo}>*/}
-              {/*<Text As={'p'} size={24} lineHeight={33} weight={EWeight.bold} color={EColors.white}>2 помидора</Text>*/}
+            {/*<Text As={'p'} size={24} lineHeight={33} weight={EWeight.bold} color={EColors.white}>2 помидора</Text>*/}
             {/*</div>*/}
           </div>
         </div>
@@ -86,62 +95,85 @@ export function StatisticsPage({...props}: IStatisticsPageProps) {
             <div className={styles.chartLine}></div>
 
             <div className={styles.chartColums}>
-              <div className={styles.buttonWrapper}>
-                <button
-                  className={styles.button}
-                  id='1'
-                  style={{height: props.moButtonHeight}}>
-                </button>
-                <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Пн</Text>
-              </div>
-              <div className={styles.buttonWrapper}>
-                <button
-                  className={styles.button}
-                  id='2'
-                  style={{height: props.tuButtonHeight}}>
-                </button>
-                <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Вт</Text>
-              </div>
-              <div className={styles.buttonWrapper}>
-                <button
-                  className={styles.button}
-                  id='3'
-                  style={{height: props.weButtonHeight}}>
-                </button>
-                <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Ср</Text>
-              </div>
-              <div className={styles.buttonWrapper}>
-                <button
-                  className={styles.button}
-                  id='4'
-                  style={{height: props.thButtonHeight}}>
-                </button>
-                <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Чт</Text>
-              </div>
-              <div className={styles.buttonWrapper}>
-                <button
-                  className={styles.button}
-                  id='5'
-                  style={{height: props.frButtonHeight}}>
-                </button>
-                <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Пт</Text>
-              </div>
-              <div className={styles.buttonWrapper}>
-                <button
-                  className={styles.button}
-                  id='6'
-                  style={{height: props.saButtonHeight}}>
-                </button>
-                <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Сб</Text>
-              </div>
-              <div className={styles.buttonWrapper}>
-                <button
-                  className={styles.button}
-                  id='7'
-                  style={{height: props.suButtonHeight}}>
-                </button>
-                <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Вс</Text>
-              </div>
+              {/*<div className={styles.buttonWrapper}>*/}
+              {/*  <button*/}
+              {/*    className={styles.button}*/}
+              {/*    id='1'*/}
+              {/*    style={{height: props.moButtonHeight}}>*/}
+              {/*  </button>*/}
+              {/*  <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Пн</Text>*/}
+              {/*</div>*/}
+              {/*<div className={styles.buttonWrapper}>*/}
+              {/*  <button*/}
+              {/*    className={styles.button}*/}
+              {/*    id='2'*/}
+              {/*    style={{height: props.tuButtonHeight}}>*/}
+              {/*  </button>*/}
+              {/*  <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Вт</Text>*/}
+              {/*</div>*/}
+              {/*<div className={styles.buttonWrapper}>*/}
+              {/*  <button*/}
+              {/*    className={styles.button}*/}
+              {/*    id='3'*/}
+              {/*    style={{height: props.weButtonHeight}}>*/}
+              {/*  </button>*/}
+              {/*  <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Ср</Text>*/}
+              {/*</div>*/}
+              {/*<div className={styles.buttonWrapper}>*/}
+              {/*  <button*/}
+              {/*    className={styles.button}*/}
+              {/*    id='4'*/}
+              {/*    style={{height: props.thButtonHeight}}>*/}
+              {/*  </button>*/}
+              {/*  <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Чт</Text>*/}
+              {/*</div>*/}
+              {/*<div className={styles.buttonWrapper}>*/}
+              {/*  <button*/}
+              {/*    className={styles.button}*/}
+              {/*    id='5'*/}
+              {/*    style={{height: props.frButtonHeight}}>*/}
+              {/*  </button>*/}
+              {/*  <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Пт</Text>*/}
+              {/*</div>*/}
+              {/*<div className={styles.buttonWrapper}>*/}
+              {/*  <button*/}
+              {/*    className={styles.button}*/}
+              {/*    id='6'*/}
+              {/*    style={{height: props.saButtonHeight}}>*/}
+              {/*  </button>*/}
+              {/*  <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Сб</Text>*/}
+              {/*</div>*/}
+              {/*<div className={styles.buttonWrapper}>*/}
+              {/*  <button*/}
+              {/*    className={styles.button}*/}
+              {/*    id='7'*/}
+              {/*    style={{height: props.suButtonHeight}}>*/}
+              {/*    /!*onClick={onClick(+id)}*!/*/}
+              {/*  </button>*/}
+              {/*  <Text As={'p'} size={24} lineHeight={24} color={EColors.grey99}>Вс</Text>*/}
+              {/*</div>*/}
+              {
+                props.statForButtons.map((button) => (
+                  <div
+                    className={styles.buttonWrapper}
+                    key={button.key}
+                  >
+                    <button
+                      className={styles.button}
+                      id={button.key.toString()}
+                      style={{height: button.level}}
+                      onClick={button.onClick}>
+                    </button>
+                    <Text
+                      As={'p'}
+                      size={24}
+                      lineHeight={24}
+                      color={EColors.grey99}>
+                      {button.name}
+                    </Text>
+                  </div>
+                ))
+              }
             </div>
           </div>
         </div>
