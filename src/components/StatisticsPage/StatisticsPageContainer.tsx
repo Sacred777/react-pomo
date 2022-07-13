@@ -14,12 +14,12 @@ const StatisticsPageContainer = () => {
   const [dayOfWeekForDisplay, setDayOfWeekForDisplay] = useState((getRusDayOfWeek(today)));
   // let statForDay = getStatForDay(getRusDayOfWeek(today));
   // console.log(statForDay);
-  console.log(dayOfWeekForDisplay);
+  // console.log(dayOfWeekForDisplay);
 
   const WEEKS_MENU = [{id: '0', name: 'Эта неделя'}, {id: '1', name: 'Прошедшая неделя'}, {id: '2', name: '2 недели назад'}];
   const [currentMenu, setCurrentMenu] = useState(WEEKS_MENU);
   // TODO возможно нужна просто переменная
-  const [weekIdNumber, setWeekIdNumber] = useState(0);
+  // const [weekIdNumber, setWeekIdNumber] = useState(0);
   const [currentNumberOfWeek, setCurrentNumberOfWeek] = useState(getNumberOfWeekSince01011970(today));
 
   const handleSelectClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -31,11 +31,11 @@ const StatisticsPageContainer = () => {
     setCurrentMenu(newWeeksMenu);
   }
 
-  console.log(currentNumberOfWeek);
-  console.log(stat);
+  // console.log(currentNumberOfWeek);
+  // console.log(stat);
 
   const currentWeekStat = stat.filter((item) => item.week === currentNumberOfWeek);
-  console.log(currentWeekStat);
+  // console.log(currentWeekStat);
 
   // Получаем шаг для градаций времени на графике
   const maxPomodoroTime = currentWeekStat.reduce((prev, current) => prev.pomodoroTime > current.pomodoroTime ? prev : current).pomodoroTime;
@@ -53,7 +53,7 @@ const StatisticsPageContainer = () => {
   }
 
   let statForDay = getStatForDay(dayOfWeekForDisplay);
-  console.log(statForDay);
+  // console.log(statForDay);
 
   const changeStatDay = (event: React.MouseEvent<HTMLButtonElement>) => {
     setDayOfWeekForDisplay(+event.currentTarget.id);
@@ -74,7 +74,7 @@ const StatisticsPageContainer = () => {
     statForButtons.push(objOfData);
   }
 
-  console.log(statForButtons);
+  // console.log(statForButtons);
 
 
   function getPersentFromSeconds(seconds: number) {
@@ -87,7 +87,7 @@ const StatisticsPageContainer = () => {
     return currentWeekStat.find((item) => item.dayOfTheWeek === numberOfWeek);
   }
 
-  console.log(statForDay);
+  // console.log(statForDay);
 
   const props: IStatisticsPageProps = {
     currentMenu,

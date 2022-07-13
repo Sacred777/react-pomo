@@ -111,7 +111,7 @@ export function getStringOfSecondsHHMM(payload: number) {
     string = seconds === 1 ? string + seconds.toString() + ' секунды' : string + seconds.toString() + ' секунд'
   }
 
-  console.log(string);
+  // console.log(string);
 
   return string;
 
