@@ -13,7 +13,14 @@ export interface IStatForButton {
   data: string;
 }
 
+interface IcurrentMrnu {
+  id: string;
+  name: string;
+}
+
 export interface IStatisticsPageProps {
+  currentMenu: IcurrentMrnu[];
+  onClick: ReactEventHandler<HTMLDivElement>;
   statForButtons: IStatForButton[];
   // isDataOfDay: boolean;
   dayOfWeek: string;
@@ -31,12 +38,12 @@ export interface IStatisticsPageProps {
 export function StatisticsPage({...props}: IStatisticsPageProps) {
   const [isOpened, setIsOpened] = useState(false);
   // const [isFresh, setIsFresh] = useState(false);
-  const [idNumber, setIdNumber] = useState(0);
-  const [prevWeekNumber, setPrevWeekNumber] = useState(0);
+  // const [idNumber, setIdNumber] = useState(0);
+  // const [prevWeekNumber, setPrevWeekNumber] = useState(0);
 
-  const menu = [{id: '0', name: 'Эта неделя'}, {id: '1', name: 'Прошедшая неделя'}, {id: '2', name: '2 недели назад'}];
+  // const menu = [{id: '0', name: 'Эта неделя'}, {id: '1', name: 'Прошедшая неделя'}, {id: '2', name: '2 недели назад'}];
 
-  const [currentMenu, setCurrentMenu] = useState(menu);
+  // const [currentMenu, setCurrentMenu] = useState(menu);
 
   let pomoName = 'помидоров';
   if (props.pomodoroCount === 1) {
@@ -54,25 +61,14 @@ export function StatisticsPage({...props}: IStatisticsPageProps) {
     setIsOpened(false);
   }
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const id = +e.currentTarget.id;
-    setIdNumber(id);
-    // console.log(id);
-    const array = menu.slice(id).concat(menu.slice(0, id));
-    // console.log('ar', array);
-    setCurrentMenu(array);
-  }
-
-  console.log('id', idNumber);
-  // console.log('isOpened', isOpened);
-
-  // useEffect(() => {
-  //   if (!isOpened) {
-  //     setPrevWeekNumber(idNumber);
-  //   }
-  // }, [isOpened])
-  //
-  // console.log('prevWeekNumber', prevWeekNumber);
+  // const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  //   const id = +e.currentTarget.id;
+  //   setIdNumber(id);
+  //   // console.log(id);
+  //   const array = menu.slice(id).concat(menu.slice(0, id));
+  //   // console.log('ar', array);
+  //   setCurrentMenu(array);
+  // }
 
   return (
     <div className={styles.wrapper}>
@@ -84,25 +80,25 @@ export function StatisticsPage({...props}: IStatisticsPageProps) {
           button={
             <div
               className={isOpened ? styles.select + ' ' + styles.opened + ' ' + styles.notBorder : styles.select}
-              id={currentMenu[0].id}
+              id={props.currentMenu[0].id}
             >
-              <Text size={16} lineHeight={17}>{currentMenu[0].name}</Text>
+              <Text size={16} lineHeight={17}>{props.currentMenu[0].name}</Text>
               <Icon name={EIcons.rectangleDown}/>
             </div>
           }>
           <div
-            onClick={handleClick}
+            onClick={props.onClick}
             className={isOpened ? styles.select + ' ' + styles.opened : styles.select}
-            id={currentMenu[1].id}
+            id={props.currentMenu[1].id}
           >
-            <Text size={16} lineHeight={17}>{currentMenu[1].name}</Text>
+            <Text size={16} lineHeight={17}>{props.currentMenu[1].name}</Text>
           </div>
           <div
-            onClick={handleClick}
+            onClick={props.onClick}
             className={isOpened ? styles.select + ' ' + styles.opened : styles.select}
-            id={currentMenu[2].id}
+            id={props.currentMenu[2].id}
           >
-            <Text size={16} lineHeight={17}>{currentMenu[2].name}</Text>
+            <Text size={16} lineHeight={17}>{props.currentMenu[2].name}</Text>
           </div>
 
         </Dropdown>

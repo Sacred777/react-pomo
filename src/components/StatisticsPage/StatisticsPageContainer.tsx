@@ -16,7 +16,21 @@ const StatisticsPageContainer = () => {
   // console.log(statForDay);
   console.log(dayOfWeekForDisplay);
 
-  const currentNumberOfWeek = getNumberOfWeekSince01011970(today);
+  const WEEKS_MENU = [{id: '0', name: 'Эта неделя'}, {id: '1', name: 'Прошедшая неделя'}, {id: '2', name: '2 недели назад'}];
+  const [currentMenu, setCurrentMenu] = useState(WEEKS_MENU);
+  // TODO возможно нужна просто переменная
+  const [weekIdNumber, setWeekIdNumber] = useState(0);
+  const [currentNumberOfWeek, setCurrentNumberOfWeek] = useState(getNumberOfWeekSince01011970(today));
+
+  const handleSelectClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const id = +e.currentTarget.id;
+    setCurrentNumberOfWeek(getNumberOfWeekSince01011970(today) - id);
+    // console.log(id);
+    const newWeeksMenu = WEEKS_MENU.slice(id).concat(WEEKS_MENU.slice(0, id));
+    // console.log('ar', array);
+    setCurrentMenu(newWeeksMenu);
+  }
+
   console.log(currentNumberOfWeek);
   console.log(stat);
 
@@ -76,6 +90,8 @@ const StatisticsPageContainer = () => {
   console.log(statForDay);
 
   const props: IStatisticsPageProps = {
+    currentMenu,
+    onClick: handleSelectClick,
     statForButtons,
     // isDataOfDay: statForDay ? true : false,
     dayOfWeek: (
