@@ -1,4 +1,4 @@
-import React, {ReactEventHandler, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {IStatForButton, IStatisticsPageProps, StatisticsPage} from "./StatisticsPage";
 import {useAppSelector} from "../../hooks/reduxHooks";
 import {

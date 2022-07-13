@@ -26,6 +26,7 @@ export function TasksItem({taskId, editTask}: ITasksItem) {
     dispatch(removeTask(taskId));
   }
 
+  // TODO typescript нужно поправить
   // @ts-ignore
   return (
     <>

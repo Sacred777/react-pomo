@@ -105,6 +105,7 @@ body[data-theme="light"] {
   --greyEC: hsl(0, 0%, calc(var(--whiteLightness) - 7.5%));
   --greyE5: hsl(0, 0%, calc(var(--whiteLightness) - 10%));
   --greyE4: hsl(0, 0%, calc(var(--whiteLightness) - 11%));
+  --greyDE: hsl(0, 0%, calc(var(--whiteLightness) - 13%));
   --greyC4: hsl(0, 0%, calc(var(--whiteLightness) - 23%));
   --grey99: hsl(0, 0%, calc(var(--whiteLightness) - 40%));
   --grey33: hsl(0, 0%, calc(var(--whiteLightness) - 80%));
@@ -118,6 +119,7 @@ body[data-theme="night"] {
   --greyEC: hsl(0, 0%, calc(var(--whiteLightness) + 7.5%));
   --greyE5: hsl(0, 0%, calc(var(--whiteLightness) + 10%));
   --greyE4: hsl(0, 0%, calc(var(--whiteLightness) + 11%));
+  --greyDE: hsl(0, 0%, calc(var(--whiteLightness) + 13%));
   --greyC4: hsl(0, 0%, calc(var(--whiteLightness) + 23%));
   --grey99: hsl(0, 0%, calc(var(--whiteLightness) + 40%));
   --grey33: hsl(0, 0%, calc(var(--whiteLightness) + 80%));
