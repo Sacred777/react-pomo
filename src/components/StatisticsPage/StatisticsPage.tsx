@@ -3,7 +3,6 @@ import styles from './statisticspage.module.css';
 import {EColors, EWeight, Text} from "../Text";
 import {EIcons, Icon} from "../Icon";
 import {Break} from "../Break";
-import {Dropdown} from "../Dropdown";
 import {WeeksSelect} from "./WeeksSelect";
 
 export interface IStatForButton {
@@ -23,7 +22,6 @@ export interface IStatisticsPageProps {
   currentMenu: ICurrentMenu[];
   onClick: ReactEventHandler<HTMLDivElement>;
   statForButtons: IStatForButton[];
-  // isDataOfDay: boolean;
   dayOfWeek: string;
   workingOnTaskTime: string;
   pomodoroCount: number;
@@ -36,8 +34,7 @@ export interface IStatisticsPageProps {
   fourLineLevelValue: string;
 }
 
-export function StatisticsPage({...props}: IStatisticsPageProps) {
-  const [isOpened, setIsOpened] = useState(false);
+export function StatisticsPage(props: IStatisticsPageProps) {
 
   let pomoName = 'помидоров';
   if (props.pomodoroCount === 1) {

@@ -1,1 +1,1 @@
-export * from './WeeksCelect';
+export * from './WeeksSelect';
