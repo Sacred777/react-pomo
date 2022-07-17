@@ -3,102 +3,102 @@
   list-style-type: none;
 }
 
-.item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-top: 1px solid var(--greyE4);
-}
+/*.item {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: space-between;*/
+/*  padding: 10px 0;*/
+/*  border-top: 1px solid var(--greyE4);*/
+/*}*/
 
-.item:last-child {
-  border-bottom: 1px solid var(--greyE4);
-}
+/*.item:last-child {*/
+/*  border-bottom: 1px solid var(--greyE4);*/
+/*}*/
 
-.taskWrapper {
-  display: flex;
-  align-items: center;
-}
+/*.taskWrapper {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*}*/
 
-.count {
-  display: inline-block;
-  --radius-count: 25px;
-  width: var(--radius-count);
-  height: var(--radius-count);
-  text-align: center;
-  border: 1px solid var(--greyC4);
-  border-radius: 50%;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 26px;
-  color: var(--grey33);
-}
+/*.count {*/
+/*  display: inline-block;*/
+/*  --radius-count: 25px;*/
+/*  width: var(--radius-count);*/
+/*  height: var(--radius-count);*/
+/*  text-align: center;*/
+/*  border: 1px solid var(--greyC4);*/
+/*  border-radius: 50%;*/
+/*  font-weight: 300;*/
+/*  font-size: 16px;*/
+/*  line-height: 26px;*/
+/*  color: var(--grey33);*/
+/*}*/
 
-.taskInput {
-  padding: 6px 4px;
-  font-size: 16px;
-  line-height: 17px;
-  font-weight: 300;
-  color: var(--grey99);
-  background-color: var(--greyF4);
-  transition: background-color var(--duration) ease-in-out;
-}
+/*.taskInput {*/
+/*  padding: 6px 4px;*/
+/*  font-size: 16px;*/
+/*  line-height: 17px;*/
+/*  font-weight: 300;*/
+/*  color: var(--grey99);*/
+/*  background-color: var(--greyF4);*/
+/*  transition: background-color var(--duration) ease-in-out;*/
+/*}*/
 
-.taskInput:disabled {
-  background-color: transparent;
-}
+/*.taskInput:disabled {*/
+/*  background-color: transparent;*/
+/*}*/
 
-.dropdownBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  transition: background-color var(--duration) ease-in-out;
-}
+/*.dropdownBtn {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*  border-radius: 50%;*/
+/*  width: 40px;*/
+/*  height: 40px;*/
+/*  transition: background-color var(--duration) ease-in-out;*/
+/*}*/
 
-.dropdownBtn:hover {
-  background-color: var(--greyE5);
-}
+/*.dropdownBtn:hover {*/
+/*  background-color: var(--greyE5);*/
+/*}*/
 
-.dropdownIcon {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background-color: var(--greyC4);
-  border-radius: 50%;
-}
+/*.dropdownIcon {*/
+/*  display: inline-block;*/
+/*  width: 6px;*/
+/*  height: 6px;*/
+/*  background-color: var(--greyC4);*/
+/*  border-radius: 50%;*/
+/*}*/
 
-.dropdownIcon:not(:last-child) {
-  margin-right: 5px;
-}
+/*.dropdownIcon:not(:last-child) {*/
+/*  margin-right: 5px;*/
+/*}*/
 
-.dropdown {
-  --withDropdown: 165px;
-  position: absolute;
-  right: calc(50% - var(--withDropdown) / 2);
-  top: 0;
-  padding: 5px 0;
-  width: var(--withDropdown);
-  border: 1px solid var(--greyC4);
-  background-color: var(--white);
-}
+/*.dropdown {*/
+/*  --withDropdown: 165px;*/
+/*  position: absolute;*/
+/*  right: calc(50% - var(--withDropdown) / 2);*/
+/*  top: 0;*/
+/*  padding: 5px 0;*/
+/*  width: var(--withDropdown);*/
+/*  border: 1px solid var(--greyC4);*/
+/*  background-color: var(--white);*/
+/*}*/
 
-.dropdown::before {
-  --triangleSize: 8px;
-  content: '';
-  position: absolute;
-  /* top: var(--triangleSize); */
-  top: -6px;
-  left: calc( 50% - var(--triangleSize) / 2);
-  width: var(--triangleSize);
-  height: var(--triangleSize);
-  border-top: 1px solid var(--greyC4);
-  border-left: 1px solid var(--greyC4);
-  background-color: var(--white);
-  /* font-size: 20px; */
-  /* color: var(--greyC4); */
-  transform: rotate(45deg);
+/*.dropdown::before {*/
+/*  --triangleSize: 8px;*/
+/*  content: '';*/
+/*  position: absolute;*/
+/*  !* top: var(--triangleSize); *!*/
+/*  top: -6px;*/
+/*  left: calc( 50% - var(--triangleSize) / 2);*/
+/*  width: var(--triangleSize);*/
+/*  height: var(--triangleSize);*/
+/*  border-top: 1px solid var(--greyC4);*/
+/*  border-left: 1px solid var(--greyC4);*/
+/*  background-color: var(--white);*/
+/*  !* font-size: 20px; *!*/
+/*  !* color: var(--greyC4); *!*/
+/*  transform: rotate(45deg);*/
 
-}
+/*}*/

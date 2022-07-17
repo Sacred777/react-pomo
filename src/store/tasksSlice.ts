@@ -42,9 +42,13 @@ const tasksSlice = createSlice({
       }
     },
 
-    changeTask(state, action: PayloadAction<TTask>) {
+    changeNameTask(state, action: PayloadAction<{id:number, value: string}>) {
       // TODO Написать функцию
-      state.tasks.push(action.payload);
+      const foundTask = state.tasks.find(task => task.id === action.payload.id)
+      if(foundTask) {
+        // console.log('удалили помидор')
+        foundTask.name = action.payload.value;
+      }
     },
 
     removeTask(state, action: PayloadAction<number>) {
@@ -59,7 +63,7 @@ export const {
   increaseTime,
   increaseCount,
   decreaseCount,
-  changeTask,
+  changeNameTask,
   removeTask
 } = tasksSlice.actions;
 

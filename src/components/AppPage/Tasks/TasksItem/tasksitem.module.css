@@ -1,12 +1,156 @@
-.tasksItem {
+.tasksButton {
   display: flex;
   padding: 9px 10px;
+  width: 100% ;
+  font-size: 16px;
   cursor: pointer;
   transition: background-color var(--duration) ease-in-out;
 }
 
-.tasksItem:hover {
+.tasksButton:hover {
   background-color: var(--greyF4) ;
 }
 
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 1px solid var(--greyE4);
+}
 
+.item:last-child {
+  border-bottom: 1px solid var(--greyE4);
+}
+
+.taskWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.taskWrapper p {
+  padding: 6px 4px;
+}
+
+.count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  --radius-count: 25px;
+  width: var(--radius-count);
+  height: var(--radius-count);
+  border: 1px solid var(--greyC4);
+  border-radius: 50%;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--grey33);
+}
+
+.taskInput {
+  padding: 6px 4px;
+  font-size: 16px;
+  line-height: 17px;
+  font-weight: 300;
+  color: var(--grey99);
+  background-color: var(--greyF4);
+  transition: background-color var(--duration) ease-in-out;
+}
+
+.taskInput:disabled {
+  background-color: transparent;
+}
+
+.dropdownBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  transition: background-color var(--duration) ease-in-out;
+}
+
+.dropdownBtn:hover {
+  background-color: var(--greyE5);
+}
+
+.dropdownIcon {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--greyC4);
+  border-radius: 50%;
+}
+
+.dropdownIcon:not(:last-child) {
+  margin-right: 5px;
+}
+
+.dropdown {
+  --withDropdown: 165px;
+  position: absolute;
+  right: calc(50% - var(--withDropdown) / 2);
+  top: 0;
+  padding: 5px 0;
+  width: var(--withDropdown);
+  border: 1px solid var(--greyC4);
+  background-color: var(--white);
+}
+
+.dropdown::before {
+  --triangleSize: 8px;
+  content: '';
+  position: absolute;
+  /* top: var(--triangleSize); */
+  top: -6px;
+  left: calc( 50% - var(--triangleSize) / 2);
+  width: var(--triangleSize);
+  height: var(--triangleSize);
+  border-top: 1px solid var(--greyC4);
+  border-left: 1px solid var(--greyC4);
+  background-color: var(--white);
+  /* font-size: 20px; */
+  /* color: var(--greyC4); */
+  transform: rotate(45deg);
+  
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 35px 83px;
+  /*background-color: var(--cinnabar);*/
+}
+
+.modalDeleteButton {
+  align-self: center;
+  padding: 19px 50px;
+  font-size: 16px;
+  background-color: var(--cinnabar);
+  transition: background-color var(--duration) ease-in-out;
+}
+
+.modalDeleteButton:hover {
+  background-color: var(--hdo);
+}
+
+.modalCancelButton {
+  align-self: center;
+  font-size: 16px;
+  border-bottom: 1px solid var(--black);
+  transition: border-color var(--duration) ease-in-out;
+}
+
+.modalCancelButton:hover {
+  border-color: var(--cinnabar);
+}
+
+.modalCancelButton span {
+  transition: color var(--duration) ease-in-out;
+}
+
+.modalCancelButton:hover span {
+  color: var(--cinnabar);
+}

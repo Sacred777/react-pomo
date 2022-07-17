@@ -1,12 +1,12 @@
 import React from 'react';
 // import classNames from "classnames";
-import { SubmitHandler, useForm, useFormState } from 'react-hook-form';
+import {SubmitHandler, useForm, useFormState} from 'react-hook-form';
 
-import { EColors, EWeight, Text } from '../Text';
+import {EColors, EWeight, Text} from '../Text';
 import styles from './settingsmodal.module.css';
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { Break } from '../Break';
-import { changeSettings } from '../../store/settingsSlice';
+import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
+import {Break} from '../Break';
+import {changeSettings} from '../../store/settingsSlice';
 
 
 export function SettingsModal() {
@@ -79,7 +79,7 @@ export function SettingsModal() {
   return (
     <div>
       <Text As={'h2'} size={24} lineHeight={24} weight={EWeight.medium}>Настройки программы</Text>
-      <Break size={12} top />
+      <Break size={12} top/>
 
       <form
         className={styles.form}
@@ -88,7 +88,7 @@ export function SettingsModal() {
         {/* taskTime */}
         <label className={styles.label}>
           <Text size={labelSize} lineHeight={labelSize} color={EColors.grey33}>Помидор, мин</Text>
-          <Break size={gaps} top />
+          <Break size={gaps} top/>
           <input
             className={styles.inputs}
             type='text'
@@ -123,7 +123,7 @@ export function SettingsModal() {
         {/* shortBreakTime */}
         <label className={styles.label}>
           <Text size={labelSize} lineHeight={labelSize} color={EColors.grey33}>Короткий перерыв, мин</Text>
-          <Break size={gaps} top />
+          <Break size={gaps} top/>
           <input
             className={styles.inputs}
             type='text'
@@ -158,7 +158,7 @@ export function SettingsModal() {
         {/* longBreakTime */}
         <label className={styles.label}>
           <Text size={labelSize} lineHeight={labelSize} color={EColors.grey33}>Длинный перерыв, мин</Text>
-          <Break size={gaps} top />
+          <Break size={gaps} top/>
           <input
             className={styles.inputs}
             type='text'
@@ -193,7 +193,7 @@ export function SettingsModal() {
         {/* longBreakCycle */}
         <label className={styles.label}>
           <Text size={labelSize} lineHeight={labelSize} color={EColors.grey33}>Помидоров до длинного перерыва</Text>
-          <Break size={gaps} top />
+          <Break size={gaps} top/>
           <input
             className={styles.inputs}
             type='text'
@@ -227,14 +227,14 @@ export function SettingsModal() {
 
         <label className={styles.label}>
           <Text size={labelSize} lineHeight={labelSize} color={EColors.grey33}>Отключить уведомления</Text>
-          <Break size={gaps} top />
+          <Break size={gaps} top/>
           <input
             className={styles.inputs}
             type='checkbox'
             defaultChecked={settings.massage}
             {...register('massage')}
           />
-          <Break size={12} top />
+          <Break size={12} top/>
         </label>
 
         <div className={styles.buttonsWrapper}>
@@ -244,7 +244,7 @@ export function SettingsModal() {
         </div>
       </form>
 
-      <Break size={gaps} top />
+      <Break size={gaps} top/>
 
       <button className={styles.cancelButton} onClick={handleClick}>
         <Text size={16} lineHeight={17} color={EColors.red}>Выйти</Text>
