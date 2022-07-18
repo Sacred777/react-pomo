@@ -8,6 +8,7 @@ import {useAppDispatch} from "../../../../hooks/reduxHooks";
 import {changeNameTask, decreaseCount, increaseCount, removeTask} from "../../../../store/tasksSlice";
 import {Portal} from "../../../Portal";
 import {Modal} from "../../../Modal";
+import {NOOP} from "../../../../utils/js/noop";
 
 export interface ITasksItemProps {
   id: number;
@@ -15,12 +16,34 @@ export interface ITasksItemProps {
   name: string;
 }
 
+interface IModalProperties {
+  modalTitle: string;
+  firstButtonStyles: string;
+  firstButtonHandler: () => void;
+  firstButtonTitle: string;
+  secondButtonStyles: string;
+  secondButtonHandler: () => void;
+  secondButtonTitle: string;
+}
+
 export function TasksItem({id, count, name}: ITasksItemProps) {
   const dispatch = useAppDispatch();
   const [isEditable, setIsEditable] = useState(false);
   const [value, setValue] = useState(name);
-  const ref = useRef(null);
+  const ref = useRef<HTMLInputElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const initialModalProperties: IModalProperties = {
+    modalTitle: '',
+    firstButtonStyles: '',
+    firstButtonHandler: NOOP,
+    firstButtonTitle: '',
+    secondButtonStyles: '',
+    secondButtonHandler: NOOP,
+    secondButtonTitle: '',
+  }
+
+  const [modalProperties, setModalProperties] = useState(initialModalProperties);
 
   function plusCount() {
     dispatch(increaseCount(id));
@@ -35,7 +58,16 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
     setIsModalOpen(false);
   }
 
-  function openModal() {
+  function openDeleteTaskModal() {
+    setModalProperties({
+      modalTitle: 'Удалить задачу?',
+      firstButtonStyles: styles.modalDeleteButton,
+      firstButtonHandler: deleteTask,
+      firstButtonTitle: 'Удалить',
+      secondButtonStyles: styles.modalCancelButton,
+      secondButtonHandler: () => setIsModalOpen(false),
+      secondButtonTitle: 'Отмена',
+    })
     setIsModalOpen(true);
   }
 
@@ -50,13 +82,12 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
 
   function handleOnSubmit(event: React.FormEvent) {
     event.preventDefault();
-    dispatch(changeNameTask({id, value}));
-    setIsEditable(false);
+    changeTask();
   }
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
-      if(event.key === 'Escape') {
+      if (event.key === 'Escape') {
         setValue(name);
         setIsEditable(false);
       }
@@ -66,8 +97,39 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isEditable])
 
-  // @ts-ignore
-  // @ts-ignore
+  // TODO Написать обработчик покидания инпута
+  function handleBluer() {
+    // Сравнить name и value
+    // Если одинаковые закрыть редактирование
+    if (name === value.trim()) {
+      setIsEditable(false);
+      return;
+    }
+    // Если нет - открываем модальное окно
+    setModalProperties({
+      modalTitle: 'Данные изменены!',
+      firstButtonStyles: styles.modalDeleteButton,
+      firstButtonHandler: changeTask,
+      firstButtonTitle: 'Сохранить',
+      secondButtonStyles: styles.modalCancelButton,
+      secondButtonHandler: cancelChangeTask,
+      secondButtonTitle: 'Отмена',
+    })
+    setIsModalOpen(true);
+  }
+
+  function changeTask() {
+    dispatch(changeNameTask({id, value}));
+    setIsModalOpen(false);
+    setIsEditable(false);
+  }
+
+  function cancelChangeTask() {
+    setValue(name);
+    setIsModalOpen(false);
+    setIsEditable(false);
+  }
+
   return (
     <li className={styles.item}>
       <div className={styles.taskWrapper}>
@@ -82,6 +144,7 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
               value={value}
               autoFocus={true}
               onChange={handleOnChange}
+              onBlur={handleBluer}
               ref={ref}
             />
           </form>
@@ -137,7 +200,7 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
           <li>
             <button
               className={styles.tasksButton}
-              onClick={openModal}
+              onClick={openDeleteTaskModal}
             >
               <Icon name={EIcons.delete}/>
               <Break size={8}/>
@@ -153,20 +216,22 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
           closeIconSize={24}
         >
           <div className={styles.modal}>
-            <Text As={'h2'} size={24} lineHeight={17}>Удалить задачу?</Text>
+            <Text As={'h2'} size={24} lineHeight={17}>{modalProperties.modalTitle}</Text>
             <Break size={25} top/>
             <button
-              className={styles.modalDeleteButton}
-              onClick={deleteTask}
+              className={modalProperties.firstButtonStyles}
+              onClick={modalProperties.firstButtonHandler}
             >
-              <Text size={16} lineHeight={17} weight={EWeight.medium} color={EColors.white}>Удалить</Text>
+              <Text size={16} lineHeight={17} weight={EWeight.medium}
+                    color={EColors.white}>{modalProperties.firstButtonTitle}</Text>
             </button>
             <Break size={20} top/>
             <button
-              className={styles.modalCancelButton}
-              onClick={() => setIsModalOpen(false)}
+              className={modalProperties.secondButtonStyles}
+              onClick={modalProperties.secondButtonHandler}
             >
-              <Text size={16} lineHeight={17} weight={EWeight.light} color={EColors.black}>Отмена</Text>
+              <Text size={16} lineHeight={17} weight={EWeight.light}
+                    color={EColors.black}>{modalProperties.secondButtonTitle}</Text>
             </button>
           </div>
         </Modal>

@@ -17,9 +17,11 @@ export function Modal({children, isOpen, onOpen = NOOP, onClose = NOOP, closeIco
   // const dispatch = useAppDispatch();
   const [isModalActive, setIsModalActive] = useState(isOpen);
   const ref = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() =>{
     setIsModalActive(isOpen);
+    if(closeButtonRef.current) {closeButtonRef.current.focus()}
   }, [isOpen])
 
   useEffect(() => {
@@ -30,7 +32,7 @@ export function Modal({children, isOpen, onOpen = NOOP, onClose = NOOP, closeIco
     function handleClick(event: MouseEvent) {
       if(event.target instanceof Node && !ref.current?.contains(event.target)) {
         // console.log('clicked out');
-        setIsModalActive(false)
+        setIsModalActive(false);
       }
     }
 
@@ -38,23 +40,36 @@ export function Modal({children, isOpen, onOpen = NOOP, onClose = NOOP, closeIco
     return () => document.removeEventListener('click', handleClick);
   },[isModalActive])
 
-  const closeModal = () => {
-    setIsModalActive(false)
-  }
+  useEffect(()=>{
+    function handleKeydown(event: KeyboardEvent) {
+      if(event.key === 'Escape') {
+        setIsModalActive(false);
+      }
+      // console.log(event.key);
+    }
+
+    document.addEventListener('keydown', handleKeydown);
+    return () => document.removeEventListener('keydown', handleKeydown);
+  },[isModalActive])
 
   // TODO удачный ли вариант stopPropagation
   return (
     <div className={isModalActive ? classNames(styles.overlay, styles.isActive) : styles.overlay}
-         onClick={closeModal}>
+         // onClick={closeModal}
+    >
       <div
         className={isModalActive ? classNames(styles.modal, styles.isOpen) : styles.modal}
         id='modal'
-        onClick={(e) => {
-          e.stopPropagation()
-        }}
+        // onClick={(e) => {
+        //   e.stopPropagation()
+        // }}
         ref={ref}
       >
-        <button className={styles.closeBtn} onClick={closeModal}>
+        <button
+          className={styles.closeBtn}
+          onClick={() => setIsModalActive(false)}
+          ref={closeButtonRef}
+        >
           <Icon name={EIcons.close} size={closeIconSize} title={'Закрыть окно'} role={'img'}/>
         </button>
         {children}
