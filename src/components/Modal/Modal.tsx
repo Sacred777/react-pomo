@@ -13,15 +13,15 @@ interface IModalProps {
 }
 
 export function Modal({children, isOpen, onOpen = NOOP, onClose = NOOP, closeIconSize = 40}: IModalProps) {
-  // const isModalActive = useAppSelector(state => state.modal.isActive);
-  // const dispatch = useAppDispatch();
   const [isModalActive, setIsModalActive] = useState(isOpen);
-  const ref = useRef<HTMLDivElement>(null);
+  const modalWindowRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() =>{
+  useEffect(() => {
     setIsModalActive(isOpen);
-    if(closeButtonRef.current) {closeButtonRef.current.focus()}
+    if (closeButtonRef.current) {
+      closeButtonRef.current.focus()
+    }
   }, [isOpen])
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export function Modal({children, isOpen, onOpen = NOOP, onClose = NOOP, closeIco
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
-      if(event.target instanceof Node && !ref.current?.contains(event.target)) {
+      if (event.target instanceof Node && !modalWindowRef.current?.contains(event.target)) {
         // console.log('clicked out');
         setIsModalActive(false);
       }
@@ -38,32 +38,28 @@ export function Modal({children, isOpen, onOpen = NOOP, onClose = NOOP, closeIco
 
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);
-  },[isModalActive])
+  }, [isModalActive])
 
-  useEffect(()=>{
+  useEffect(() => {
     function handleKeydown(event: KeyboardEvent) {
-      if(event.key === 'Escape') {
+      if (event.key === 'Escape') {
         setIsModalActive(false);
       }
-      // console.log(event.key);
     }
 
     document.addEventListener('keydown', handleKeydown);
     return () => document.removeEventListener('keydown', handleKeydown);
-  },[isModalActive])
+  }, [isModalActive])
 
-  // TODO удачный ли вариант stopPropagation
+
   return (
-    <div className={isModalActive ? classNames(styles.overlay, styles.isActive) : styles.overlay}
-         // onClick={closeModal}
+    <div
+      className={isModalActive ? classNames(styles.overlay, styles.isActive) : styles.overlay}
     >
       <div
         className={isModalActive ? classNames(styles.modal, styles.isOpen) : styles.modal}
         id='modal'
-        // onClick={(e) => {
-        //   e.stopPropagation()
-        // }}
-        ref={ref}
+        ref={modalWindowRef}
       >
         <button
           className={styles.closeBtn}

@@ -1,4 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+
+const LS_SETTINGS_KEY = 'settings'
 
 export type TSettings = {
   taskTime: number;
@@ -8,13 +10,15 @@ export type TSettings = {
   massage: boolean;
 }
 
-const initialState: TSettings = {
+const initialState: TSettings = JSON.parse(localStorage.getItem(LS_SETTINGS_KEY) ?? JSON.stringify({
   taskTime: 60,
   shortBreakTime: 100,
   longBreakTime: 120,
   longBreakCycle: 2,
   massage: true,
-}
+}))
+
+if(!localStorage.getItem(LS_SETTINGS_KEY)) localStorage.setItem(LS_SETTINGS_KEY, JSON.stringify(initialState));
 
 const settingsSlice = createSlice({
   name: 'settings',
@@ -26,10 +30,11 @@ const settingsSlice = createSlice({
       state.longBreakTime = action.payload.longBreakTime;
       state.longBreakCycle = action.payload.longBreakCycle;
       state.massage = action.payload.massage;
+      localStorage.setItem(LS_SETTINGS_KEY, JSON.stringify(state));
     },
   }
 })
 
-export const { changeSettings } = settingsSlice.actions;
+export const {changeSettings} = settingsSlice.actions;
 
 export default settingsSlice.reducer;

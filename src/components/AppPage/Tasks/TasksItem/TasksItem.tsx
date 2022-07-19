@@ -8,7 +8,7 @@ import {useAppDispatch} from "../../../../hooks/reduxHooks";
 import {changeNameTask, decreaseCount, increaseCount, removeTask} from "../../../../store/tasksSlice";
 import {Portal} from "../../../Portal";
 import {Modal} from "../../../Modal";
-import {NOOP} from "../../../../utils/js/noop";
+import {initialModalProperties} from "../../../../models/modalProperties";
 
 export interface ITasksItemProps {
   id: number;
@@ -16,33 +16,11 @@ export interface ITasksItemProps {
   name: string;
 }
 
-interface IModalProperties {
-  modalTitle: string;
-  firstButtonStyles: string;
-  firstButtonHandler: () => void;
-  firstButtonTitle: string;
-  secondButtonStyles: string;
-  secondButtonHandler: () => void;
-  secondButtonTitle: string;
-}
-
 export function TasksItem({id, count, name}: ITasksItemProps) {
   const dispatch = useAppDispatch();
   const [isEditable, setIsEditable] = useState(false);
-  const [value, setValue] = useState(name);
   const ref = useRef<HTMLInputElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const initialModalProperties: IModalProperties = {
-    modalTitle: '',
-    firstButtonStyles: '',
-    firstButtonHandler: NOOP,
-    firstButtonTitle: '',
-    secondButtonStyles: '',
-    secondButtonHandler: NOOP,
-    secondButtonTitle: '',
-  }
-
   const [modalProperties, setModalProperties] = useState(initialModalProperties);
 
   function plusCount() {
@@ -77,56 +55,26 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
 
 
   function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setValue(event.target.value)
+    dispatch(changeNameTask({id, value: event.target.value}));
   }
 
   function handleOnSubmit(event: React.FormEvent) {
     event.preventDefault();
-    changeTask();
+    setIsEditable(false);
   }
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
-        setValue(name);
         setIsEditable(false);
       }
     }
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isEditable])
+  }, [isEditable, isModalOpen])
 
-  // TODO Написать обработчик покидания инпута
   function handleBluer() {
-    // Сравнить name и value
-    // Если одинаковые закрыть редактирование
-    if (name === value.trim()) {
-      setIsEditable(false);
-      return;
-    }
-    // Если нет - открываем модальное окно
-    setModalProperties({
-      modalTitle: 'Данные изменены!',
-      firstButtonStyles: styles.modalDeleteButton,
-      firstButtonHandler: changeTask,
-      firstButtonTitle: 'Сохранить',
-      secondButtonStyles: styles.modalCancelButton,
-      secondButtonHandler: cancelChangeTask,
-      secondButtonTitle: 'Отмена',
-    })
-    setIsModalOpen(true);
-  }
-
-  function changeTask() {
-    dispatch(changeNameTask({id, value}));
-    setIsModalOpen(false);
-    setIsEditable(false);
-  }
-
-  function cancelChangeTask() {
-    setValue(name);
-    setIsModalOpen(false);
     setIsEditable(false);
   }
 
@@ -141,7 +89,7 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
             <input
               type='text'
               className={styles.taskInput}
-              value={value}
+              value={name}
               autoFocus={true}
               onChange={handleOnChange}
               onBlur={handleBluer}
@@ -149,7 +97,7 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
             />
           </form>
           :
-          <Text As={'p'} size={16} lineHeight={17} weight={EWeight.light}>{value}</Text>
+          <Text As={'p'} size={16} lineHeight={17} weight={EWeight.light}>{name}</Text>
         }
       </div>
 

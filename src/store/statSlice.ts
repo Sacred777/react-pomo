@@ -1,9 +1,10 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {CreateStatState} from "../help/CreateStatsState";
+
+const LS_STAT_KEY = 'stat';
 
 // TODO Удалить. Служит для создания статистики
 const testStat = CreateStatState();
-// console.log(testStat);
 
 export type TStat = {
   day: number;
@@ -36,10 +37,12 @@ type TStatState = {
   stat: TStat[];
 }
 
-//Todo на финише установить stat: [],
+//Todo на финише установить после ?? '[]',
 const initialState: TStatState = {
-  stat: testStat,
+  stat: JSON.parse(localStorage.getItem(LS_STAT_KEY) ?? JSON.stringify(testStat))
 };
+// TODO на финише удалить.
+if(!localStorage.getItem(LS_STAT_KEY)) localStorage.setItem(LS_STAT_KEY, JSON.stringify(initialState));
 
 const statSlice = createSlice({
   name: 'stat',
@@ -47,6 +50,7 @@ const statSlice = createSlice({
   reducers: {
     createStat(state, action: PayloadAction<TStat>) {
       state.stat.push(action.payload);
+      localStorage.setItem(LS_STAT_KEY, JSON.stringify(state.stat));
     },
 
     changeStat(state, action: PayloadAction<TShortStat>) {
@@ -58,15 +62,14 @@ const statSlice = createSlice({
       currentStat.pomodoroCount = currentStat.pomodoroCount + action.payload.pomodoroCount;
       currentStat.taskCount = currentStat.taskCount + action.payload.taskCount;
       currentStat.lastLongBreakPomodoroCount = currentStat.lastLongBreakPomodoroCount + action.payload.lastLongBreakPomodoroCount;
+      localStorage.setItem(LS_STAT_KEY, JSON.stringify(state.stat));
     },
 
     cleanLastLongBreakPomodoroCount(state, action: PayloadAction<string>) {
       const [currentStat] = state.stat.filter((stat) => stat.date === action.payload);
       currentStat.lastLongBreakPomodoroCount = 0;
+      localStorage.setItem(LS_STAT_KEY, JSON.stringify(state.stat));
     },
-
-
-
   }
 })
 
