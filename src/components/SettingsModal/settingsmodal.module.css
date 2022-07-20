@@ -1,41 +1,60 @@
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.wrapper {
+  padding: 50px;
 }
 
-.label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-top: 1px solid var(--greyC4);
+.listItem {
+  width: 320px;
+ }
+
+.listItem:not(:last-child) {
+  margin-bottom: 10px;
 }
 
-.inputs {
-  font-size: 26px;
-  line-height: 1;
-  text-align: center;
+.listItem label {
+  display: block;
+  margin: 5px;
+  padding: 0 5px;
+  text-align: initial;
 }
 
-.errorBox {
-  min-height: 12px;
+.redSlider {
+  height: 40px;
+  border: 2px solid var(--cinnabar);
 }
 
-.buttonsWrapper {
-  text-align: center;
+.redThumb {
+  height: 36px;
+  width: 40px;
+  background-color: var(--cinnabar);
+  cursor: pointer;
+  transition: background-color var(--duration) ease-in-out;
 }
 
-.applyButton {
-  padding: 10px 40px;
-  background-color: #a8b64f;
-  transition: opacity 0.3s ease-in-out;
+.redThumb:hover {
+  background-color: var(--hdo);
 }
 
-.applyButton:disabled {
-  opacity: 0.6;
-  cursor: initial;
+.redThumb:focus-visible {
+  /*outline: 2px solid var(--hdo);*/
 }
 
-.cancelButton {
-  border-bottom: 1px solid var(--cinnabar);
+.greenSlider {
+  height: 40px;
+  border: 2px solid var(--celery);
+}
+
+.greenThumb {
+  height: 36px;
+  width: 40px;
+  background-color: var(--celery);
+  cursor: pointer;
+  transition: background-color var(--duration) ease-in-out;
+}
+
+.greenThumb:hover {
+  background-color: var(--wasabi);
+}
+
+.greenThumb:focus-visible {
+  /*outline: 2px solid var(--wasabi);*/
 }

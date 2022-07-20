@@ -25,7 +25,7 @@ export enum EWeight {
 }
 
 interface ITextProps {
-  As?: 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'div' | 'li';
+  As?: 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'div' | 'li' | 'label';
   children?: React.ReactNode;
   size: TSizes;
   lineHeight: TLineHeight;
