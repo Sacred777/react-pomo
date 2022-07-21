@@ -37,17 +37,12 @@ type TStatState = {
   stat: TStat[];
 }
 
-//Todo на финише удалить переменные раскомментировать // JSON.parse(localStorage.getItem(LS_STAT_KEY) ?? '[]')
-const _ls = localStorage.getItem(LS_STAT_KEY);
-const _lsArray = _ls ? JSON.parse(_ls) : testStat;
+// TODO на финише удалить.
+if(!localStorage.getItem(LS_STAT_KEY)) localStorage.setItem(LS_STAT_KEY, JSON.stringify(testStat));
 
 const initialState: TStatState = {
-  stat: _lsArray
-    // JSON.parse(localStorage.getItem(LS_STAT_KEY) ?? '[]')
+  stat: JSON.parse(localStorage.getItem(LS_STAT_KEY) ?? '[]')
 };
-
-// TODO на финише удалить.
-if(!localStorage.getItem(LS_STAT_KEY)) localStorage.setItem(LS_STAT_KEY, JSON.stringify(initialState));
 
 const statSlice = createSlice({
   name: 'stat',

@@ -12,6 +12,11 @@
   transition: background-color var(--duration) ease-in-out;
   /*transition: transform var(--duration) ease-in-out;*/
   z-index: 10;
+  filter: drop-shadow(0px 10px 63px rgba(0, 0, 0, 0.07));
+}
+
+.select:hover {
+  background-color: var(--greyEC);
 }
 
 .select svg {

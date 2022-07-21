@@ -13,11 +13,30 @@ import {setIsActive} from '../../store/modalSlice'
 
 export function Header() {
   const dispatch = useAppDispatch();
-  const [theme, setTheme] = useState('light');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const LS_THEME_KEY = 'theme';
+  // const ii = JSON.parse(localStorage.getItem(LS_THEME_KEY) ?? 'light');
+  // console.log(ii);
+  const [theme, setTheme] = useState(localStorage.getItem(LS_THEME_KEY) ?? 'light');
+
+  if(localStorage.getItem(LS_THEME_KEY)) localStorage.setItem(LS_THEME_KEY, theme);
+
+  useEffect(() => {
+    // const isLocalStorage = localStorage.getItem(LS_THEME_KEY) === null;
+    // setTheme(localStorage.getItem(LS_THEME_KEY) ?? 'light');
+    // if(localStorage.getItem(LS_THEME_KEY)) localStorage.setItem(LS_THEME_KEY, theme);
+    // console.log('ls', localStorage.getItem(LS_THEME_KEY));
+    // if(!localStorage.getItem(LS_THEME_KEY)) {
+    //   localStorage.setItem(LS_THEME_KEY, 'light');
+    // } else {
+    //   console.log('is-ls', localStorage.getItem(LS_THEME_KEY))
+    //   setTheme(localStorage.getItem(LS_THEME_KEY));
+    // }
+  }, [])
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
+    localStorage.setItem(LS_THEME_KEY, theme);
   }, [theme]);
 
   // const openModal = () => {
@@ -26,6 +45,7 @@ export function Header() {
 
   function handleChange() {
     setTheme(theme === 'light' ? 'night' : 'light');
+    console.log('handl', theme);
   }
 
   return (
@@ -46,6 +66,7 @@ export function Header() {
                 type="checkbox"
                 name='theme'
                 onChange={handleChange}
+                checked={theme === 'night'}
               />
               <span className={styles.themeSpan}></span>
             </label>

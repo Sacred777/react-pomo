@@ -130,6 +130,11 @@
   background-color: var(--cinnabar);
 }
 
+.button[data-level="notempty"]:focus {
+  background-color: var(--hdo);
+}
+
+
 .workingOnTasks {
   margin-bottom: 32px;
   padding: 25px;

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../hooks/reduxHooks';
 import {
   getDateStringYYYYMMDD,
-  getNumberOfWeek,
   getNumberOfWeekSince01011970,
   getRusDayOfWeek,
   showTime
@@ -42,10 +41,11 @@ export function TimerContainer() {
   // Сортировка массива дел старое сверху
   const sortTasks = [...tasks].sort((prev, current) => prev.id - current.id);
   const currentTask = sortTasks[0];
+
   // Если задача поменялась, в стэйт нужны свежие данные
   useEffect(() => {
     setSecondsLeft(isTasks ? currentTask.time : settingsInfo.taskTime);
-  }, [tasks])
+  }, [tasks, settingsInfo])
   // Получаем название задачи из массива
   const taskName = isTasks ? currentTask.name : 'Нет задач';
 
