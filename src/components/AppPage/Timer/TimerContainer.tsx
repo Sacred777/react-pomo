@@ -40,7 +40,7 @@ export function TimerContainer() {
   useLocalStorageUpdate(LS_SECONDS_LEFT_KEY, secondsLeft);
   useLocalStorageUpdate(LS_PAUSE_SECONDS_KEY, pauseSeconds);
   useLocalStorageUpdate(LS_BREAK_SECONDS_KEY, breakSeconds);
-  useLocalStorageUpdate(LS_IS_CHANGE_MODE_KEY, isChangedMode);
+  // useLocalStorageUpdate(LS_IS_CHANGE_MODE_KEY, isChangedMode);
 
   const currentDate = new Date();
   const currentDateStringYYYYMMDD = getDateStringYYYYMMDD(currentDate);
@@ -54,16 +54,20 @@ export function TimerContainer() {
   const sortTasks = [...tasks].sort((prev, current) => prev.id - current.id);
   const currentTask = sortTasks[0];
 
-  // Если задача поменялась, в стэйт нужны свежие данные
+  // Если задача поменялась или настройки изменены, в стэйт нужны свежие данные
   useEffect(() => {
+    // !!!
+    if(isTasks && secondsLeft) return;
     setSecondsLeft(isTasks ? currentTask.time : settingsInfo.taskTime);
   }, [tasks, settingsInfo])
+
   // Получаем название задачи из массива
   const taskName = isTasks ? currentTask.name : 'Нет задач';
 
   // Ф-ция увеличения значения счётчика с шагом в 1 минуту
   function handleAddTime() {
-    dispatch(increaseTime(currentTask.id));
+      setSecondsLeft((prevstate) => prevstate + 60);
+      !states.isBreak && dispatch(increaseTime(currentTask.id));
   }
 
   // Получаем из stat статистику текущего дня
@@ -73,7 +77,7 @@ export function TimerContainer() {
   let taskNumber = isCurrentDateStat && isTasks ? currentDateStat.taskCount + 1 : 0;
 
 
-  // Определение типа окна исходя из states
+  // Определение типа окна исходя из stats
   let typeOfWindow: EWindowTypes;
 
   if (states.isStarted) {
@@ -101,6 +105,7 @@ export function TimerContainer() {
         dispatch(pauseTimer(true));
         break
       case EWindowTypes.pausing: // Продолжить
+        console.log('Продолжить')
         dispatch(startTimer(true));
         break
       case EWindowTypes.breaking: // Пауза
@@ -120,7 +125,7 @@ export function TimerContainer() {
         // Записать состояние
         // Время работы таймера. Разница между временем задачи и оставшегося времени по счетчику
         // Время паузы
-        // Увеиличить StopCount
+        // Увеличить StopCount
         const newStat = {
           ...statDataTemplate,
           timerTime: currentTask.time - secondsLeft + pauseSeconds,
