@@ -19,9 +19,9 @@ export function Header() {
   // console.log(ii);
   const [theme, setTheme] = useState(localStorage.getItem(LS_THEME_KEY) ?? 'light');
 
-  if(localStorage.getItem(LS_THEME_KEY)) localStorage.setItem(LS_THEME_KEY, theme);
+  // if(localStorage.getItem(LS_THEME_KEY)) localStorage.setItem(LS_THEME_KEY, theme);
 
-  useEffect(() => {
+  // useEffect(() => {
     // const isLocalStorage = localStorage.getItem(LS_THEME_KEY) === null;
     // setTheme(localStorage.getItem(LS_THEME_KEY) ?? 'light');
     // if(localStorage.getItem(LS_THEME_KEY)) localStorage.setItem(LS_THEME_KEY, theme);
@@ -32,7 +32,7 @@ export function Header() {
     //   console.log('is-ls', localStorage.getItem(LS_THEME_KEY))
     //   setTheme(localStorage.getItem(LS_THEME_KEY));
     // }
-  }, [])
+  // }, [])
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);

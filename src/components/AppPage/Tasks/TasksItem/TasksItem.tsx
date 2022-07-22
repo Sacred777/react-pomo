@@ -127,6 +127,7 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
             <button
               className={styles.tasksButton}
               onClick={minusCount}
+              disabled={count === 1}
             >
               <Icon name={EIcons.minus}/>
               <Break size={8}/>
@@ -149,6 +150,7 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
             <button
               className={styles.tasksButton}
               onClick={openDeleteTaskModal}
+
             >
               <Icon name={EIcons.delete}/>
               <Break size={8}/>

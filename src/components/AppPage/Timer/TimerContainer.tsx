@@ -17,18 +17,30 @@ import {
   TStat
 } from "../../../store/statSlice";
 import getShortStatDataTemplate from "../../../utils/getStatObjects";
+import {useLocalStorageUpdate} from "../../../hooks/useLocalStorageUpdate";
 
 export function TimerContainer() {
   const dispatch = useAppDispatch();
+
+  const LS_SECONDS_LEFT_KEY = 'sl';
+  const LS_PAUSE_SECONDS_KEY = 'ps';
+  const LS_BREAK_SECONDS_KEY = 'bs';
+  const LS_IS_CHANGE_MODE_KEY = 'cm';
+
   const settingsInfo = useAppSelector(state => state.settings);
   const tasks = useAppSelector(state => state.tasks.tasks);
   const states = useAppSelector(state => state.states);
   const stats = useAppSelector(state => state.stat.stat);
 
-  const [secondsLeft, setSecondsLeft] = useState(0);
-  const [pauseSeconds, setPauseSeconds] = useState(0);
-  const [breakSeconds, setBreakSeconds] = useState(0);
-  const [isChangedMode, setIsChangedMode] = useState(false);
+  const [secondsLeft, setSecondsLeft] = useState(Number(localStorage.getItem(LS_SECONDS_LEFT_KEY)) ?? 0);
+  const [pauseSeconds, setPauseSeconds] = useState(Number(localStorage.getItem(LS_PAUSE_SECONDS_KEY)) ?? 0);
+  const [breakSeconds, setBreakSeconds] = useState(Number(localStorage.getItem(LS_BREAK_SECONDS_KEY)) ?? 0);
+  const [isChangedMode, setIsChangedMode] = useState((localStorage.getItem(LS_IS_CHANGE_MODE_KEY)) === 'false' ?? false);
+
+  useLocalStorageUpdate(LS_SECONDS_LEFT_KEY, secondsLeft);
+  useLocalStorageUpdate(LS_PAUSE_SECONDS_KEY, pauseSeconds);
+  useLocalStorageUpdate(LS_BREAK_SECONDS_KEY, breakSeconds);
+  useLocalStorageUpdate(LS_IS_CHANGE_MODE_KEY, isChangedMode);
 
   const currentDate = new Date();
   const currentDateStringYYYYMMDD = getDateStringYYYYMMDD(currentDate);
@@ -58,13 +70,13 @@ export function TimerContainer() {
   const [currentDateStat] = stats.filter((item) => item.date === currentDateStringYYYYMMDD);
   const isCurrentDateStat = currentDateStat !== undefined;
   let pomodoroCount = isCurrentDateStat && isTasks ? currentDateStat.pomodoroCount + 1 : 0;
-  let taskNumber = isCurrentDateStat && isTasks? currentDateStat.taskCount +1 : 0;
+  let taskNumber = isCurrentDateStat && isTasks ? currentDateStat.taskCount + 1 : 0;
 
 
   // Определение типа окна исходя из states
   let typeOfWindow: EWindowTypes;
 
-  if(states.isStarted) {
+  if (states.isStarted) {
     typeOfWindow = EWindowTypes.starting;
   } else if (states.onPause) {
     typeOfWindow = EWindowTypes.pausing;
@@ -80,7 +92,7 @@ export function TimerContainer() {
     switch (typeOfWindow) {
       case EWindowTypes.initial:  // Старт
         // Создаём статистику текущего дня
-        if(!isCurrentDateStat) {
+        if (!isCurrentDateStat) {
           createCurrentDayStat();
         }
         dispatch(startTimer(true));
@@ -106,9 +118,9 @@ export function TimerContainer() {
         break
       case EWindowTypes.starting: // Стоп активная
         // Записать состояние
-          // Время работы таймера. Разница между временем задачи и оставшегося времени по счетчику
-          // Время паузы
-          // Увеиличить StopCount
+        // Время работы таймера. Разница между временем задачи и оставшегося времени по счетчику
+        // Время паузы
+        // Увеиличить StopCount
         const newStat = {
           ...statDataTemplate,
           timerTime: currentTask.time - secondsLeft + pauseSeconds,
@@ -153,15 +165,15 @@ export function TimerContainer() {
   }
 
   useEffect(() => {
-    if(!states.isStarted && !states.isBreak) {
+    if (!states.isStarted && !states.isBreak) {
       return
     }
 
     function switchMode() {
       setIsChangedMode(false);
-      if(states.isStarted) {
+      if (states.isStarted) {
         //Если ещё несколько задач или помидоров
-        if(sortTasks.length > 1 || currentTask.count > 1) {
+        if (sortTasks.length > 1 || currentTask.count > 1) {
           // Записать статистику
           const newStat = {
             ...statDataTemplate,
@@ -169,7 +181,7 @@ export function TimerContainer() {
             pomodoroTime: currentTask.time - secondsLeft,
             pauseTime: pauseSeconds,
             pomodoroCount: 1,
-            taskCount: currentTask.count === 1 ? 1 : 0 ,
+            taskCount: currentTask.count === 1 ? 1 : 0,
             lastLongBreakPomodoroCount: 1,
           }
           dispatch(changeStat(newStat));
@@ -190,7 +202,7 @@ export function TimerContainer() {
             pomodoroTime: currentTask.time - secondsLeft,
             pauseTime: pauseSeconds,
             pomodoroCount: 1,
-            taskCount: currentTask.count === 1 ? 1 : 0 ,
+            taskCount: currentTask.count === 1 ? 1 : 0,
           }
           // Записываем статистику
           dispatch(changeStat(newStat));
@@ -202,7 +214,7 @@ export function TimerContainer() {
           // Состояние в исходное положение
           dispatch(setInitialState(true));
         }
-      } else if(states.isBreak) {
+      } else if (states.isBreak) {
         //Обновляем статистику
         const newStat = {
           ...statDataTemplate,
@@ -216,7 +228,7 @@ export function TimerContainer() {
     }
 
     const intervalID = setInterval(() => {
-      if(secondsLeft === 0 || isChangedMode) {
+      if (secondsLeft === 0 || isChangedMode) {
         return switchMode();
       }
       setSecondsLeft((prevState) => prevState - 1);
@@ -228,11 +240,11 @@ export function TimerContainer() {
 
   // Счётчик Паузы
   useEffect(() => {
-    if(!states.onPause) {
+    if (!states.onPause) {
       return
     }
     const intervalID = setInterval(() => {
-     setPauseSeconds((prevState) => (prevState) + 1);
+      setPauseSeconds((prevState) => (prevState) + 1);
     }, 1000)
 
     return () => clearInterval(intervalID);
@@ -240,10 +252,10 @@ export function TimerContainer() {
 
 
   function getNextBreakSeconds() {
-    if(isCurrentDateStat) {
+    if (isCurrentDateStat) {
       const isLongBreak = settingsInfo.longBreakCycle === currentDateStat.lastLongBreakPomodoroCount + 1;
       const breakDuration = isLongBreak ? settingsInfo.longBreakTime : settingsInfo.shortBreakTime;
-      if(isLongBreak) {
+      if (isLongBreak) {
         dispatch(cleanLastLongBreakPomodoroCount(currentDateStringYYYYMMDD))
       }
       return breakDuration;

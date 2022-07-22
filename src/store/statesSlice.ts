@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-// const LS_STATES_KEY = 'states';
+const LS_STATES_KEY = 'states';
 
 export type TStates = {
   isStarted: boolean;
@@ -9,23 +9,22 @@ export type TStates = {
   onBreakPause: boolean;
 }
 
-const initialState: TStates = {
-  isStarted: false,
-  onPause: false,
-  isBreak: false,
-  onBreakPause: false,
-};
+// const initialState: TStates = {
+//   isStarted: false,
+//   onPause: false,
+//   isBreak: false,
+//   onBreakPause: false,
+// };
 
+const initialState: TStates = JSON.parse(localStorage.getItem(LS_STATES_KEY)
+  ?? JSON.stringify({
+    isStarted: false,
+    onPause: false,
+    isBreak: false,
+    onBreakPause: false,
+  }));
 
-// const initialState: TStates = JSON.parse(localStorage.getItem(LS_STATES_KEY)
-//   ?? JSON.stringify({
-//     isStarted: false,
-//     onPause: false,
-//     isBreak: false,
-//     onBreakPause: false,
-//   }));
-
-// if(!localStorage.getItem(LS_STATES_KEY)) localStorage.setItem(LS_STATES_KEY, JSON.stringify(initialState));
+if(!localStorage.getItem(LS_STATES_KEY)) localStorage.setItem(LS_STATES_KEY, JSON.stringify(initialState));
 
 const statesSlice = createSlice({
   name: 'states',
@@ -36,7 +35,7 @@ const statesSlice = createSlice({
       state.onPause = false;
       state.isBreak = false;
       state.onBreakPause = false;
-      // localStorage.setItem(LS_STATES_KEY, JSON.stringify(state));
+      localStorage.setItem(LS_STATES_KEY, JSON.stringify(state));
     },
 
     startTimer(state, action: PayloadAction<boolean>) {
@@ -44,7 +43,7 @@ const statesSlice = createSlice({
       state.onPause = false;
       state.isBreak = false;
       state.onBreakPause = false;
-      // localStorage.setItem(LS_STATES_KEY, JSON.stringify(state));
+      localStorage.setItem(LS_STATES_KEY, JSON.stringify(state));
     },
 
     pauseTimer(state, action: PayloadAction<boolean>) {
@@ -52,7 +51,7 @@ const statesSlice = createSlice({
       state.onPause = action.payload;
       state.isBreak = false;
       state.onBreakPause = false;
-      // localStorage.setItem(LS_STATES_KEY, JSON.stringify(state));
+      localStorage.setItem(LS_STATES_KEY, JSON.stringify(state));
     },
 
     breakTimer(state, action: PayloadAction<boolean>) {
@@ -60,7 +59,7 @@ const statesSlice = createSlice({
       state.onPause = false;
       state.isBreak = action.payload;
       state.onBreakPause = false;
-      // localStorage.setItem(LS_STATES_KEY, JSON.stringify(state));
+      localStorage.setItem(LS_STATES_KEY, JSON.stringify(state));
     },
 
     pauseBreakTimer(state, action: PayloadAction<boolean>) {
@@ -68,7 +67,7 @@ const statesSlice = createSlice({
       state.onPause = false;
       state.isBreak = false;
       state.onBreakPause = action.payload;
-      // localStorage.setItem(LS_STATES_KEY, JSON.stringify(state));
+      localStorage.setItem(LS_STATES_KEY, JSON.stringify(state));
     },
   }
 })

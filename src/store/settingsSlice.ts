@@ -10,7 +10,8 @@ export type TSettings = {
   massage: boolean;
 }
 
-const initialState: TSettings = JSON.parse(localStorage.getItem(LS_SETTINGS_KEY) ?? JSON.stringify({
+const initialState: TSettings = JSON.parse(localStorage.getItem(LS_SETTINGS_KEY)
+  ?? JSON.stringify({
   taskTime: 60,
   shortBreakTime: 120,
   longBreakTime: 180,
