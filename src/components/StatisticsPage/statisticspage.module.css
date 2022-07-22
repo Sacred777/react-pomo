@@ -118,7 +118,12 @@
   width: 100%;
   height: 1%;
   background-color: var(--greyC4);
-  /*transition: background-color var(--duration) ease-in-out;*/
+  transition: background-color var(--duration) ease-in-out;
+}
+
+.button:focus {
+  outline: none;
+  background-color: var(--grey99) ;
 }
 
 .button[data-level="notempty"] {
@@ -131,6 +136,7 @@
 }
 
 .button[data-level="notempty"]:focus {
+  outline: none;
   background-color: var(--hdo);
 }
 

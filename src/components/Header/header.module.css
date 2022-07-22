@@ -74,10 +74,31 @@
   background-color: rgb(138, 138, 138);
 }
 
-
-
 .link {
   display: flex;
   align-items: center;
   padding: 4px;
+  outline: 1px solid transparent;
+  outline-offset: 2px;
+  transition: outline-color var(--duration) ease-in-out;
+}
+
+.link span {
+  transition: color var(--duration) ease-in-out;
+}
+
+.link:hover span {
+  color: var(--hdo);
+}
+
+.link path {
+  transition: fill var(--duration) ease-in-out;;
+}
+
+.link:hover path {
+  fill: var(--hdo)
+}
+
+.link:focus-visible {
+  outline-color:  var(--cinnabar);
 }

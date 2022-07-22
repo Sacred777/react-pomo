@@ -46,9 +46,7 @@ export function StatisticsPage(props: IStatisticsPageProps) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.topWrapper}>
-
         <Text size={24} lineHeight={33} weight={EWeight.bold}>Ваша активность</Text>
-
         <WeeksSelect
           currentMenu={props.currentMenu}
           onClick={props.onClick}
@@ -57,7 +55,6 @@ export function StatisticsPage(props: IStatisticsPageProps) {
 
       <div className={styles.chartWrapper}>
         <div className={styles.leftChartWrapper}>
-
           <div className={styles.workingOnTasks}>
             <Text size={24} lineHeight={33} weight={EWeight.bold}>{props.dayOfWeek}</Text>
             <Break size={12} top/>
@@ -76,24 +73,32 @@ export function StatisticsPage(props: IStatisticsPageProps) {
               </Text>
             </Text>
           </div>
-
           <div className={styles.pomodoroCount}>
             <div className={styles.pomodoroCountIcon}>
               {props.pomodoroCount === 0
                 ? <Icon name={EIcons.pomo} size={115}/>
                 : <Icon name={EIcons.logo} size={81}/>
               }
-
               <Break size={16}/>
-
-              {props.pomodoroCount !== 0 && <Text size={24} lineHeight={33} weight={EWeight.bold}
-                                                  color={EColors.grey99}>{`x ${props.pomodoroCount}`}              </Text>}
+              {props.pomodoroCount !== 0
+                && <Text
+                  size={24}
+                  lineHeight={33}
+                  weight={EWeight.bold}
+                  color={EColors.grey99}>{`x ${props.pomodoroCount}`}
+                </Text>}
             </div>
 
-            {props.pomodoroCount !== 0 && <div className={styles.pomodoroCountInfo}>
-              <Text As={'p'} size={24} lineHeight={33} weight={EWeight.bold}
-                    color={EColors.white}>{`${props.pomodoroCount} ${pomoName}`}</Text>
-            </div>}
+            {props.pomodoroCount !== 0
+              && <div className={styles.pomodoroCountInfo}>
+                <Text
+                  As={'p'}
+                  size={24}
+                  lineHeight={33}
+                  weight={EWeight.bold}
+                  color={EColors.white}>{`${props.pomodoroCount} ${pomoName}`}
+                </Text>
+              </div>}
           </div>
         </div>
 

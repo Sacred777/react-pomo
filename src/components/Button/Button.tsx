@@ -6,8 +6,6 @@ export enum EButtonColors {
   green = 'green',
   grey = 'grey',
   red = 'red',
-  // greyGreen = 'greyGreen',
-  // greyRed = 'greyRed',
 }
 
 interface IButtonProps {

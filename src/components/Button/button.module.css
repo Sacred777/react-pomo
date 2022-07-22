@@ -27,6 +27,10 @@
   background-color: var(--wasabi);
 }
 
+.green:not(:disabled):focus {
+  outline: none;
+  background-color: var(--wasabi);
+}
 
 .red {
   /*background-color: var(--cinnabar);*/
@@ -42,6 +46,16 @@
   color: white;
 }
 
+.red:focus {
+  outline: none;
+  background-color: var(--cinnabar);
+  border-color: var(--cinnabar);
+}
+
+.red:focus span {
+  color: white;
+}
+
 .notBackground {
   background-color: transparent;
 }
@@ -49,6 +63,8 @@
 .red:not(:disabled).notBackground:hover {
   background-color: var(--cinnabar);
 }
+
+
 
 .red:disabled {
   border-color: var(--greyC4);

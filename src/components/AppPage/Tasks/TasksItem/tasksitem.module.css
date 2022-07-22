@@ -11,6 +11,11 @@
   background-color: var(--greyF4) ;
 }
 
+.tasksButton:not(:disabled):focus {
+  outline: none;
+  background-color: var(--greyF4) ;
+}
+
 .tasksButton:disabled {
   opacity: 0.6;
   cursor: initial;
@@ -80,6 +85,12 @@
 .dropdownBtn:hover {
   background-color: var(--greyE5);
 }
+
+.dropdownBtn:focus {
+  outline: none;
+  background-color: var(--greyE5);
+}
+
 
 .dropdownIcon {
   display: inline-block;
