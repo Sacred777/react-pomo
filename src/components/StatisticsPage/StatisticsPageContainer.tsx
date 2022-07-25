@@ -21,6 +21,7 @@ const StatisticsPageContainer = () => {
   // TODO возможно нужна просто переменная
   // const [weekIdNumber, setWeekIdNumber] = useState(0);
   const [currentNumberOfWeek, setCurrentNumberOfWeek] = useState(getNumberOfWeekSince01011970(today));
+  console.log(currentNumberOfWeek);
 
   const handleSelectClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const id = +e.currentTarget.id;
@@ -35,10 +36,10 @@ const StatisticsPageContainer = () => {
   // console.log(stat);
 
   const currentWeekStat = stat.filter((item) => item.week === currentNumberOfWeek);
-  // console.log(currentWeekStat);
+  console.log(currentWeekStat);
 
-  // Получаем шаг для градаций времени на графике
-  const maxPomodoroTime = currentWeekStat.reduce((prev, current) => prev.pomodoroTime > current.pomodoroTime ? prev : current).pomodoroTime;
+  // Получаем шаг для шкалы времени на графике
+  const maxPomodoroTime = currentWeekStat.length === 0 ? 4 : currentWeekStat.reduce((prev, current) => prev.pomodoroTime > current.pomodoroTime ? prev : current).pomodoroTime;
   const stepOfLevels = Math.ceil(maxPomodoroTime / 300) * 60;
   // console.log(secondsToString(stepOfLevels));
 
