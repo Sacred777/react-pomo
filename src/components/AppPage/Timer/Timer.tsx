@@ -30,7 +30,12 @@ interface ITimer {
   isRightButtonDisabled?: boolean;
 }
 
-export function Timer({ isLeftButtonDisabled = false, isRightButtonDisabled = false, isAddButtonDisabled = false, ...props}: ITimer) {
+export function Timer({
+                        isLeftButtonDisabled = false,
+                        isRightButtonDisabled = false,
+                        isAddButtonDisabled = false,
+                        ...props
+                      }: ITimer) {
 
   let leftButtonName = '';
   let rightButtonName = '';
@@ -71,7 +76,7 @@ export function Timer({ isLeftButtonDisabled = false, isRightButtonDisabled = fa
       break
     default:
       leftButtonName = 'Старт';
-      rightButtonName = 'Стор';
+      rightButtonName = 'Стоп';
       break
   }
 
@@ -79,9 +84,12 @@ export function Timer({ isLeftButtonDisabled = false, isRightButtonDisabled = fa
     <>
       <div className={headerStyles}>
         <Text As={'p'} size={16} lineHeight={17} color={EColors.white} weight={EWeight.bold}>{props.taskName}</Text>
+
         <Text As={'p'} size={16} lineHeight={17} color={EColors.white}>
-          {`Помидор ${props.pomodoroCount ? props.pomodoroCount : ''}`}
+          {props.windowType === EWindowTypes.breaking || props.windowType === EWindowTypes.breakPausing ? 'Перерыв' :
+            `Помидор ${props.pomodoroCount ? props.pomodoroCount : ''}`}
         </Text>
+
       </div>
 
       <div className={styles.body}>
@@ -107,7 +115,7 @@ export function Timer({ isLeftButtonDisabled = false, isRightButtonDisabled = fa
           </Text>
         </p>
 
-        <Break size={35} top />
+        <Break size={35} top/>
 
         <div className={styles.btnsBox}>
           <Button
@@ -118,7 +126,7 @@ export function Timer({ isLeftButtonDisabled = false, isRightButtonDisabled = fa
             <Text size={16} lineHeight={17} color={EColors.white} weight={EWeight.medium}>{leftButtonName}</Text>
           </Button>
 
-          <Break size={25} inline />
+          <Break size={25} inline/>
 
           <Button
             type={'button'}

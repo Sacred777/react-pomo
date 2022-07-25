@@ -62,6 +62,15 @@ const tasksSlice = createSlice({
       state.tasks = state.tasks.filter((task) => task.id !== action.payload);
       localStorage.setItem(LS_TASKS_KEY, JSON.stringify(state.tasks));
     },
+
+    changeTime(state, action: PayloadAction<{id:number, value:number}>) {
+      const foundTask = state.tasks.find(task => task.id === action.payload.id)
+      if(foundTask) {
+        // console.log('удалили помидор')
+        foundTask.time = action.payload.value;
+      }
+      localStorage.setItem(LS_TASKS_KEY, JSON.stringify(state.tasks));
+    }
   }
 })
 
@@ -71,7 +80,8 @@ export const {
   increaseCount,
   decreaseCount,
   changeNameTask,
-  removeTask
+  removeTask,
+  changeTime,
 } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
