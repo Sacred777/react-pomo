@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
-import { Routes, Route } from 'react-router-dom';
-import './App.css';
-import { Layout } from './components/Layout';
-import { Header } from './components/Header';
-import { AppPage } from './components/AppPage';
-import { NotFoundPage } from './components/NotFoundPage';
+import React from 'react';
+import {Routes, Route} from 'react-router-dom';
+import {Layout} from './components/Layout';
+import {Header} from './components/Header';
+import {AppPage} from './components/AppPage';
+import {NotFoundPage} from './components/NotFoundPage';
 import StatisticsPageContainer from "./components/StatisticsPage/StatisticsPageContainer";
 
 function App() {
@@ -12,12 +11,12 @@ function App() {
   return (
     <div className="App">
       <Layout>
-        <Header />
+        <Header/>
         <main className='container'>
           <Routes>
-            <Route path="/" element={<AppPage />} />
-            <Route path="/stat" element={<StatisticsPageContainer />} />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path="/" element={<AppPage/>}/>
+            <Route path="/stat" element={<StatisticsPageContainer/>}/>
+            <Route path="*" element={<NotFoundPage/>}/>
           </Routes>
         </main>
       </Layout>

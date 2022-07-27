@@ -1,8 +1,6 @@
 import {getDateStringYYYYMMDD} from "./timeutiltties";
-import {TShortStat} from "../store/statSlice";
 
 // Получение шаблона объекта данных статистики без отдельных значений даты
-
 export default function getShortStatDataTemplate (date: Date) {
   return {
     date: getDateStringYYYYMMDD(date),

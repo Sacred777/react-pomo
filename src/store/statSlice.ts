@@ -38,7 +38,7 @@ type TStatState = {
 }
 
 // TODO на финише удалить.
-if(!localStorage.getItem(LS_STAT_KEY)) localStorage.setItem(LS_STAT_KEY, JSON.stringify(testStat));
+if (!localStorage.getItem(LS_STAT_KEY)) localStorage.setItem(LS_STAT_KEY, JSON.stringify(testStat));
 
 const initialState: TStatState = {
   stat: JSON.parse(localStorage.getItem(LS_STAT_KEY) ?? '[]')

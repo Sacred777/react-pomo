@@ -1,41 +1,19 @@
 import {getDateStringYYYYMMDD, getNumberOfWeekSince01011970, getRusDayOfWeek} from "../utils/timeutiltties";
 
+// TODO вспомогательная функция для создания массива статистики за заданное кол-во дней.
 export function CreateStatState() {
-
-  // Можно задать конец недели today = new Date('2022-06-10')
+  const COUNTS_OF_DAY_BEFORE = 14;
   const today = new Date();
   const currentWeekOfNumber = getNumberOfWeekSince01011970(today);
   const dateSince01011970 = new Date(currentWeekOfNumber * 7 * 24 * 60 * 60 * 1000);
-
-  const countOfDaysBetore = 14;
-  const startOfWeekMS = dateSince01011970.setDate(dateSince01011970.getDate() + getRusDayOfWeek(today) - 1 - countOfDaysBetore);
+  const startOfWeekMS = dateSince01011970.setDate(dateSince01011970.getDate() + getRusDayOfWeek(today) - 1 - COUNTS_OF_DAY_BEFORE);
   let startOfWeek = new Date(startOfWeekMS);
-  // console.log(startOfWeek);
-  // console.log(getStatObj(startOfWeek));
 
   const statArray = []
   while (getDateStringYYYYMMDD(startOfWeek) < getDateStringYYYYMMDD(today)) {
     statArray.push(getStatObj(startOfWeek));
-    startOfWeek.setDate(startOfWeek.getDate() +1);
+    startOfWeek.setDate(startOfWeek.getDate() + 1);
   }
-
-  // console.log(statArray);
-
-  // const statObj = {
-  //   day: 1,
-  //   month: 7,
-  //   year: 2022,
-  //   dayOfTheWeek: 5,
-  //   week: 2738,
-  //   date: '20220701',
-  //   timerTime: 260,
-  //   pomodoroTime: 60,
-  //   pauseTime: 20,
-  //   stopCount: 2,
-  //   pomodoroCount: 1,
-  //   taskCount: 1,
-  //   lastLongBreakPomodoroCount: 1,
-  // }
 
   return statArray;
 }
@@ -59,8 +37,8 @@ function getStatObj(date: Date) {
 }
 
 function getRandomInterval(x = 0, y = 0) {
-  const min = Math.min(x,y);
-  const max = Math.max(x,y);
+  const min = Math.min(x, y);
+  const max = Math.max(x, y);
 
   return Math.floor(min + Math.random() * (max - min));
 }

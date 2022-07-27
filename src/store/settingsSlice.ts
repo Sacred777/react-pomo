@@ -12,14 +12,14 @@ export type TSettings = {
 
 const initialState: TSettings = JSON.parse(localStorage.getItem(LS_SETTINGS_KEY)
   ?? JSON.stringify({
-  taskTime: 60,
-  shortBreakTime: 120,
-  longBreakTime: 180,
-  longBreakCycle: 2,
-  massage: true,
-}))
+    taskTime: 60,
+    shortBreakTime: 120,
+    longBreakTime: 180,
+    longBreakCycle: 2,
+    massage: true,
+  }))
 
-if(!localStorage.getItem(LS_SETTINGS_KEY)) localStorage.setItem(LS_SETTINGS_KEY, JSON.stringify(initialState));
+if (!localStorage.getItem(LS_SETTINGS_KEY)) localStorage.setItem(LS_SETTINGS_KEY, JSON.stringify(initialState));
 
 const settingsSlice = createSlice({
   name: 'settings',
@@ -57,7 +57,6 @@ const settingsSlice = createSlice({
 })
 
 export const {
-  changeSettings,
   changeTaskTime,
   changeShortBreakTime,
   changeLongBreakTime,

@@ -9,13 +9,6 @@ export type TStates = {
   onBreakPause: boolean;
 }
 
-// const initialState: TStates = {
-//   isStarted: false,
-//   onPause: false,
-//   isBreak: false,
-//   onBreakPause: false,
-// };
-
 const initialState: TStates = JSON.parse(localStorage.getItem(LS_STATES_KEY)
   ?? JSON.stringify({
     isStarted: false,
@@ -24,7 +17,7 @@ const initialState: TStates = JSON.parse(localStorage.getItem(LS_STATES_KEY)
     onBreakPause: false,
   }));
 
-if(!localStorage.getItem(LS_STATES_KEY)) localStorage.setItem(LS_STATES_KEY, JSON.stringify(initialState));
+if (!localStorage.getItem(LS_STATES_KEY)) localStorage.setItem(LS_STATES_KEY, JSON.stringify(initialState));
 
 const statesSlice = createSlice({
   name: 'states',

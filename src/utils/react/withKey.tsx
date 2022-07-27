@@ -18,7 +18,7 @@ export function withKey(key?: string) {
     (props: E, index: number) =>
       React.createElement(
         component,
-        { ...props, key: key ? props[key as keyof E] : index },
+        {...props, key: key ? props[key as keyof E] : index},
         [],
       );
 }
