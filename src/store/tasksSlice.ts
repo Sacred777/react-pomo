@@ -7,6 +7,7 @@ export type TTask = {
   name: string;
   count: number;
   time: number;
+  isTiming: boolean;
 }
 
 type TTasksState = {
@@ -70,7 +71,17 @@ const tasksSlice = createSlice({
         foundTask.time = action.payload.value;
       }
       localStorage.setItem(LS_TASKS_KEY, JSON.stringify(state.tasks));
+    },
+
+    startTiming(state, action: PayloadAction<{id:number, value:boolean}>) {
+      const foundTask = state.tasks.find(task => task.id === action.payload.id)
+      if(foundTask) {
+        // console.log('удалили помидор')
+        foundTask.isTiming = action.payload.value;
+      }
+      localStorage.setItem(LS_TASKS_KEY, JSON.stringify(state.tasks));
     }
+
   }
 })
 
@@ -82,6 +93,7 @@ export const {
   changeNameTask,
   removeTask,
   changeTime,
+  startTiming,
 } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

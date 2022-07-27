@@ -23,6 +23,7 @@ export function TaskInput() {
         name: value.trim(),
         count: 1,
         time: taskTime,
+        isTiming: false,
       })
     );
   setValue('');

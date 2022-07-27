@@ -6,7 +6,7 @@ import {
   getRusDayOfWeek,
   showTime
 } from '../../../utils/timeutiltties';
-import {changeTime, decreaseCount, increaseTime, removeTask} from '../../../store/tasksSlice';
+import {changeTime, decreaseCount, increaseTime, removeTask, startTiming} from '../../../store/tasksSlice';
 import {breakTimer, pauseBreakTimer, pauseTimer, setInitialState, startTimer} from "../../../store/statesSlice";
 import {EWindowTypes, Timer} from './Timer';
 import {
@@ -22,11 +22,12 @@ import {useLocalStorageUpdate} from "../../../hooks/useLocalStorageUpdate";
 export function TimerContainer() {
   const dispatch = useAppDispatch();
 
+  // Ключи для Local Storage
   const LS_SECONDS_LEFT_KEY = 'sl';
   const LS_PAUSE_SECONDS_KEY = 'ps';
   const LS_BREAK_SECONDS_KEY = 'bs';
-  // const LS_IS_CHANGE_MODE_KEY = 'cm';
   const LS_NUMBER_OF_RUNNING_POMODORO_KEY = 'nrp';
+  const TIMER_INCREMENT_STEP = 60;
 
   const settingsInfo = useAppSelector(state => state.settings);
   const tasks = useAppSelector(state => state.tasks.tasks);
@@ -39,11 +40,11 @@ export function TimerContainer() {
   const [isChangedMode, setIsChangedMode] = useState(false);
   const [numberOfRunningPomodoro, setNumberOfRunningPomodoro] = useState(Number(localStorage.getItem(LS_NUMBER_OF_RUNNING_POMODORO_KEY)) ?? 0);
 
+  // Обновление Local Storage при изменении состояния компонента
   useLocalStorageUpdate(LS_SECONDS_LEFT_KEY, secondsLeft);
   useLocalStorageUpdate(LS_PAUSE_SECONDS_KEY, pauseSeconds);
   useLocalStorageUpdate(LS_BREAK_SECONDS_KEY, breakSeconds);
   useLocalStorageUpdate(LS_NUMBER_OF_RUNNING_POMODORO_KEY, numberOfRunningPomodoro);
-  // useLocalStorageUpdate(LS_IS_CHANGE_MODE_KEY, isChangedMode);
 
   const currentDate = new Date();
   const currentDateStringYYYYMMDD = getDateStringYYYYMMDD(currentDate);
@@ -57,40 +58,45 @@ export function TimerContainer() {
   const sortTasks = [...tasks].sort((prev, current) => prev.id - current.id);
   const currentTask = sortTasks[0];
 
+  // Стартовые значения
   useEffect(() => {
-    if (isTasks) setNumberOfRunningPomodoro(1);
+    if (isTasks) {
+      if(!currentTask.isTiming) setNumberOfRunningPomodoro(1);
+    } else {
+      setNumberOfRunningPomodoro(0);
+    }
   }, [isTasks])
 
   useEffect(() => {
-    if(isTasks) {
+    if (isTasks) {
       sortTasks.forEach((task) => {
-        dispatch(changeTime({id: task.id, value: settingsInfo.taskTime}));
+        if (!currentTask.isTiming) dispatch(changeTime({id: task.id, value: settingsInfo.taskTime}));
       })
+      if (!states.isStarted && !states.isBreak && !states.onPause && !states.onBreakPause) {
+        setSecondsLeft(settingsInfo.taskTime);
+      }
     }
   }, [settingsInfo])
 
-  // Если задача поменялась или настройки изменены, в стэйт нужны свежие данные
+  // Если задача поменялась или настройки изменены, в стейт нужны свежие данные
   useEffect(() => {
-    // !!!
     if (isTasks && secondsLeft) return;
     setSecondsLeft(isTasks ? currentTask.time : settingsInfo.taskTime);
   }, [tasks, settingsInfo])
 
-  // Получаем название задачи из массива
+  // Получаем название задачи
   const taskName = isTasks ? currentTask.name : 'Нет задач';
 
-  // Ф-ция увеличения значения счётчика с шагом в 1 минуту
+  // Ф-ция увеличения значения счётчика
   function handleAddTime() {
-    setSecondsLeft((prevstate) => prevstate + 60);
+    setSecondsLeft((prevState) => prevState + TIMER_INCREMENT_STEP);
     !states.isBreak && dispatch(increaseTime(currentTask.id));
   }
 
   // Получаем из stat статистику текущего дня
   const [currentDateStat] = stats.filter((item) => item.date === currentDateStringYYYYMMDD);
   const isCurrentDateStat = currentDateStat !== undefined;
-  // let pomodoroCount = isCurrentDateStat && isTasks ? currentDateStat.pomodoroCount + 1 : 0;
   let taskNumber = isCurrentDateStat && isTasks ? currentDateStat.taskCount + 1 : 0;
-
 
   // Определение типа окна исходя из stats
   let typeOfWindow: EWindowTypes;
@@ -115,6 +121,7 @@ export function TimerContainer() {
           createCurrentDayStat();
         }
         dispatch(startTimer(true));
+        dispatch(startTiming({id: currentTask.id, value: true}));
         break
       case EWindowTypes.starting: // Пауза
         dispatch(pauseTimer(true));
@@ -290,9 +297,7 @@ export function TimerContainer() {
       setNumberOfRunningPomodoro((prevState) => ++prevState);
     } else {
       dispatch(removeTask(currentTask.id));
-      //TODO как-то помидоры считаются не очень.
       setNumberOfRunningPomodoro(1);
-      // dispatch(startTimer(false));
     }
   }
 

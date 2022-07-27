@@ -2,15 +2,15 @@
   padding: 50px;
 }
 
-.listItem:not(:last-child) {
-  margin-bottom: 10px;
-}
-
 .listItem label {
   display: block;
   margin: 5px;
   padding: 0 5px;
   text-align: initial;
+}
+
+.listItem:not(:last-child) {
+  margin-bottom: 10px;
 }
 
 .redSlider {
@@ -20,6 +20,7 @@
 }
 
 .redThumb {
+  display: block;
   height: 36px;
   width: 40px;
   background-color: var(--cinnabar);
@@ -29,10 +30,6 @@
 
 .redThumb:hover {
   background-color: var(--hdo);
-}
-
-.redThumb:focus-visible {
-  /*outline: 2px solid var(--hdo);*/
 }
 
 .greenSlider {
@@ -50,8 +47,4 @@
 
 .greenThumb:hover {
   background-color: var(--wasabi);
-}
-
-.greenThumb:focus-visible {
-  /*outline: 2px solid var(--wasabi);*/
 }

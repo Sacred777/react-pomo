@@ -38,12 +38,12 @@
   vertical-align: middle;
   background-color: var(--white);
   cursor: default;
-  transform: scale(0.5);
-  transition: transform var(--transitionTime);
+  /*transform: scale(0.5);*/
+  /*transition: transform var(--transitionTime);*/
 }
 
 .isOpen {
-  transform: scale(1);
+  /*transform: scale(1);*/
 }
 
 .closeBtn {
