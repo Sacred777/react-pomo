@@ -10,7 +10,6 @@
   background-color: var(--greyF4);
   cursor: pointer;
   transition: background-color var(--duration) ease-in-out;
-  /*transition: transform var(--duration) ease-in-out;*/
   z-index: 10;
   filter: drop-shadow(0px 10px 63px rgba(0, 0, 0, 0.07));
 }
@@ -25,7 +24,7 @@
 }
 
 .opened {
-  background-color: hsl(0, 0%, 98%);
+  background-color: var(--greyFA);
 }
 
 .opened {

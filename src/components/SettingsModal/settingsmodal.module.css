@@ -2,6 +2,14 @@
   padding: 50px;
 }
 
+body[data-theme="night"] .wrapper {
+  background-color: var(--greyDE);
+  /*box-shadow: 4px 4px 8px 0 var(--greyC4);*/
+}
+
+
+
+
 .listItem label {
   display: block;
   margin: 5px;
@@ -17,6 +25,10 @@
   width: 320px;
   height: 40px;
   border: 2px solid var(--cinnabar);
+}
+
+body[data-theme="night"] .redSlider {
+  filter: invert(100%);
 }
 
 .redThumb {
@@ -35,6 +47,10 @@
 .greenSlider {
   height: 40px;
   border: 2px solid var(--celery);
+}
+
+body[data-theme="night"] .greenSlider {
+  filter: invert(100%);
 }
 
 .greenThumb {

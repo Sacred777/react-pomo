@@ -5,8 +5,6 @@ import { Layout } from './components/Layout';
 import { Header } from './components/Header';
 import { AppPage } from './components/AppPage';
 import { NotFoundPage } from './components/NotFoundPage';
-import { StatisticsPage } from './components/StatisticsPage';
-import {CreateStatState} from "./help/CreateStatsState";
 import StatisticsPageContainer from "./components/StatisticsPage/StatisticsPageContainer";
 
 function App() {

@@ -13,7 +13,6 @@ interface IButtonProps {
   color?: EButtonColors;
   type: 'submit' | 'button' | 'reset';
   notBackground?: boolean;
-  // TODO Нужен ли этот onClick?
   onClick?: () => void;
   disabled?: boolean;
 }

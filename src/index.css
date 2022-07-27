@@ -62,7 +62,6 @@
 
 :root {
   --duration: 0.3s;
-  
   --cinnabar: #dc3e22;
   --celery: #a8b64f;
   --wasabi: #899441;
@@ -101,6 +100,7 @@ body[data-theme="light"] {
   --black: #000;
   --whiteLightness: 100%;
   --white: hsl(0, 0%, var(--whiteLightness));
+  --greyFA: hsl(0, 0%, calc(var(--whiteLightness) - 2%));
   --greyF4: hsl(0, 0%, calc(var(--whiteLightness) - 4%));
   --greyEC: hsl(0, 0%, calc(var(--whiteLightness) - 7.5%));
   --greyE5: hsl(0, 0%, calc(var(--whiteLightness) - 10%));
@@ -112,21 +112,19 @@ body[data-theme="light"] {
 }
 
 body[data-theme="night"] {
-  --black: #fff;
+  --black:hsl(0, 0%, calc(var(--whiteLightness) + 70%));
   --whiteLightness: 0%;
   --white: hsl(0, 0%, var(--whiteLightness));
-  --greyF4: hsl(0, 0%, calc(var(--whiteLightness) + 4%));
+  --greyFA: hsl(0, 0%, calc(var(--whiteLightness) + 2%));
+  --greyF4: hsl(0, 0%, calc(var(--whiteLightness) + 15%));
   --greyEC: hsl(0, 0%, calc(var(--whiteLightness) + 7.5%));
   --greyE5: hsl(0, 0%, calc(var(--whiteLightness) + 10%));
   --greyE4: hsl(0, 0%, calc(var(--whiteLightness) + 11%));
   --greyDE: hsl(0, 0%, calc(var(--whiteLightness) + 13%));
   --greyC4: hsl(0, 0%, calc(var(--whiteLightness) + 23%));
   --grey99: hsl(0, 0%, calc(var(--whiteLightness) + 40%));
-  --grey33: hsl(0, 0%, calc(var(--whiteLightness) + 80%));
-
+  --grey33: hsl(0, 0%, calc(var(--whiteLightness) + 70%));
 }
-
-
 
 img {
   max-width: 100%;
@@ -170,28 +168,8 @@ p {
   margin: 0;
 }
 
-/*TODO посмотреть нужно ли это*/
-.blocked {
-  display: none;
-}
-
 .container {
   margin: 0 auto;
   padding: 0 15px;
   max-width: 1310px;
-}
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
-input[type="number"]:hover,
-input[type="number"]:focus {
-  -moz-appearance: number-input;
 }

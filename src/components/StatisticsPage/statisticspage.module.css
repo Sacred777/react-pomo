@@ -157,6 +157,10 @@
   background-color: var(--greyF4);
 }
 
+body[data-theme="night"] .items[data-value="value"] {
+  filter: invert(95%);
+}
+
 .info {
   display: flex;
   flex-direction: column;

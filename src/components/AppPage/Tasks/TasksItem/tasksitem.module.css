@@ -33,6 +33,10 @@
   border-bottom: 1px solid var(--greyE4);
 }
 
+body[data-theme="night"] .item {
+  background-color: var(--greyE5);
+}
+
 .taskWrapper {
   display: flex;
   align-items: center;
@@ -127,8 +131,6 @@
   border-top: 1px solid var(--greyC4);
   border-left: 1px solid var(--greyC4);
   background-color: var(--white);
-  /* font-size: 20px; */
-  /* color: var(--greyC4); */
   transform: rotate(45deg);
   
 }
@@ -138,7 +140,10 @@
   flex-direction: column;
   justify-content: center;
   padding: 35px 83px;
-  /*background-color: var(--cinnabar);*/
+}
+
+body[data-theme="night"] .modal {
+  background-color: var(--greyDE);
 }
 
 .modalDeleteButton {

@@ -1,5 +1,4 @@
-import React, {ReactNode, useEffect, useMemo} from 'react';
-// import styles from './portal.css';
+import {ReactNode, useEffect, useMemo} from 'react';
 import {createPortal} from "react-dom";
 
 interface IPortal {
@@ -8,14 +7,14 @@ interface IPortal {
   className?: string;
 }
 
-export function Portal({ children, root, className}: IPortal ) {
-  const el = useMemo(() => document.createElement('div'),[]);
+export function Portal({children, root, className}: IPortal) {
+  const el = useMemo(() => document.createElement('div'), []);
 
   useEffect(() => {
     const target = root && root.appendChild ? root : document.body;
     const classList = ['portal'];
 
-    // TODO для складывания классов использовать утилиту
+    // TODO для добавления классов использовать утилиту
     if (className) {
       className.split(' ').forEach(cn => classList.push(cn));
     }
