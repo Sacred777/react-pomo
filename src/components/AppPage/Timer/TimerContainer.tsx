@@ -27,6 +27,7 @@ export function TimerContainer() {
   const LS_PAUSE_SECONDS_KEY = 'ps';
   const LS_BREAK_SECONDS_KEY = 'bs';
   const LS_NUMBER_OF_RUNNING_POMODORO_KEY = 'nrp';
+
   const TIMER_INCREMENT_STEP = 60;
 
   const settingsInfo = useAppSelector(state => state.settings);
@@ -57,16 +58,19 @@ export function TimerContainer() {
   // Сортировка массива дел старое сверху
   const sortTasks = [...tasks].sort((prev, current) => prev.id - current.id);
   const currentTask = sortTasks[0];
+  // Получаем название задачи
+  const taskName = isTasks ? currentTask.name : 'Нет задач';
 
-  // Стартовые значения
+  // Сброс значений счетчика при обновлении задач
   useEffect(() => {
     if (isTasks) {
-      if(!currentTask.isTiming) setNumberOfRunningPomodoro(1);
+      if (!currentTask.isTiming) setNumberOfRunningPomodoro(1);
     } else {
       setNumberOfRunningPomodoro(0);
     }
   }, [isTasks])
 
+  // Обновление времени помидоров при изменении настроек (кроме задачи которая выполняется)
   useEffect(() => {
     if (isTasks) {
       sortTasks.forEach((task) => {
@@ -78,14 +82,11 @@ export function TimerContainer() {
     }
   }, [settingsInfo])
 
-  // Если задача поменялась или настройки изменены, в стейт нужны свежие данные
+  // Если задача поменялась или настройки изменены, для таймера нужны свежие данные
   useEffect(() => {
     if (isTasks && secondsLeft) return;
     setSecondsLeft(isTasks ? currentTask.time : settingsInfo.taskTime);
   }, [tasks, settingsInfo])
-
-  // Получаем название задачи
-  const taskName = isTasks ? currentTask.name : 'Нет задач';
 
   // Ф-ция увеличения значения счётчика
   function handleAddTime() {
@@ -116,7 +117,6 @@ export function TimerContainer() {
   function handleLeftButton() {
     switch (typeOfWindow) {
       case EWindowTypes.initial:  // Старт
-        // Создаём статистику текущего дня
         if (!isCurrentDateStat) {
           createCurrentDayStat();
         }
@@ -127,7 +127,6 @@ export function TimerContainer() {
         dispatch(pauseTimer(true));
         break
       case EWindowTypes.pausing: // Продолжить
-        console.log('Продолжить')
         dispatch(startTimer(true));
         break
       case EWindowTypes.breaking: // Пауза
@@ -144,24 +143,17 @@ export function TimerContainer() {
       case EWindowTypes.initial: // Стоп неактивная
         break
       case EWindowTypes.starting: // Стоп активная
-        // Записать состояние
-        // Время работы таймера. Разница между временем задачи и оставшегося времени по счетчику
-        // Время паузы
-        // Увеличить StopCount
         const newStat = {
           ...statDataTemplate,
           timerTime: currentTask.time - secondsLeft + pauseSeconds,
           pauseTime: pauseSeconds,
           stopCount: 1,
         }
-        // Записываем статистику
         dispatch(changeStat(newStat));
-        // Установить время secondsLeft = время задачи
         setSecondsLeft(currentTask.time);
-        // Обнулить pauseSeconds
         setPauseSeconds(0);
-        // Установить таймер в false
         dispatch(startTimer(false));
+        dispatch(startTiming({id: currentTask.id, value: false}));
         break
       case EWindowTypes.pausing: // Сделано
         dispatch(startTimer(true));
@@ -179,7 +171,6 @@ export function TimerContainer() {
   }
 
   function createCurrentDayStat() {
-    // Готовим объект
     const stat: TStat = {
       ...statDataTemplate,
       day: currentDate.getDate(),
@@ -201,7 +192,6 @@ export function TimerContainer() {
       if (states.isStarted) {
         //Если ещё несколько задач или помидоров
         if (sortTasks.length > 1 || currentTask.count > 1) {
-          // Записать статистику
           const newStat = {
             ...statDataTemplate,
             timerTime: currentTask.time - secondsLeft + pauseSeconds,
@@ -212,16 +202,13 @@ export function TimerContainer() {
             lastLongBreakPomodoroCount: 1,
           }
           dispatch(changeStat(newStat));
-          // Удалить помидор или задачу
           setFinishedPomodoro();
-          // Определить время перерыва (записать в secondLeft)
           const nextBreakSeconds = getNextBreakSeconds();
           setSecondsLeft(nextBreakSeconds);
           setBreakSeconds(nextBreakSeconds);
-          // Сброс счетчика паузы
           setPauseSeconds(0);
-          // Поменять состояние на Break
           dispatch(breakTimer(true));
+          dispatch(startTiming({id: currentTask.id, value: false}));
         } else {
           const newStat = {
             ...statDataTemplate,
@@ -231,18 +218,13 @@ export function TimerContainer() {
             pomodoroCount: 1,
             taskCount: currentTask.count === 1 ? 1 : 0,
           }
-          // Записываем статистику
           dispatch(changeStat(newStat));
-          // Обнуляем счетчик перерывов
           dispatch(cleanLastLongBreakPomodoroCount(currentDateStringYYYYMMDD));
           setFinishedPomodoro();
-          // Сброс счетчика паузы
           setPauseSeconds(0);
-          // Состояние в исходное положение
           dispatch(setInitialState(true));
         }
       } else if (states.isBreak) {
-        //Обновляем статистику
         const newStat = {
           ...statDataTemplate,
           timerTime: breakSeconds,

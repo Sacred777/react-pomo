@@ -13,7 +13,6 @@ export enum EWindowTypes {
   breakPausing = 'breakPausing',
 }
 
-
 interface ITimer {
   windowType: EWindowTypes,
   taskName: string;
@@ -21,8 +20,6 @@ interface ITimer {
   timerDigits: string;
   handleAddTime: () => void;
   taskNumber: number;
-  // leftButtonName: string;
-  // rightButtonName: string;
   handleLeftButtonClick: () => void;
   handleRightButtonClick: () => void;
   isAddButtonDisabled?: boolean;
@@ -30,12 +27,13 @@ interface ITimer {
   isRightButtonDisabled?: boolean;
 }
 
-export function Timer({
-                        isLeftButtonDisabled = false,
-                        isRightButtonDisabled = false,
-                        isAddButtonDisabled = false,
-                        ...props
-                      }: ITimer) {
+export function Timer(
+  {
+    isLeftButtonDisabled = false,
+    isRightButtonDisabled = false,
+    isAddButtonDisabled = false,
+    ...props
+  }: ITimer) {
 
   let leftButtonName = '';
   let rightButtonName = '';
@@ -47,7 +45,6 @@ export function Timer({
       leftButtonName = 'Старт';
       rightButtonName = 'Стоп';
       headerStyles = styles.header;
-      // console.log(headerStyles);
       timerStyles = EColors.grey33;
       break
     case EWindowTypes.starting:
@@ -89,7 +86,6 @@ export function Timer({
           {props.windowType === EWindowTypes.breaking || props.windowType === EWindowTypes.breakPausing ? 'Перерыв' :
             `Помидор ${props.pomodoroCount ? props.pomodoroCount : ''}`}
         </Text>
-
       </div>
 
       <div className={styles.body}>
@@ -100,7 +96,6 @@ export function Timer({
             className={styles.addBtnBox}
             disabled={isAddButtonDisabled}
             onClick={props.handleAddTime}
-            // disabled={!isTasks}
           >
             <Icon name={EIcons.add} size={50}></Icon>
           </button>
@@ -131,13 +126,11 @@ export function Timer({
           <Button
             type={'button'}
             color={EButtonColors.red}
-            // notBackground={true}
             disabled={isRightButtonDisabled}
             onClick={props.handleRightButtonClick}
           >
             <Text size={16} lineHeight={17} color={EColors.red} weight={EWeight.medium}>{rightButtonName}</Text>
           </Button>
-
         </div>
       </div>
     </>
