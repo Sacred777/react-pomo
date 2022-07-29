@@ -4,11 +4,7 @@
 
 body[data-theme="night"] .wrapper {
   background-color: var(--greyDE);
-  /*box-shadow: 4px 4px 8px 0 var(--greyC4);*/
 }
-
-
-
 
 .listItem label {
   display: block;

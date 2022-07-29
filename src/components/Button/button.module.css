@@ -33,7 +33,6 @@
 }
 
 .red {
-  /*background-color: var(--cinnabar);*/
   border-color: var(--cinnabar);
 }
 
@@ -64,11 +63,8 @@
   background-color: var(--cinnabar);
 }
 
-
-
 .red:disabled {
   border-color: var(--greyC4);
-  /*color: var(--greyC4);*/
   background-color: transparent;
   cursor: initial;
 }

@@ -32,18 +32,10 @@
 .modal {
   position: relative;
   display: inline-block;
-  /* width: 500px; */
   margin: 50px auto;
-  /*padding: 50px;*/
   vertical-align: middle;
   background-color: var(--white);
   cursor: default;
-  /*transform: scale(0.5);*/
-  /*transition: transform var(--transitionTime);*/
-}
-
-.isOpen {
-  /*transform: scale(1);*/
 }
 
 .closeBtn {

@@ -1,19 +1,19 @@
 .tasksButton {
   display: flex;
   padding: 9px 10px;
-  width: 100% ;
+  width: 100%;
   font-size: 16px;
   cursor: pointer;
   transition: background-color var(--duration) ease-in-out;
 }
 
 .tasksButton:not(:disabled):hover {
-  background-color: var(--greyF4) ;
+  background-color: var(--greyF4);
 }
 
 .tasksButton:not(:disabled):focus {
   outline: none;
-  background-color: var(--greyF4) ;
+  background-color: var(--greyF4);
 }
 
 .tasksButton:disabled {
@@ -123,9 +123,8 @@ body[data-theme="night"] .item {
   --triangleSize: 8px;
   content: '';
   position: absolute;
-  /* top: var(--triangleSize); */
   top: -6px;
-  left: calc( 50% - var(--triangleSize) / 2);
+  left: calc(50% - var(--triangleSize) / 2);
   width: var(--triangleSize);
   height: var(--triangleSize);
   border-top: 1px solid var(--greyC4);

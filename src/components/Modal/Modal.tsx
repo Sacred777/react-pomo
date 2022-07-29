@@ -31,7 +31,6 @@ export function Modal({children, isOpen, onOpen = NOOP, onClose = NOOP, closeIco
   useEffect(() => {
     function handleClick(event: MouseEvent) {
       if (event.target instanceof Node && !modalWindowRef.current?.contains(event.target)) {
-        // console.log('clicked out');
         setIsModalActive(false);
       }
     }

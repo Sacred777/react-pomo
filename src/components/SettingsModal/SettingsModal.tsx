@@ -1,8 +1,5 @@
 import React from 'react';
-// import classNames from "classnames";
-import {SubmitHandler, useForm} from 'react-hook-form';
-
-import {EColors, EWeight, Text} from '../Text';
+import {EWeight, Text} from '../Text';
 import styles from './settingsmodal.module.css';
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {Break} from '../Break';
@@ -14,22 +11,18 @@ import {
 } from '../../store/settingsSlice';
 import ReactSlider from 'react-slider';
 
-
 export function SettingsModal() {
+  const LABEL_SIZE = 16;
   const settings = useAppSelector(state => state.settings);
   const dispatch = useAppDispatch();
-
-  const gaps = 5;
-  const labelSize = 16;
 
   return (
     <div className={styles.wrapper}>
       <Text As={'h2'} size={24} lineHeight={24} weight={EWeight.medium}>Настройки программы</Text>
       <Break size={20} top/>
-
       <ul>
         <li className={styles.listItem}>
-          <Text As={'label'} size={labelSize} lineHeight={1}>
+          <Text As={'label'} size={LABEL_SIZE} lineHeight={1}>
             {`Помидор - ${settings.taskTime / 60}:00`}
           </Text>
           <ReactSlider
@@ -43,7 +36,7 @@ export function SettingsModal() {
           />
         </li>
         <li className={styles.listItem}>
-          <Text As={'label'} size={labelSize} lineHeight={1}>
+          <Text As={'label'} size={LABEL_SIZE} lineHeight={1}>
             {`Короткий перерыв - ${settings.shortBreakTime / 60}:00`}
           </Text>
           <ReactSlider
@@ -58,7 +51,7 @@ export function SettingsModal() {
         </li>
 
         <li className={styles.listItem}>
-          <Text As={'label'} size={labelSize} lineHeight={1}>
+          <Text As={'label'} size={LABEL_SIZE} lineHeight={1}>
             {`Длинный перерыв - ${settings.longBreakTime / 60}:00`}
           </Text>
           <ReactSlider
@@ -73,7 +66,7 @@ export function SettingsModal() {
         </li>
 
         <li className={styles.listItem}>
-          <Text As={'label'} size={labelSize} lineHeight={1}>
+          <Text As={'label'} size={LABEL_SIZE} lineHeight={1}>
             {`Помидоров до длинного перерыва - ${settings.longBreakCycle}`}
           </Text>
           <ReactSlider
@@ -87,7 +80,6 @@ export function SettingsModal() {
           />
         </li>
       </ul>
-
     </div>
   );
 }

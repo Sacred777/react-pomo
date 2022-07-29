@@ -19,37 +19,37 @@ import {
 
 
 const icons = {
-  close:         CloseBtnIcon,
-  logo:          LogoIcon,
-  statistics:    StatisticsIcon,
-  settings:      SettingsIcon,
-  delete:        DeleteIcon,
-  edit:          EditIcon,
-  minus:         MinusIcon,
-  plus:          PlusIcon,
-  focus:         FocusIcon,
-  pause:         PauseIcon,
-  stop:          StopIcon,
-  add:           AddIcon,
+  close: CloseBtnIcon,
+  logo: LogoIcon,
+  statistics: StatisticsIcon,
+  settings: SettingsIcon,
+  delete: DeleteIcon,
+  edit: EditIcon,
+  minus: MinusIcon,
+  plus: PlusIcon,
+  focus: FocusIcon,
+  pause: PauseIcon,
+  stop: StopIcon,
+  add: AddIcon,
   rectangleDown: RectangleDownIcon,
-  pomo:          PomoIcon,
+  pomo: PomoIcon,
 }
 
 export enum EIcons {
-  close =         'close',
-  logo =          'logo',
-  statistics =    'statistics',
-  settings =      'settings',
-  delete =        'delete',
-  edit =          'edit',
-  minus =         'minus',
-  plus =          'plus',
-  focus =         'focus',
-  pause =         'pause',
-  stop =          'stop',
-  add =           'add',
+  close = 'close',
+  logo = 'logo',
+  statistics = 'statistics',
+  settings = 'settings',
+  delete = 'delete',
+  edit = 'edit',
+  minus = 'minus',
+  plus = 'plus',
+  focus = 'focus',
+  pause = 'pause',
+  stop = 'stop',
+  add = 'add',
   rectangleDown = 'rectangleDown',
-  pomo =          'pomo',
+  pomo = 'pomo',
 }
 
 export type TSizes = 129 | 115 | 81 | 50 | 40 | 24 | 20 | 18 | 16;
@@ -64,7 +64,7 @@ interface IIconProps {
   desktopSize?: TSizes;
 }
 
-export function Icon( props: IIconProps ) {
+export function Icon(props: IIconProps) {
   const {
     name,
     size = 18,
@@ -77,9 +77,9 @@ export function Icon( props: IIconProps ) {
 
   const classes = classNames(
     styles[`i${size}`],
-    { [styles[`m${mobileSize}`]]: mobileSize},
-    { [styles[`t${tabletSize}`]]: tabletSize},
-    { [styles[`d${desktopSize}`]]: desktopSize},
+    {[styles[`m${mobileSize}`]]: mobileSize},
+    {[styles[`t${tabletSize}`]]: tabletSize},
+    {[styles[`d${desktopSize}`]]: desktopSize},
   );
 
   const IconComponent = icons[name];

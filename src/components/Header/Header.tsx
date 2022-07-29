@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom'
 import styles from './header.module.css';
-
 import {EIcons, Icon} from "../Icon";
 import {Break} from "../Break";
 import {EColors, EWeight, Text} from '../Text';
@@ -10,8 +9,8 @@ import {Modal} from "../Modal";
 import {SettingsModal} from "../SettingsModal";
 
 export function Header() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const LS_THEME_KEY = 'theme';
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem(LS_THEME_KEY) ?? 'light');
 
   useEffect(() => {

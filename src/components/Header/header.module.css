@@ -30,31 +30,23 @@
 /* Checkbox is in not checked state*/
 .themeSpan {
   --width: 37px;
-  /*Высота*/
   --height: 22px;
-  /*Ширина*/
   position: relative;
   display: inline-block;
   width: var(--width);
   height: var(--height);
   border-radius: 30px;
   border: 1px solid rgb(211, 153, 153);
-  /*Цвет бордера*/
   background-color: var(--cinnabar);
-  /*Цвет фона бокса*/
   transition: background-color var(--duration) ease-in-out;
 }
 
-/* Checkbox is in checked state */
 .themeInput:checked+.themeSpan {
   background-color: #aaa;
-  /*Цвет фона*/
 }
 
-/* Checkbox switch is in not checked state  */
 .themeSpan::before {
   --switch: 18px;
-  /*Радиус переключателя*/
   position: absolute;
   content: '';
   top: 50%;
@@ -63,12 +55,10 @@
   height: var(--switch);
   border-radius: 50%;
   background-color: aliceblue;
-  /*Цвет переключателя*/
   transform: translate(0, calc(var(--switch) / -2));
   transition: transform var(--duration) ease-in-out, background-color var(--duration) ease-in-out;
 }
 
-/* Checkbox switch is in checked state  */
 .themeInput:checked+.themeSpan::before {
   transform: translate(16px, -9px);
   background-color: rgb(138, 138, 138);
@@ -101,4 +91,9 @@
 
 .link:focus-visible {
   outline-color:  var(--cinnabar);
+}
+
+button.link g {
+  fill: var(--cinnabar);
+  transition: fill var(--duration) ease-in-out;;
 }

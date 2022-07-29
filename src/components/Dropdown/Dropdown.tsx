@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { NOOP } from '../../utils/js/noop';
+import {NOOP} from '../../utils/js/noop';
 import styles from './dropdown.module.css';
 
 interface IDropdownProps {
@@ -10,13 +10,13 @@ interface IDropdownProps {
   onClose?: () => void;
 }
 
-export function Dropdown({ button, children, isOpen, onOpen = NOOP, onClose = NOOP }: IDropdownProps) {
+export function Dropdown({button, children, isOpen, onOpen = NOOP, onClose = NOOP}: IDropdownProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(isOpen);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsDropdownOpen(isOpen);
-  },[isOpen]);
+  }, [isOpen]);
 
   useEffect(() => {
     isDropdownOpen ? onOpen() : onClose();
@@ -24,30 +24,28 @@ export function Dropdown({ button, children, isOpen, onOpen = NOOP, onClose = NO
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
-      if(event.target instanceof Node && !ref.current?.contains(event.target)) {
-        // console.log('clicked out');
+      if (event.target instanceof Node && !ref.current?.contains(event.target)) {
         setIsDropdownOpen(false)
       }
     }
 
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);
-  },[isDropdownOpen])
+  }, [isDropdownOpen])
 
-  useEffect(()=>{
+  useEffect(() => {
     function handleKeydown(event: KeyboardEvent) {
-      if(event.key === 'Escape') {
+      if (event.key === 'Escape') {
         setIsDropdownOpen(false);
       }
-      // console.log(event.key);
     }
 
     document.addEventListener('keydown', handleKeydown);
     return () => document.removeEventListener('keydown', handleKeydown);
-  },[isDropdownOpen])
+  }, [isDropdownOpen])
 
   const handleOpen = () => {
-    if(isOpen === undefined) {
+    if (isOpen === undefined) {
       setIsDropdownOpen(!isDropdownOpen);
     }
   }

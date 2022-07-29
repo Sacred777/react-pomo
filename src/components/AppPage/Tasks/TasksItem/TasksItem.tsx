@@ -36,6 +36,10 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
     setIsModalOpen(false);
   }
 
+  function setTaskEditable() {
+    setIsEditable(true);
+  }
+
   function openDeleteTaskModal() {
     setModalProperties({
       modalTitle: 'Удалить задачу?',
@@ -48,11 +52,6 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
     })
     setIsModalOpen(true);
   }
-
-  function setTaskEditable() {
-    setIsEditable(true);
-  }
-
 
   function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch(changeNameTask({id, value: event.target.value}));
@@ -84,8 +83,8 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
         <span className={styles.count}>{count}</span>
         <Break size={8} inline/>
 
-        {isEditable ?
-          <form action="submit" onSubmit={handleOnSubmit}>
+        {isEditable
+          ? <form action="submit" onSubmit={handleOnSubmit}>
             <input
               type='text'
               className={styles.taskInput}
@@ -96,12 +95,9 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
               ref={ref}
             />
           </form>
-          :
-          <Text As={'p'} size={16} lineHeight={17} weight={EWeight.light}>{name}</Text>
+          : <Text As={'p'} size={16} lineHeight={17} weight={EWeight.light}>{name}</Text>
         }
       </div>
-
-      {/* <Break size={8} inline /> */}
 
       <Dropdown
         button={
@@ -150,7 +146,6 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
             <button
               className={styles.tasksButton}
               onClick={openDeleteTaskModal}
-
             >
               <Icon name={EIcons.delete}/>
               <Break size={8}/>
@@ -159,6 +154,7 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
           </li>
         </ul>
       </Dropdown>
+
       <Portal>
         <Modal
           isOpen={isModalOpen}
@@ -186,6 +182,7 @@ export function TasksItem({id, count, name}: ITasksItemProps) {
           </div>
         </Modal>
       </Portal>
+
     </li>
   );
 }
