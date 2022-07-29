@@ -1,46 +1,47 @@
-import React, {ReactEventHandler, useEffect, useState} from 'react';
-import styles from './statisticspage.module.css';
-import {EColors, EWeight, Text} from "../Text";
-import {EIcons, Icon} from "../Icon";
-import {Break} from "../Break";
+import React, {useState} from 'react';
+import {useAppSelector} from "../../hooks/reduxHooks";
+import {
+  getNumberOfWeekSince01011970,
+  getRusDayOfWeek,
+} from "../../utils/timeutiltties";
+import styles from "./statisticspage.module.css";
+import {EWeight, Text} from "../Text";
 import {WeeksSelect} from "./WeeksSelect";
+import {LeftDashboard} from "./LeftDashboard";
+import {statObject} from "../../models/statObject";
+import {BottomDashboard} from "./BottomDashboard";
+import {Chart} from "./Chart";
 
-export interface IStatForButton {
-  key: number;
-  name: string;
-  level: string;
-  onClick: ReactEventHandler<HTMLButtonElement>;
-  data: string;
-}
+const StatisticsPage = () => {
+  const WEEKS_MENU = [{id: '0', name: 'Эта неделя'}, {id: '1', name: 'Прошедшая неделя'}, {
+    id: '2',
+    name: '2 недели назад'
+  }];
 
-export interface ICurrentMenu {
-  id: string;
-  name: string;
-}
+  const stat = useAppSelector(state => state.stat.stat);
+  const today = new Date();
+  const [dayOfWeekForDisplay, setDayOfWeekForDisplay] = useState((getRusDayOfWeek(today)));
+  const [currentMenu, setCurrentMenu] = useState(WEEKS_MENU);
+  const [currentNumberOfWeek, setCurrentNumberOfWeek] = useState(getNumberOfWeekSince01011970(today));
 
-export interface IStatisticsPageProps {
-  currentMenu: ICurrentMenu[];
-  onClick: ReactEventHandler<HTMLDivElement>;
-  statForButtons: IStatForButton[];
-  dayOfWeek: string;
-  workingOnTaskTime: string;
-  pomodoroCount: number;
-  focusPercents: string;
-  pauseTime: string;
-  stopCount: string;
-  oneLineLevelValue: string;
-  twoLineLevelValue: string;
-  threeLineLevelValue: string;
-  fourLineLevelValue: string;
-}
+  const handleSelectClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const id = +e.currentTarget.id;
+    setCurrentNumberOfWeek(getNumberOfWeekSince01011970(today) - id);
+    const newWeeksMenu = WEEKS_MENU.slice(id).concat(WEEKS_MENU.slice(0, id));
+    setCurrentMenu(newWeeksMenu);
+  }
 
-export function StatisticsPage(props: IStatisticsPageProps) {
+  const currentWeekStat = stat.filter((item) => item.week === currentNumberOfWeek);
 
-  let pomoName = 'помидоров';
-  if (props.pomodoroCount === 1) {
-    pomoName = 'помидор';
-  } else if (props.pomodoroCount > 1 && props.pomodoroCount < 5) {
-    pomoName = 'помидора';
+  let statForDay = {...statObject, ...getStatForDay(dayOfWeekForDisplay)};
+
+  const changeStatDay = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setDayOfWeekForDisplay(+event.currentTarget.id);
+  }
+
+  // Получаем данные за конкретный день
+  function getStatForDay(numberOfWeek: number) {
+    return currentWeekStat.find((item) => item.dayOfTheWeek === numberOfWeek);
   }
 
   return (
@@ -48,141 +49,25 @@ export function StatisticsPage(props: IStatisticsPageProps) {
       <div className={styles.topWrapper}>
         <Text size={24} lineHeight={33} weight={EWeight.bold}>Ваша активность</Text>
         <WeeksSelect
-          currentMenu={props.currentMenu}
-          onClick={props.onClick}
+          currentMenu={currentMenu}
+          onClick={handleSelectClick}
         />
       </div>
 
       <div className={styles.chartWrapper}>
-        <div className={styles.leftChartWrapper}>
-          <div className={styles.workingOnTasks}>
-            <Text size={24} lineHeight={33} weight={EWeight.bold}>{props.dayOfWeek}</Text>
-            <Break size={12} top/>
-            <Text
-              size={16}
-              lineHeight={33}>
-              {props.workingOnTaskTime ? 'Вы работали над задачами в течении' : 'Нет данных'}
-              <Break size={5} inline={true}/>
-              <Text
-                size={16}
-                lineHeight={33}
-                color={EColors.red}
-                weight={EWeight.bold}
-              >
-                {props.workingOnTaskTime}
-              </Text>
-            </Text>
-          </div>
-          <div className={styles.pomodoroCount}>
-            <div className={styles.pomodoroCountIcon}>
-              {props.pomodoroCount === 0
-                ? <Icon name={EIcons.pomo} size={115}/>
-                : <Icon name={EIcons.logo} size={81}/>
-              }
-              <Break size={16}/>
-              {props.pomodoroCount !== 0
-                && <Text
-                  size={24}
-                  lineHeight={33}
-                  weight={EWeight.bold}
-                  color={EColors.grey99}>{`x ${props.pomodoroCount}`}
-                </Text>}
-            </div>
+        <LeftDashboard
+          statForDay={statForDay} dayOfWeekForDisplay={dayOfWeekForDisplay}
+        />
 
-            {props.pomodoroCount !== 0
-              && <div className={styles.pomodoroCountInfo}>
-                <Text
-                  As={'p'}
-                  size={24}
-                  lineHeight={33}
-                  weight={EWeight.bold}
-                  color={EColors.white}>{`${props.pomodoroCount} ${pomoName}`}
-                </Text>
-              </div>}
-          </div>
-        </div>
-
-        <div className={styles.rightChartWrapper}>
-          <div className={styles.chartField}>
-            <div className={styles.chartLine}>
-              <Text As={'p'} size={12} lineHeight={33}>{props.fourLineLevelValue}</Text>
-            </div>
-            <div className={styles.chartLine}>
-              <Text As={'p'} size={12} lineHeight={33}>{props.threeLineLevelValue}</Text>
-            </div>
-            <div className={styles.chartLine}>
-              <Text As={'p'} size={12} lineHeight={33}>{props.twoLineLevelValue}</Text>
-            </div>
-            <div className={styles.chartLine}>
-              <Text As={'p'} size={12} lineHeight={33}>{props.oneLineLevelValue}</Text>
-            </div>
-            <div className={styles.chartLine}></div>
-
-            <div className={styles.chartColums}>
-              {
-                props.statForButtons.map((button) => (
-                  <div
-                    className={styles.buttonWrapper}
-                    key={button.key}
-                  >
-                    <button
-                      className={styles.button}
-                      id={button.key.toString()}
-                      style={{height: button.level}}
-                      onClick={button.onClick}
-                      data-level={button.data}>
-                    </button>
-                    <Text
-                      As={'p'}
-                      size={24}
-                      lineHeight={24}
-                      color={EColors.grey99}>
-                      {button.name}
-                    </Text>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-        </div>
-
+        <Chart
+          currentWeekStat={currentWeekStat}
+          onClick={changeStatDay}
+        />
       </div>
-      <div className={styles.bottomWrapper}>
 
-        <div
-          className={styles.items + ' ' + styles.focus}
-          data-value={props.focusPercents !== '0%' ? 'value' : 'notvalue'}>
-          <div
-            className={styles.info}
-          >
-            <Text As={'p'} size={24} lineHeight={33} weight={EWeight.bold}>Фокус</Text>
-            <Text size={64} lineHeight={76}>{props.focusPercents}</Text>
-          </div>
-          <Icon name={EIcons.focus} size={129}/>
-        </div>
-
-        <div
-          className={styles.items + ' ' + styles.pause}
-          data-value={props.pauseTime !== '0c' ? 'value' : 'notvalue'}
-        >
-          <div className={styles.info}>
-            <Text As={'p'} size={24} lineHeight={33} weight={EWeight.bold}>Время на паузе</Text>
-            <Text size={64} lineHeight={76}>{props.pauseTime}</Text>
-          </div>
-          <Icon name={EIcons.pause} size={129}/>
-        </div>
-
-        <div
-          className={styles.items + ' ' + styles.stop}
-          data-value={props.stopCount !== '0' ? 'value' : 'notvalue'}
-        >
-          <div className={styles.info}>
-            <Text As={'p'} size={24} lineHeight={33} weight={EWeight.bold}>Остановки</Text>
-            <Text size={64} lineHeight={76}>{props.stopCount}</Text>
-          </div>
-          <Icon name={EIcons.stop} size={129}/>
-        </div>
-      </div>
+      <BottomDashboard statForDay={statForDay}/>
     </div>
   );
-}
+};
+
+export default StatisticsPage;

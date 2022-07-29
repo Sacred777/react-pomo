@@ -1,0 +1,82 @@
+.rightChartWrapper {
+  width: 75%;
+  align-self: stretch;
+  padding-bottom: 51px;
+  background-color: var(--greyEC);
+}
+
+.chartField {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--greyF4);
+}
+
+.chartLine {
+  position: relative;
+  width: 89%;
+  height: 20%;
+  border-bottom: 1px solid transparent;
+  /*border-bottom: 1px solid hsla(0, 0%, 20%, 0.2);*/
+}
+
+.chartLine:not(:nth-last-child(2)) {
+  border-bottom: 1px solid hsla(0, 0%, 20%, 0.2);
+}
+
+.chartLine p {
+  position: absolute;
+  bottom: -17px;
+  right: -60px;
+}
+
+.chartColumns {
+  position: absolute;
+  top: 0;
+  left: 6%;
+  right: 17%;
+  bottom: -50px;
+  display: flex;
+  justify-content: space-between;
+  /*outline: 1px solid black;*/
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  /*padding-bottom: 10px;*/
+  height: 100%;
+  width: 11%;
+}
+
+.buttonWrapper p {
+  padding: 13px 0;
+}
+
+.button {
+  width: 100%;
+  height: 1%;
+  background-color: var(--greyC4);
+  transition: background-color var(--duration) ease-in-out;
+}
+
+.button:focus {
+  outline: none;
+  background-color: var(--grey99) ;
+}
+
+.button[data-level="notempty"] {
+  background-color: var(--d-salmon);
+  transition: background-color var(--duration) ease-in-out;
+}
+
+.button[data-level="notempty"]:hover {
+  background-color: var(--cinnabar);
+}
+
+.button[data-level="notempty"]:focus {
+  outline: none;
+  background-color: var(--hdo);
+}

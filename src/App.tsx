@@ -4,7 +4,7 @@ import {Layout} from './components/Layout';
 import {Header} from './components/Header';
 import {AppPage} from './components/AppPage';
 import {NotFoundPage} from './components/NotFoundPage';
-import StatisticsPageContainer from "./components/StatisticsPage/StatisticsPageContainer";
+import StatisticsPage from "./components/StatisticsPage/StatisticsPage";
 
 function App() {
 
@@ -15,7 +15,7 @@ function App() {
         <main className='container'>
           <Routes>
             <Route path="/" element={<AppPage/>}/>
-            <Route path="/stat" element={<StatisticsPageContainer/>}/>
+            <Route path="/stat" element={<StatisticsPage/>}/>
             <Route path="*" element={<NotFoundPage/>}/>
           </Routes>
         </main>

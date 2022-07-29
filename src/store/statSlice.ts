@@ -1,26 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {CreateStatState} from "../help/CreateStatsState";
+import {TStat} from "../models/statObject";
 
 const LS_STAT_KEY = 'stat';
 
 // TODO Удалить. Служит для создания статистики
 const testStat = CreateStatState();
-
-export type TStat = {
-  day: number;
-  month: number;
-  year: number;
-  dayOfTheWeek: number;
-  week: number;
-  date: string;
-  timerTime: number;
-  pomodoroTime: number;
-  pauseTime: number;
-  stopCount: number;
-  pomodoroCount: number;
-  taskCount: number;
-  lastLongBreakPomodoroCount: number;
-}
 
 export type TShortStat = {
   date: string;

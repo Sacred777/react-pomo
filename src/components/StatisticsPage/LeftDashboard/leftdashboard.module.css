@@ -1,0 +1,36 @@
+.leftChartWrapper {
+  width: 23%;
+  margin-right: 32px;
+}
+
+.workingOnTasks {
+  margin-bottom: 32px;
+  padding: 25px;
+  min-height: 260px;
+  height: 55%;
+  background-color: var(--greyF4);
+}
+
+.pomodoroCount {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 179px;
+  height: 38%;
+}
+
+.pomodoroCountIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  padding: 0 25px;
+  background-color: var(--greyF4);
+}
+
+.pomodoroCountInfo {
+  display: flex;
+  justify-content: center;
+  padding: 9px;
+  background-color: var(--cinnabar);
+}

@@ -1,0 +1,53 @@
+.bottomWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /*row-gap: 32px;*/
+  /*min-height: 179px;*/
+}
+
+.items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px;
+  /*height: 179px;*/
+  width: 32%;
+  background-color: var(--greyF4);
+}
+
+body[data-theme="night"] .items[data-value="value"] {
+  filter: invert(95%);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: stretch;
+}
+
+.focus[data-value='value'] {
+  background-color: var(--honey);
+}
+
+.focus[data-value='notvalue'] path {
+  stroke: var(--greyC4);
+}
+
+.pause[data-value='value'] {
+  background-color: var(--malva);
+}
+
+.pause[data-value='notvalue'] path {
+  stroke: var(--greyC4);
+}
+
+.stop[data-value='value'] {
+  background-color: var(--frost);
+}
+
+.stop[data-value='notvalue'] path {
+  stroke: var(--greyC4);
+}
+

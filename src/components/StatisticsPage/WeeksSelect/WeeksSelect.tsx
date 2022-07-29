@@ -3,14 +3,18 @@ import styles from './weeksselect.module.css';
 import {Dropdown} from "../../Dropdown";
 import {Text} from "../../Text";
 import {EIcons, Icon} from "../../Icon";
-import {ICurrentMenu} from "../StatisticsPage";
 
-interface IWeeksSelect {
+interface ICurrentMenu {
+  id: string;
+  name: string;
+}
+
+interface IWeeksSelectProps {
   currentMenu: ICurrentMenu[];
   onClick: ReactEventHandler<HTMLDivElement>;
 }
 
-export function WeeksSelect({currentMenu, onClick}: IWeeksSelect) {
+export function WeeksSelect({currentMenu, onClick}: IWeeksSelectProps) {
   const [isOpened, setIsOpened] = useState(false);
 
   const handleOpen = () => {

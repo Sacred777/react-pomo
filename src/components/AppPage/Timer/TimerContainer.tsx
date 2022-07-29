@@ -14,10 +14,10 @@ import {
   cleanLastLongBreakPomodoroCount,
   createStat,
   TShortStat,
-  TStat
 } from "../../../store/statSlice";
 import getShortStatDataTemplate from "../../../utils/getStatObjects";
 import {useLocalStorageUpdate} from "../../../hooks/useLocalStorageUpdate";
+import {TStat} from "../../../models/statObject";
 
 export function TimerContainer() {
   const dispatch = useAppDispatch();
